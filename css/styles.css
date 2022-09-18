@@ -5,7 +5,7 @@
 *{
     margin: 0;
     padding: 0;
-    font-family: 'Poppins-Regular';
+    font-family: 'Poppins-Regular', Arial, Helvetica, sans-serif;
 }
 body{
     background-color: #FCFCFC;
@@ -23,23 +23,37 @@ main{
 h1{
     text-align: center;
 }
-main button{
-    width: 30%;
-    height: 50px;
-    border-radius: 50px;
-    margin-top: 20px;
-    border: none;
+main a{
+    text-decoration: none;
     font-size: 24px;
-    font-weight: 700;
-    letter-spacing: 2px;
     background-color: #226CE0;
+    padding: 10px 25px;
+    border-radius: 50px;
     color: white;
+    width: 25%;
+    text-align: center;
+    margin-top: 25px;
     transform: .2s;
-    cursor: pointer;
+    border: 2px solid #226CE0;
+    font-weight: 500;
+    letter-spacing: 2px;
 }
-main button:hover{
+main a:hover{
+    color: #226CE0;
     background-color: white;
     border: 2px solid #226CE0;
-    color: #226CE0;
     transition: .2s;
+}
+
+main textarea{
+    width: 100%;
+    height: 300px;
+    margin-bottom: 25px;
+    font-weight: 700;
+    text-indent: 50px;
+    hyphens: auto;
+}
+.divTermo label{
+    cursor: pointer;
+    font-weight: 700;
 }
