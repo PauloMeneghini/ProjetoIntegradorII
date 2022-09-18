@@ -23,7 +23,7 @@ main{
 h1{
     text-align: center;
 }
-main a{
+main a, .active{
     text-decoration: none;
     font-size: 24px;
     background-color: #226CE0;
@@ -45,7 +45,7 @@ main a:hover{
     transition: .2s;
 }
 
-main textarea{
+#termo{
     width: 100%;
     height: 300px;
     margin-bottom: 25px;
@@ -56,4 +56,28 @@ main textarea{
 .divTermo label{
     cursor: pointer;
     font-weight: 700;
+}
+.btnTermo{
+    pointer-events: none;
+    cursor: default;
+    background-color: #ccc;
+    border: #ccc;
+}
+
+.email, .senha, .confirmaSenha{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+.email label, .senha label, .confirmaSenha label{
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+.email input, .senha input, .confirmaSenha input{
+    border: none;
+    border-bottom: 2px solid #226CE0;
+    height: 20px;
+    outline: 0;
+    font-size: 18px;
 }
