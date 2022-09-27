@@ -93,6 +93,14 @@ main a:hover{
     font-size: 16px;
     color: white;
     font-family: 'Poppins-Bold';
+    cursor: pointer;
+    transition: .2s;
+}
+.btnEntrar:hover{
+    background-color: white;
+    border: 3px solid #226CE0;
+    color: #226CE0;
+    transition: .2s;
 }
 .login h6{
     font-weight: 500;
@@ -128,11 +136,15 @@ main a:hover{
 }
 .formCadastro{
     width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .email, .senha, .confirmaSenha{
     display: flex;
     flex-direction: column;
     color: #363636;
+    width: 100%;
 }
 .email label, .senha label, .confirmaSenha label{
     margin-top: 30px;
@@ -159,6 +171,14 @@ main a:hover{
     font-size: 16px;
     color: white;
     font-family: 'Poppins-Bold';
+    cursor: pointer;
+    transition: .2s;
+}
+.btnCadastrar:hover{
+    background-color: white;
+    border: 3px solid #226CE0;
+    color: #226CE0;
+    transition: .2s;
 }
 
 #termo{
