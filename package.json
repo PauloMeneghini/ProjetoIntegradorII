@@ -1,0 +1,23 @@
+{
+  "name": "site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "js/connection.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PauloMeneghini/ProjetoIntegradorII.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PauloMeneghini/ProjetoIntegradorII/issues"
+  },
+  "homepage": "https://github.com/PauloMeneghini/ProjetoIntegradorII#readme",
+  "dependencies": {
+    "oracledb": "^5.5.0"
+  }
+}

@@ -30,7 +30,7 @@ main a, .active{
     padding: 10px 25px;
     border-radius: 50px;
     color: white;
-    width: 25%;
+    width: 40%;
     text-align: center;
     margin-top: 25px;
     transform: .2s;
@@ -43,6 +43,18 @@ main a:hover{
     background-color: white;
     border: 2px solid #226CE0;
     transition: .2s;
+}
+
+.container{
+    height: 60vh;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 30px;
+    background-color: #fefefe;
 }
 
 #termo{
@@ -80,4 +92,31 @@ main a:hover{
     height: 20px;
     outline: 0;
     font-size: 18px;
+}
+
+/* Responsive */
+
+@media (max-width: 1535px){
+    main{
+        width: 50%;
+    }
+    main a, .active{
+        width: 60%;
+    }
+    .email, .senha, .confirmaSenha{
+        width: 80%;
+    }
+}
+
+@media (max-width: 728px) {
+    main{
+        width: 100%;
+    }
+    main a, .active{
+        width: 60%;
+    }
+    #termo{
+        width: 90%;
+    }
+
 }
