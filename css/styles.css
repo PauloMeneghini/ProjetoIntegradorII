@@ -57,7 +57,7 @@ main a:hover{
     background-color: #fefefe;
 }
 
-/* Login */
+/* Index -> Login */
 
 .containerLogin{
     position: absolute;
@@ -89,7 +89,7 @@ main a:hover{
     width: 204px;
     height: 48px;
     border-radius: 50px;
-    margin-top: 50px;
+    margin: 50px 0px 20px 0px;
     font-size: 16px;
     color: white;
     font-family: 'Poppins-Bold';
@@ -98,17 +98,19 @@ main a:hover{
 }
 .btnEntrar:hover{
     background-color: white;
-    border: 3px solid #226CE0;
+    border: 3px solid white;
     color: #226CE0;
     transition: .2s;
 }
-.login h6{
+.login a{
     font-weight: 500;
-    margin-top: 20px;
+    font-size: 14px;
+    text-decoration: none;
+    color: white;
 }
 
 
-/* Cadastro */
+/* Index -> Cadastro */
 
 .containerCadastro{
     width: 610px;
@@ -148,7 +150,7 @@ main a:hover{
 }
 .email label, .senha label, .confirmaSenha label{
     margin-top: 30px;
-    font-weight: bold;
+    font-family: 'Poppins-Bold';
 }
 
 .email input, .senha input, .confirmaSenha input{
@@ -181,23 +183,123 @@ main a:hover{
     transition: .2s;
 }
 
-#termo{
+/* Login.html */
+
+.imgLogin{
+    width: 490px;
+    height: 100%;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.contentLogin{
+    width: 510px;
+    height: 100%;
+    background-color: #226CE0;
+    border-radius: 0px 16px 16px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.formLogin{
+    width: 90%;
+    color: white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.formLogin h1{
+    font-family: 'Poppins-Bold';
+}
+.formLogin label{
+    color: white;
+    font-family: 'Poppins-Bold';
+}
+.formLogin a{
+    margin-top: 20px;
+    text-decoration: none;
+    color: white;
+}
+.btnEntrar{
+    margin-top: 10px;
+}
+
+/* termo.html */
+.contentTermo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     width: 100%;
+    height: 100%;
+    background-color: #226CE0;
+    border-radius: 16px;
+}
+#termo{
+    width: 80%;
     height: 300px;
     margin-bottom: 25px;
     font-weight: 700;
     text-indent: 50px;
     hyphens: auto;
+    border: none;
+    padding: 15px;
+    border-radius: 16px;
+}
+#cbTermo{
+    width: 20px;
+    height: 20px;
+}
+.divTermo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .divTermo label{
     cursor: pointer;
-    font-weight: 700;
+    font-family: 'Poppins-Bold';
+    color: white;
+    margin-left: 5px;
 }
-.btnTermo{
+.linkTermo{
     pointer-events: none;
     cursor: default;
+}
+.linkTermoActive{
+    cursor: pointer;
+}
+
+.btnTermo{
     background-color: #ccc;
-    border: #ccc;
+    border: 3px solid #ccc;
+    width: 204px;
+    height: 48px;
+    border-radius: 50px;
+    margin-top: 20px;
+    font-size: 16px;
+    color: white;
+    font-family: 'Poppins-Bold';
+}
+.active{
+    border: 3px solid white;
+    text-decoration: none;
+    background-color: #226CE0;
+    width: 204px;
+    height: 48px;
+    border-radius: 50px;
+    margin-top: 20px;
+    font-size: 16px;
+    color: white;
+    font-family: 'Poppins-Bold';
+    cursor: pointer;
+    transition: .2s;
+}
+.active:hover{
+    background-color: white;
+    border: 3px solid white;
+    color: #226CE0;
+    transition: .2s;
 }
 
 

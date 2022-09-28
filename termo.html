@@ -10,19 +10,24 @@
 <body>
     
     <main>
-        <textarea name="termo" id="termo">Lorem ipsum dolor sit amet. Aut ullam voluptatum eos voluptatibus nesciunt quam sapiente. Qui internos repellat est omnis nostrum qui velit laudantium ut quos iure et voluptas rerum ab nesciunt sunt ut laboriosam praesentium. Est provident nostrum At saepe commodi aut sunt nisi id placeat dolores?
-
-        Non ipsa rerum sit voluptatem quae aut aspernatur amet rem exercitationem internos ut molestias tenetur et magnam sunt aut consequatur quia. Ut omnis illum est officia voluptatum aut praesentium nisi 33 rerum tempora et autem quas rem necessitatibus quisquam quo velit omnis.
+        <div class="container">
+            <div class="contentTermo">
+                
+                <textarea name="termo" id="termo" readonly>Lorem ipsum dolor sit amet. Aut ullam voluptatum eos voluptatibus nesciunt quam sapiente. Qui internos repellat est omnis nostrum qui velit laudantium ut quos iure et voluptas rerum ab nesciunt sunt ut laboriosam praesentium. Est provident nostrum At saepe commodi aut sunt nisi id placeat dolores?
+    
+                Non ipsa rerum sit voluptatem quae aut aspernatur amet rem exercitationem internos ut molestias tenetur et magnam sunt aut consequatur quia. Ut omnis illum est officia voluptatum aut praesentium nisi 33 rerum tempora et autem quas rem necessitatibus quisquam quo velit omnis.
+                
+                Consectetur earum non nemo nihil ea eligendi vero et quia internos. Et praesentium asperiores quo error minus eos quaerat similique et voluptas voluptate.
+                </textarea>
         
-        Consectetur earum non nemo nihil ea eligendi vero et quia internos. Et praesentium asperiores quo error minus eos quaerat similique et voluptas voluptate.
-        </textarea>
-
-        <div class="divTermo">
-            <input type="checkbox" name="cbTermo" id="cbTermo" onclick="verifyCheckBox()">
-            <label for="cbTermo">Aceito os termos</label>
+                <div class="divTermo">
+                    <input type="checkbox" name="cbTermo" id="cbTermo" onclick="verifyCheckBox()">
+                    <label for="cbTermo">Aceito os termos</label>
+                </div>
+        
+                <a href="cadastro.html" class="linkTermo" id="linkTermo"><button type="submit" class="btnTermo" id="btnTermo">CONFIRMAR</button></a>
+            </div>
         </div>
-
-        <a href="cadastro.html" class="btnTermo" id="btnTermo">Próximo</a>
     </main>
 
     <script src="js/script.js"></script>
