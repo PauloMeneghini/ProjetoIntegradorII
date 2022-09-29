@@ -13,6 +13,8 @@
 }
 body{
     background-color: #FCFCFC;
+    background-image: url("../img/blob-scene-haikei11.svg");
+    background-size: 100%;
 }
 
 main{
