@@ -477,3 +477,101 @@ input[type="text"], input:focus {
 .addCartao .numero, .addCartao .nome, .addCartao .dados-cartao{
     margin: 16px 0px;
 }
+
+.content-addCartao a{
+    margin-bottom: 0;
+}
+
+.btnsCadCartao{
+    margin-top: 20px;
+    flex-direction: row;
+}
+
+.btnCadCartao, .btnCancelar{
+    border: 3px solid white;
+    text-decoration: none;
+    background-color: #226CE0;
+    width: 204px;
+    height: 48px;
+    border-radius: 50px;    
+    font-size: 16px;
+    color: white;
+    font-family: 'Poppins-Bold';
+    cursor: pointer;
+    transition: .2s;
+}
+
+.btnCancelar{
+    background-color: white;
+    color: #226CE0;
+}
+
+.btnCadCartao:hover{
+    background-color: white;
+    color: #226CE0;
+}
+
+.btnCancelar:hover{
+    background-color: #226CE0;
+    color: white;
+}
+
+/* recarga.html */
+
+.contentBilheteRecarga{
+    width: 590px;
+    height: 100%;
+    border-radius: 16px 0px 0px 16px;
+    background-color: #226CE0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    float: left;
+}
+
+.bilhete{
+    background-color: white;
+    width: 60%;
+    margin-top: 30px;
+    padding: 25px;
+    border-radius: 16px;
+}
+
+.contentValorRecarga{
+    width: 410px;
+    height: 100%;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.contentValorRecarga h1{
+    color: #226CE0;
+    font-family: 'Poppins-Bold';
+    width: 80%;
+    text-align: left;
+    margin-bottom: 50px;
+}
+
+.btnRecarga{
+    border: 3px solid #226CE0;
+    text-decoration: none;
+    background-color: #226CE0;
+    width: 204px;
+    height: 48px;
+    border-radius: 50px;    
+    font-size: 16px;
+    color: white;
+    font-family: 'Poppins-Bold';
+    cursor: pointer;
+    transition: .2s;
+    margin-top: 15px;
+}
+.btnRecarga:hover{
+    background-color: white;
+    color: #226CE0;
+    transition: .2s;
+}
