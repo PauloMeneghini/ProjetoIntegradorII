@@ -1,23 +1,26 @@
-@font-face{
+@font-face {
     font-family: Poppins-Regular;
     src: url(../fonts/Poppins/Poppins-Regular.ttf);
 }
-@font-face{
+
+@font-face {
     font-family: Poppins-Bold;
     src: url(../fonts/Poppins/Poppins-Bold.ttf);
 }
-*{
+
+* {
     margin: 0;
     padding: 0;
     font-family: 'Poppins-Regular', Arial, Helvetica, sans-serif;
 }
-body{
+
+body {
     background-color: #FCFCFC;
     background-image: url("../img/blob-scene-haikei11.svg");
     background-size: 100%;
 }
 
-main{
+main {
     width: 50%;
     height: 100vh;
     margin: 0 auto;
@@ -26,9 +29,11 @@ main{
     align-items: center;
     flex-direction: column;
 }
-h1{
+
+h1 {
     text-align: center;
 }
+
 /* main a, .active{
     text-decoration: none;
     font-size: 24px;
@@ -51,7 +56,7 @@ main a:hover{
     transition: .2s;
 } */
 
-.container{
+.container {
     height: 720px;
     width: 1000px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -61,7 +66,7 @@ main a:hover{
 
 /* Index -> Login */
 
-.containerLogin{
+.containerLogin {
     position: absolute;
     width: 390px;
     height: 720px;
@@ -72,19 +77,23 @@ main a:hover{
     justify-content: center;
     align-items: center;
 }
-.login{
+
+.login {
     width: 246px;
     height: 382px;
 }
-.login h1{
+
+.login h1 {
     text-align: left;
     width: 200px;
     font-family: 'Poppins-Bold';
 }
-.login p{
+
+.login p {
     margin-top: 30px;
 }
-.btnEntrar{
+
+.btnEntrar {
     border: 3px solid white;
     text-decoration: none;
     background-color: #226CE0;
@@ -98,13 +107,15 @@ main a:hover{
     cursor: pointer;
     transition: .2s;
 }
-.btnEntrar:hover{
+
+.btnEntrar:hover {
     background-color: white;
     border: 3px solid white;
     color: #226CE0;
     transition: .2s;
 }
-.login a{
+
+.login a {
     font-weight: 500;
     font-size: 14px;
     text-decoration: none;
@@ -114,7 +125,7 @@ main a:hover{
 
 /* Index -> Cadastro */
 
-.containerCadastro{
+.containerCadastro {
     width: 610px;
     height: 100%;
     float: right;
@@ -123,39 +134,51 @@ main a:hover{
     justify-content: center;
     align-items: center;
 }
-.cadastro{
+
+.cadastro {
     width: 428px;
     height: 661.33px;
     display: flex;
     align-items: center;
     flex-direction: column;
 }
-.cadastro img{
+
+.cadastro img {
     width: 428px;
     height: 236px;
 }
-.cadastro h1{
+
+.cadastro h1 {
     color: #226CE0;
     font-family: 'Poppins-Bold';
 }
-.formCadastro{
+
+.formCadastro {
     width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.email, .senha, .confirmaSenha{
+
+.email,
+.senha,
+.confirmaSenha {
     display: flex;
     flex-direction: column;
     color: #363636;
     width: 100%;
 }
-.email label, .senha label, .confirmaSenha label{
+
+.email label,
+.senha label,
+.confirmaSenha label {
     margin-top: 30px;
     font-family: 'Poppins-Bold';
 }
 
-.email input, .senha input, .confirmaSenha input{
+.email input,
+.senha input,
+.confirmaSenha input {
     border: none;
     height: 40px;
     outline: 0;
@@ -164,7 +187,8 @@ main a:hover{
     border-radius: 5px;
     background-color: #F5F5F5;
 }
-.btnCadastrar{
+
+.btnCadastrar {
     border: 3px solid #226CE0;
     text-decoration: none;
     background-color: #226CE0;
@@ -178,7 +202,8 @@ main a:hover{
     cursor: pointer;
     transition: .2s;
 }
-.btnCadastrar:hover{
+
+.btnCadastrar:hover {
     background-color: white;
     border: 3px solid #226CE0;
     color: #226CE0;
@@ -187,7 +212,7 @@ main a:hover{
 
 /* Login.html */
 
-.imgLogin{
+.imgLogin {
     width: 490px;
     height: 100%;
     float: left;
@@ -195,7 +220,8 @@ main a:hover{
     justify-content: center;
     align-items: center;
 }
-.contentLogin{
+
+.contentLogin {
     width: 510px;
     height: 100%;
     background-color: #226CE0;
@@ -204,31 +230,36 @@ main a:hover{
     align-items: center;
     justify-content: center;
 }
-.formLogin{
+
+.formLogin {
     width: 90%;
     color: white;
     display: flex;
     align-items: center;
     flex-direction: column;
 }
-.formLogin h1{
+
+.formLogin h1 {
     font-family: 'Poppins-Bold';
 }
-.formLogin label{
+
+.formLogin label {
     color: white;
     font-family: 'Poppins-Bold';
 }
-.formLogin a{
+
+.formLogin a {
     margin-top: 20px;
     text-decoration: none;
     color: white;
 }
-.btnEntrar{
+
+.btnEntrar {
     margin-top: 10px;
 }
 
 /* termo.html */
-.contentTermo{
+.contentTermo {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -238,12 +269,14 @@ main a:hover{
     background-color: #226CE0;
     border-radius: 16px;
 }
-.contentTermo h1{
+
+.contentTermo h1 {
     color: white;
     font-family: 'Poppins-Bold';
     margin-bottom: 20px;
 }
-#termo{
+
+#termo {
     width: 80%;
     height: 300px;
     margin-bottom: 25px;
@@ -254,30 +287,35 @@ main a:hover{
     padding: 15px;
     border-radius: 16px;
 }
-#cbTermo{
+
+#cbTermo {
     width: 20px;
     height: 20px;
 }
-.divTermo{
+
+.divTermo {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.divTermo label{
+
+.divTermo label {
     cursor: pointer;
     font-family: 'Poppins-Bold';
     color: white;
     margin-left: 5px;
 }
-.linkTermo{
+
+.linkTermo {
     pointer-events: none;
     cursor: default;
 }
-.linkTermoActive{
+
+.linkTermoActive {
     cursor: pointer;
 }
 
-.btnTermo{
+.btnTermo {
     background-color: #ccc;
     border: 3px solid #ccc;
     width: 204px;
@@ -288,7 +326,8 @@ main a:hover{
     color: white;
     font-family: 'Poppins-Bold';
 }
-.active{
+
+.active {
     border: 3px solid white;
     text-decoration: none;
     background-color: #226CE0;
@@ -302,13 +341,13 @@ main a:hover{
     cursor: pointer;
     transition: .2s;
 }
-.active:hover{
+
+.active:hover {
     background-color: white;
     border: 3px solid white;
     color: #226CE0;
     transition: .2s;
 }
-
 
 /* Responsive 
 
