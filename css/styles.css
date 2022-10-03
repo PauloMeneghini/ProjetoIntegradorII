@@ -34,28 +34,6 @@ h1 {
     text-align: center;
 }
 
-/* main a, .active{
-    text-decoration: none;
-    font-size: 24px;
-    background-color: #226CE0;
-    padding: 10px 25px;
-    border-radius: 50px;
-    color: white;
-    width: 40%;
-    text-align: center;
-    margin-top: 25px;
-    transform: .2s;
-    border: 2px solid #226CE0;
-    font-weight: 500;
-    letter-spacing: 2px;
-}
-main a:hover{
-    color: #226CE0;
-    background-color: white;
-    border: 2px solid #226CE0;
-    transition: .2s;
-} */
-
 .container {
     height: 720px;
     width: 1000px;
@@ -349,31 +327,153 @@ main a:hover{
     transition: .2s;
 }
 
-/* Responsive 
-
-@media (max-width: 1535px){
-    main{
-        width: 50%;
-    }
-    main a, .active{
-        width: 60%;
-    }
-    .email, .senha, .confirmaSenha{
-        width: 80%;
-    }
+/* pagamento.html */
+  
+.content-preco {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 470px;
+    border-radius: 16px 0px 0px 16px;
+    background-color: #226CE0;
+    float: left;
+}
+  
+.imgPagamento {
+    width: 320px;
+    height: 100%;
+    /* display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    align-content: center; */
+}
+  
+h3 {
+    font-size: 24px;
+    color: #fff;
+    margin-top: 50px;
+    font-weight: 400;
+}
+  
+.content-preco h1 {
+    color: #fff;
+    text-align: center;
+    margin-top: 50px;
+    font-family: 'Poppins-Bold';
+    font-size: 40px;
+}
+  
+.content.preco p, a {
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 50px;
+}
+  
+.content-cartao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 530px;
+    height: 100%;
+}
+  
+.content-cartao h1 {
+    color: #226CE0;
+    text-align: center;
+    font-family: 'Poppins-Bold';
+}
+  
+.cartao {
+    width: 430px;
+    height: 170px;
+    background-color: #E4E4E4;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    margin: 0 auto;
+}
+  
+input[type="text"], input:focus {
+    padding-left: 15px;
+    outline: 0;
+    box-shadow: 0 0 0 0;
+    border-radius: 3px;
+    border: 0 none;
+    margin-left: 10px;
+}
+  
+.numero, .nome {
+    padding: 5px 220px 5px;
+    display: flex;
+    align-self: flex-start;
+}
+  
+.dados-cartao {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+  
+.dia, .ano, .cvv {
+    width: 50px;
+    padding: 5px;
+}
+  
+.usar-cartao, .adicionar-cartao {
+    border: 3px solid #226CE0;
+    text-decoration: none;
+    background-color: #226CE0;
+    width: 204px;
+    height: 48px;
+    border-radius: 50px;
+    margin-top: 20px;
+    font-size: 16px;
+    color: white;
+    font-family: 'Poppins-Bold';
+    cursor: pointer;
+    transition: .2s;
+}
+.usar-cartao:hover, .adicionar-cartao:hover{
+    background-color: white;
+    border: 3px solid #226CE0;
+    color: #226CE0;
+    transition: .2s;
+}
+  
+.linha {
+    background-color: #000000;
+    padding: 1px;
+    width: 8    0%;
 }
 
-@media (max-width: 728px) {
-    main{
-        width: 100%;
-    }
-    main a, .active{
-        width: 60%;
-    }
-    #termo{
-        width: 90%;
-    }
+/* cadCartao.html */
 
+.content-addCartao{
+    background-color: #226CE0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 16px;
 }
 
-*/
+.content-addCartao h1{
+    font-family: 'Poppins-Bold';
+    color: white;
+    margin-bottom: 20px;
+}
+
+.addCartao{
+    border: 2px solid white;
+    padding: 15px;
+    border-radius: 16px;
+}
+.addCartao .numero, .addCartao .nome, .addCartao .dados-cartao{
+    margin: 16px 0px;
+}
