@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recarga</title>
+    <link rel="stylesheet" href="public/css/styles.css" />
+  </head>
+  <body>
+    <main>
+      <div class="containerRecarga">
+        <div class="contentBilheteRecarga">
+            <div class="bilhete">
+                <p>Nome titular</p>
+                <p>Número do bilhete</p>
+            </div>
+
+            <img src="public/img/imgRecarga.png" alt="" width="80%" height="80%">
+        </div>
+
+        <div class="contentValorRecarga">
+            <h1>ESCOLHA A RECARGA DO SEU BILHETE</h1>
+            <p>Mantenha o mouse em cima do botão para ter uma breve descrição de cada tipo</p>
+            <button onclick="chamaTermo('unico')" class="btnRecarga" title="Esse bilhete é válido apenas uma vez">BILHETE ÚNICO</button>
+            <button onclick="chamaTermo('duplo')" class="btnRecarga" title="Esse bilhete pode ser utilizado até 2 vezes">BILHETE DUPLO</button>
+            <button onclick="chamaTermo('7 dias')" class="btnRecarga" title="Esse bilhete é válido por um período de 7 dias">BILHETE 7 DIAS</button></>
+            <button onclick="chamaTermo('30 dias')" class="btnRecarga" title="Esse bilhete é válido por um período de 30 dias">BILHETE 30 DIAS</button></a>
+        </div>
+
+      </div>
+    </main>
+
+    <div class="containerModalTermo" id="containerModalTermo">
+      <div class="modalTermo">
+          <h3>TERMO DE USO</h3>
+          <p>- Esse termo será incluso na próxima fase de entrega.</p>
+  
+          <div class="divTermo">
+              <input type="checkbox" name="cbTermo" id="cbTermo" onclick="verifyCheckBox()">
+              <label for="cbTermo">Aceito os termos</label>
+          </div>
+
+          <a href="#" class="linkTermo" id="linkTermo"><button type="submit" class="btnTermo" id="btnTermo">CONFIRMAR</button></a>
+      </div>
+    </div>
+
+    <script src="public/js/script.js"></script>
+  </body>
+</html>

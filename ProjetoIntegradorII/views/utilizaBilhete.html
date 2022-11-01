@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bilhete</title>
+    <link rel="stylesheet" href="/public/css/styles.css" />
+  </head>
+  <body>
+    <main>
+      <div class="containerBilhete">
+        <div class="contentBilhete">
+            <div class="utilizaBilhete">
+                <img id="QRCode" width="30%">
+                <div class="infoUtilizaBilhete">
+                    <h4 id="codigoBilhete">Bilhete Nº 0001</h4>
+                    <h4 id="tipoBilhete">Tipo: BILHETE ÚNICO </h4>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../public/js/scriptIntegracao.js"></script>
+
+    <script>
+      
+      const urlParams = new URLSearchParams(window.location.search);
+
+      const codigoBilheteURL = urlParams.get("codigo");
+      const tipoBilheteURL = urlParams.get("tipo");
+
+      const inputCodigoBilhete = document.getElementById("codigoBilhete");
+      const inputTipoBilhete = document.getElementById("tipoBilhete");
+      const QRcode = document.getElementById("QRCode");
+
+      inputCodigoBilhete.innerHTML = codigoBilheteURL;
+      inputTipoBilhete.innerHTML = tipoBilheteURL;
+
+      QRcode.src = `https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=${codigoBilheteURL}`;
+
+    </script>
+  </body>
+</html>

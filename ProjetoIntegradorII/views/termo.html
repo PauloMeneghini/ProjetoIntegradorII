@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <title>Termo</title>
+</head>
+<body>
+    
+    <main>
+        <div class="container">
+            <div class="contentTermo">
+                <h1>TERMO DE USO</h1>
+                <textarea name="termo" id="termo" readonly style="resize: none">
+                    Esse termo será incluso na próxima fase de entrega.
+                </textarea>
+        
+                <div class="divTermo">
+                    <input type="checkbox" name="cbTermo" id="cbTermo" onclick="verifyCheckBox()">
+                    <label for="cbTermo">Aceito os termos</label>
+                </div>
+        
+                <a href="#" class="linkTermo" id="linkTermo"><button type="submit" class="btnTermo" id="btnTermo">CONFIRMAR</button></a>
+            </div>
+        </div>
+    </main>
+
+    <script src="/public/js/script.js"></script>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+
+        const tipo = urlParams.get("tipo");
+
+        const link = document.getElementById("linkTermo");
+        const termo = document.getElementById("termo");
+
+        switch (tipo) {
+            case "unico":
+                link.setAttribute("href", "/pagamento?tipo=unico");
+                break;
+            case "duplo":
+                link.setAttribute("href", "/pagamento?tipo=duplo");
+                break;
+            case "7 dias":
+                link.setAttribute("href", "/pagamento?tipo=7 dias");
+                break;
+            case "30 dias":
+                link.setAttribute("href", "/pagamento?tipo=30 dias");
+                break;
+        }
+    </script>
+</body>
+</html>

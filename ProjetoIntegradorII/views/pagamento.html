@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pagamento</title>
+    <link rel="stylesheet" href="/public/css/styles.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <div class="contentPreco">
+          <h3>Valor final</h3>
+          <h1>R$0,00</h1>
+          <div class="imgPagamento">
+            <img src="/public/img/imgPagamento.png" width="100%" height="420" />
+          </div>
+          <a href="#"><p>Cancelar pagamento</p></a>
+        </div>
+
+        <div class="contentCartao">
+          <h1>PAGAMENTO</h1>
+          <p>Escolha seu cartão para começarmos</p>
+
+          <div class="cartao">
+            <input type="text" name="numero" placeholder="Número do Cartão" class="numeroCartão"/>
+            <input type="text" name="nome" placeholder="Nome do Titular" class="nomeCartão"/>
+            <div class="dadosCartao">
+              <input type="text" name="dia" placeholder="00" class="diaVencCartão" />
+              <input type="text" name="ano" placeholder="0000" class="anoVencCartão" />
+              <input type="text" name="cvv" placeholder="CVV" class="cvvCartão" />
+            </div>
+          </div>
+          <button type="submit" class="usar-cartao" id="usar-cartao" value="" onclick="gerarBilhete()">USAR CARTÃO</button>
+
+          <div class="linha"></div>
+          <a href="#" id="linkCadCartao"><button type="submit" class="adicionar-cartao">ADICIONAR CARTÃO </button></a>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+
+      const tipo = urlParams.get("tipo");
+
+      const btnCadCartao = document.getElementById("usar-cartao");
+      const linkCadCartao = document.getElementById("linkCadCartao");
+
+      switch (tipo) {
+          case "unico":
+            btnCadCartao.setAttribute("value", "unico");
+            linkCadCartao.setAttribute("href", "/cadCartao?tipo=unico");
+            break;
+          case "duplo":
+            btnCadCartao.setAttribute("value", "duplo");
+            linkCadCartao.setAttribute("href", "/cadCartao?tipo=duplo");
+            break;
+          case "7 dias":
+            btnCadCartao.setAttribute("value", "7 dias");
+            linkCadCartao.setAttribute("href", "/cadCartao?tipo=7 dias");
+            break;
+          case "30 dias":
+            btnCadCartao.setAttribute("value", "30 dias");
+            linkCadCartao.setAttribute("href", "/cadCartao?tipo=30 dias");
+            break;
+      }
+    </script>
+
+    <script src="../public/js/scriptIntegracao.js"></script>
+
+  </body>
+</html>

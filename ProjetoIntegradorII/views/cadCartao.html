@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de cartão</title>
+    <link rel="stylesheet" href="/public/css/styles.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <div class="content-addCartao">
+
+          <h1>INSIRA AS  INFORMAÇÕES DO SEU CARTÃO</h1>
+
+          <div class="addCartao">
+            <input type="text" name="numero" placeholder="Número do Cartão" class="numeroCartão"/>
+            <input type="text" name="nome" placeholder="Nome do Titular" class="nomeCartão"/>
+            <div class="dados-cartao">
+              <input type="number" name="dia" placeholder="00" class="diaVencCartão" />
+              <input type="number" name="ano" placeholder="0000" class="anoVencCartão" />
+              <input type="number" name="cvv" placeholder="CVV" class="cvvCartão" />
+            </div>
+          </div>
+
+          <div class="btnsCadCartao">
+            <button class="btnCadCartao" id="usar-cartao" value="" onclick="gerarBilhete()">CONFIRMAR E PAGAR</button>
+            <a href="/pagamento"><button class="btnCancelar">CANCELAR</button></a>
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+
+      const tipo = urlParams.get("tipo");
+
+      const btnConfirmaPagamento = document.getElementById("usar-cartao");
+
+      switch (tipo) {
+          case "unico":
+            btnConfirmaPagamento.setAttribute("value", "unico");
+            break;
+          case "duplo":
+            btnConfirmaPagamento.setAttribute("value", "duplo");
+            break;
+          case "7 dias":
+            btnConfirmaPagamento.setAttribute("value", "7 dias");
+            break;
+          case "30 dias":
+            btnConfirmaPagamento.setAttribute("value", "30 dias");
+            break;
+      }
+    </script>
+
+    <script src="../public/js/scriptIntegracao.js"></script>
+
+  </body>
+</html>
