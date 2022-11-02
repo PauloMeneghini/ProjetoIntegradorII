@@ -96,16 +96,16 @@ function Usuarios(bd)
             const conexao = await this.bd.getConexao();
             let mensagem;
 
-            const selectCount = "SELECT EMAIL FROM USUARIOS WHERE EMAIL = :email";
-            const dadoCount = [usuario.email];
+            const selectEmailCount = "SELECT EMAIL FROM USUARIOS WHERE EMAIL = :email";
+            const dadoEmailCount = [usuario.email];
 
-            resultadoCount = await conexao.execute(selectCount, dadoCount);
-
-
-            console.log(resultadoCount.rows.length);
+            resultadoEmailCount = await conexao.execute(selectEmailCount, dadoEmailCount);
 
 
-            if(resultadoCount.rows.length > 0) {
+            console.log(resultadoEmailCount.rows.length);
+
+
+            if(resultadoEmailCount.rows.length > 0) {
 
                 console.log(`O email ${usuario.email} já está cadastrado`);
 
@@ -115,18 +115,18 @@ function Usuarios(bd)
 
             } else {
 
-                const insert = "INSERT INTO USUARIOS (CODIGO, NOME, EMAIL, SENHA, DATA_CADASTRO) VALUES (SEQ_USUARIOS.NEXTVAL, :nome, :email, :senha, CURRENT_DATE)";
+                const insert = "INSERT INTO USUARIOS (CODIGO, NOME, EMAIL, SENHA, CELULAR, DATA_CADASTRO) VALUES (SEQ_USUARIOS.NEXTVAL, :nome, :email, :senha, :celular, CURRENT_DATE)";
         
-                const dados = [usuario.nome, usuario.email, usuario.senha];
+                const dados = [usuario.nome, usuario.email, usuario.senha, usuario.celular];
         
                 await conexao.execute(insert, dados);
         
                 const commit = "COMMIT";
                 await conexao.execute(commit);
         
-                const select = "SELECT CODIGO, NOME, EMAIL, SENHA, TO_CHAR(DATA_CADASTRO, 'YYYY-MM-DD HH24:MI:SS') FROM USUARIOS WHERE NOME = :0";
+                const select = "SELECT CODIGO, NOME, EMAIL, SENHA, CELULAR, TO_CHAR(DATA_CADASTRO, 'YYYY-MM-DD HH24:MI:SS') FROM USUARIOS WHERE CELULAR = :celular";
         
-                const dadosSelect = [usuario.nome];
+                const dadosSelect = [usuario.celular];
                 ret = await conexao.execute(select, dadosSelect);
                 console.log(ret.rows);
         
@@ -147,11 +147,12 @@ function Usuarios(bd)
     }
 }
 
-function Usuario(nome, email, senha)
+function Usuario(nome, email, senha, celular)
 {
     this.nome = nome;
     this.email = email;
     this.senha = senha;
+    this.celular = celular;
 }
 
 /*function middleWareGlobal(req, res, next) {
@@ -197,10 +198,10 @@ async function inclusaoUsuario(req, res)
     const senhaCriptografada = await bcrypt.hash(req.body.senhaCadastro, 10); //10 quer dizer que mesmo que a senha seja igual para usuários diferentes a criptografia vai ser a mesma
 
     const email = req.body.emailCadastro.toLowerCase();
-
     const nome = req.body.nomeUsuario;
+    const celular = req.body.celularCadastro;
 
-    const usuario = new Usuario(nome, email, senhaCriptografada);
+    const usuario = new Usuario(nome, email, senhaCriptografada, celular);
       
     try
     {
