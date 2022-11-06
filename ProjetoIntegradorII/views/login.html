@@ -40,22 +40,13 @@
 
       const inputEmail = document.getElementById('emailLogin');
 
-      function verificaEmailCelular(valor) {
+      function verificaEmailCelular(input) {
 
         var regra = /^[0-9]+$/;
 
-        if(valor.match(regra)) {
-
-          console.log('Number');
-        } else {
-          console.log('String');
+        if(input.match(regra)) {
+          console.log(input.split(""));
         }
-
-        /* if (typeof(inputEmail.value) == Number) {
-           console.log('Celular');
-        } else {
-          console.log('Email');
-        }*/
       }
     </script>
 

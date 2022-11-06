@@ -741,6 +741,27 @@ h3 {
     transition: .2s;
 }
 
+.comprarBilhete {
+    background-color: #F45D01;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 25px;
+    color: white;
+    font-family: 'Poppins-Bold';
+    font-size: 18px;
+    margin-top: 15px;
+    border: 2px solid #F45D01;
+    transition: .2s;
+}
+
+.comprarBilhete:hover{
+    cursor: pointer;
+    background-color: white;
+    border: 2px solid #F45D01;
+    color: #F45D01;
+    transition: .2s;
+}
+
 /* utilizaBilhete.html */
 
 .utilizaBilhete {
