@@ -1,3 +1,17 @@
+const express = require("express");
+const app = express();
+const cors = require("cors");
+const path = require('path');
+const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
+const session = require('express-session');
+
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+app.use('/public', express.static(path.join(__dirname, 'public')));
+
+app.use(session({secret: 'u6e7e7e57e5735u656i4eifkygfye'}));
+
 function BD()
 {
 
@@ -193,8 +207,6 @@ async function inclusao(req, res)
 
 async function inclusaoUsuario(req, res)
 {
-
-    const bcrypt = require('bcrypt');
     const senhaCriptografada = await bcrypt.hash(req.body.senhaCadastro, 10); //10 quer dizer que mesmo que a senha seja igual para usuários diferentes a criptografia vai ser a mesma
 
     const email = req.body.emailCadastro.toLowerCase();
@@ -219,6 +231,60 @@ async function inclusaoUsuario(req, res)
     
 }
 
+async function realizaLogin(req, res)
+{
+
+    this.bd = new BD();
+
+    try
+    {
+        await this.bd.getConexao();
+
+        const email = req.body.emailLogin;
+        const senha = req.body.senhaLogin;
+
+        const selectLogin = "SELECT EMAIL, SENHA, NOME FROM USUARIOS WHERE EMAIL = :email";
+
+        const dadoLogin = [email];
+
+        resultado = await conexao.execute(selectLogin, dadoLogin);
+
+        const nomeUsuario = resultado.rows[0].NOME;
+
+        if(email == resultado.rows[0].EMAIL && await bcrypt.compare(senha, resultado.rows[0].SENHA))
+        {
+
+            //res.status(201).json("Logado com sucesso!")
+
+            //app.use(session({ secret: 'keyboard cat' }));
+            
+
+            console.log(`O nome do usuário é: ${resultado.rows[0].NOME}`);
+            
+            req.session.nome = resultado.rows[0].NOME;
+
+            console.log(`Nome: ${req.session.nome}`);
+
+            //res.redirect("http://localhost:4000/mostraBilhete");
+            res.redirect("/mostraBilhete");
+
+        }
+        else
+        {
+            res.status(401).json("Erro ao logar");
+        }
+
+        // return 
+        // return res.status(201).json("sucesso");
+    }
+    catch(erro)
+    {
+        console.error;
+    }
+
+
+}
+
 async function ativacaoServidor()
 {
     const bd = new BD();
@@ -226,16 +292,6 @@ async function ativacaoServidor()
     global.bilhetes = new Bilhetes(bd);
 
     global.usuarios = new Usuarios(bd);
-
-    const express = require("express");
-    const app = express();
-    const cors = require("cors");
-    const path = require('path');
-    const bodyParser = require('body-parser');
-
-    app.engine('html', require('ejs').renderFile);
-    app.set('view engine', 'html');
-    app.use('/public', express.static(path.join(__dirname, 'public')));
 
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
@@ -251,9 +307,15 @@ async function ativacaoServidor()
     app.get('/login', function(req, res){
         res.render("login");
     });
+
+    app.post('/login', realizaLogin);
     
     app.get('/mostraBilhete', function(req, res){
-        res.render("mostraBilhete");
+
+        if(req.session.nome) {
+
+            res.render("mostraBilhete", {nome : req.session.nome});
+        }
     });
     
     
