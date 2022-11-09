@@ -10,15 +10,18 @@
     <main>
       <div class="containerBilhete">
         <div class="contentBilhete">
-          <h1>Olá, <%= nome %></h1>                  
-          <h1>Bilhete: </h1>                  
+          <h1>Olá, <%= nome %></h1>                       
           <h1>MEUS BILHETES</h1>
 
           <a href="/recarga"><button class="comprarBilhete">COMPRAR BILHETE</button></a>
+
+
+        <% for (i = 0; i < tamanhoOBJ; i++) { %>
+
           <div class="bilhete">
               <div class="info">
-                  <h4 id="codigoBilhete">Bilhete Nº <%= bilhete %></h4>
-                  <h4 id="tipoBilhete">Tipo: <%= tipoBilhete %> </h4>
+                  <h4 id="codigoBilhete">Bilhete Nº <%= bilhete[i].CODIGO %></h4>
+                  <h4 id="tipoBilhete">Tipo: <%= tipoBilhete[i].TIPO %> </h4>
               </div>
 
               <div class="btnsBilhete">
@@ -26,6 +29,7 @@
                   <a href="/recarga"><button type="submit" class="btnRecarregarBilhete">RECARREGAR BILHETE</button></a>
               </div>
           </div>
+        <% } %>
       </div>
     </main>
 

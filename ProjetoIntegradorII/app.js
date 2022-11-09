@@ -325,11 +325,11 @@ async function ativacaoServidor()
 
                 tamanhoOBJ = resultado.rows.length;
 
-                bilhete = resultado.rows[0].CODIGO;
+                bilhete = resultado.rows;
 
-                tipoBilhete = resultado.rows[0].TIPO;
+                tipoBilhete = resultado.rows;
 
-                res.render("mostraBilhete", {nome : req.session.nome, bilhete : bilhete, tipoBilhete : tipoBilhete});
+                res.render("mostraBilhete", {nome : req.session.nome, bilhete : bilhete, tipoBilhete : tipoBilhete, tamanhoOBJ : tamanhoOBJ});
 
                 console.log(`Bilhete: ${bilhete}; Tipo: ${tipoBilhete}`);
             }
