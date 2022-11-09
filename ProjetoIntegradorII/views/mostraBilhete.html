@@ -10,14 +10,15 @@
     <main>
       <div class="containerBilhete">
         <div class="contentBilhete">
-          <h1>Olá, <%= nome %></h1>          
+          <h1>Olá, <%= nome %></h1>                  
+          <h1>Bilhete: </h1>                  
           <h1>MEUS BILHETES</h1>
 
           <a href="/recarga"><button class="comprarBilhete">COMPRAR BILHETE</button></a>
           <div class="bilhete">
               <div class="info">
-                  <h4 id="codigoBilhete">Bilhete Nº 0001</h4>
-                  <h4 id="tipoBilhete">Tipo: BILHETE ÚNICO </h4>
+                  <h4 id="codigoBilhete">Bilhete Nº <%= bilhete %></h4>
+                  <h4 id="tipoBilhete">Tipo: <%= tipoBilhete %> </h4>
               </div>
 
               <div class="btnsBilhete">
@@ -32,7 +33,7 @@
 
     <script>
       
-      const urlParams = new URLSearchParams(window.location.search);
+      /*const urlParams = new URLSearchParams(window.location.search);
 
       const codigoBilheteURL = urlParams.get("codigo");
       const tipoBilheteURL = urlParams.get("tipo");
@@ -44,7 +45,7 @@
       inputCodigoBilhete.innerHTML = codigoBilheteURL;
       inputTipoBilhete.innerHTML = tipoBilheteURL;
 
-      linkUtilizaBilhete.setAttribute("href", `/utilizaBilhete?codigo=${codigoBilheteURL}&tipo=${tipoBilheteURL}`);
+      linkUtilizaBilhete.setAttribute("href", `/utilizaBilhete?codigo=${codigoBilheteURL}&tipo=${tipoBilheteURL}`);*/
 
     </script>
   </body>
