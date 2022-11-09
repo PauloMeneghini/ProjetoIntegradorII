@@ -248,16 +248,16 @@ async function realizaLogin(req, res)
 
         const dadoLogin = [email];
 
-        resultado = await conexao.execute(selectLogin, dadoLogin);
+        resultadoUsuario = await conexao.execute(selectLogin, dadoLogin);
 
-        if(email == resultado.rows[0].EMAIL && await bcrypt.compare(senha, resultado.rows[0].SENHA))
+        if(email == resultadoUsuario.rows[0].EMAIL && await bcrypt.compare(senha, resultadoUsuario.rows[0].SENHA))
         {
 
             //app.use(session({ secret: 'keyboard cat' }));
             
-            req.session.nome = resultado.rows[0].NOME;
-            req.session.email = resultado.rows[0].EMAIL;
-            req.session.idUser = resultado.rows[0].CODIGO;
+            req.session.nome = resultadoUsuario.rows[0].NOME;
+            req.session.email = resultadoUsuario.rows[0].EMAIL;
+            req.session.idUser = resultadoUsuario.rows[0].CODIGO;
 
 
             res.redirect("/mostraBilhete");
@@ -306,24 +306,36 @@ async function ativacaoServidor()
 
         if(req.session.nome) {
 
-            res.render("mostraBilhete", {nome : req.session.nome});
-
-            async function AAA(){
+            let resultado;
+            let bilheteAAA;
+            
+            async function consultaBilhete(){
                 
                 const bd = new BD();
-        
+                
                 bd.getConexao();
-        
-                const selectBilhete = "SELECT * FROM BILHETES WHERE CODIGO = :numBilhete";
+                
+                const selectBilhete = "SELECT * FROM BILHETES WHERE USUARIO = :codUsuario";
+                
+                const dadosBilhete = [req.session.idUser];
+                
+                resultado = await conexao.execute(selectBilhete, dadosBilhete);
 
-                const dadosBilhete = [1667337752450];
-        
-                let resultado = await conexao.execute(selectBilhete, dadosBilhete);
-        
                 console.log(resultado.rows);
-            }
 
-            AAA();
+                tamanhoOBJ = resultado.rows.length;
+
+                bilhete = resultado.rows[0].CODIGO;
+
+                tipoBilhete = resultado.rows[0].TIPO;
+
+                res.render("mostraBilhete", {nome : req.session.nome, bilhete : bilhete, tipoBilhete : tipoBilhete});
+
+                console.log(`Bilhete: ${bilhete}; Tipo: ${tipoBilhete}`);
+            }
+            
+            consultaBilhete();
+
         }
 
 
