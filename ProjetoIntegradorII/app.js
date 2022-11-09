@@ -1,3 +1,17 @@
+const express = require("express");
+const app = express();
+const cors = require("cors");
+const path = require('path');
+const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
+const session = require('express-session');
+
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+app.use('/public', express.static(path.join(__dirname, 'public')));
+
+app.use(session({secret: 'u6e7e7e57e5735u656i4eifkygfye'}));
+
 function BD()
 {
 
@@ -42,9 +56,9 @@ function Bilhetes(bd)
 
             const conexao = await this.bd.getConexao();
     
-            const insert = "INSERT INTO BILHETES (CODIGO, TIPO, DATA_GERACAO) VALUES (:0, :1, CURRENT_DATE)";
+            const insert = "INSERT INTO BILHETES (CODIGO, TIPO, DATA_GERACAO, USUARIO) VALUES (:codigo, :tipo, CURRENT_DATE, :usuario)";
     
-            const dados = [bilhete.codigo, bilhete.tipo];
+            const dados = [bilhete.codigo, bilhete.tipo, bilhete.idUser];
     
             await conexao.execute(insert, dados);
     
@@ -69,11 +83,12 @@ function Bilhetes(bd)
     }
 }
 
-function Bilhete(codigo, tipo, data_geracao)
+function Bilhete(codigo, tipo, data_geracao, idUser)
 {
     this.codigo = codigo;
     this.tipo = tipo;
     this.data_geracao = data_geracao;
+    this.idUser = idUser;
 }
 
 function Comunicado(codigo, tipo, mensagem, resposta)
@@ -96,16 +111,16 @@ function Usuarios(bd)
             const conexao = await this.bd.getConexao();
             let mensagem;
 
-            const selectCount = "SELECT EMAIL FROM USUARIOS WHERE EMAIL = :email";
-            const dadoCount = [usuario.email];
+            const selectEmailCount = "SELECT EMAIL FROM USUARIOS WHERE EMAIL = :email";
+            const dadoEmailCount = [usuario.email];
 
-            resultadoCount = await conexao.execute(selectCount, dadoCount);
-
-
-            console.log(resultadoCount.rows.length);
+            resultadoEmailCount = await conexao.execute(selectEmailCount, dadoEmailCount);
 
 
-            if(resultadoCount.rows.length > 0) {
+            console.log(resultadoEmailCount.rows.length);
+
+
+            if(resultadoEmailCount.rows.length > 0) {
 
                 console.log(`O email ${usuario.email} já está cadastrado`);
 
@@ -115,18 +130,18 @@ function Usuarios(bd)
 
             } else {
 
-                const insert = "INSERT INTO USUARIOS (CODIGO, NOME, EMAIL, SENHA, DATA_CADASTRO) VALUES (SEQ_USUARIOS.NEXTVAL, :nome, :email, :senha, CURRENT_DATE)";
+                const insert = "INSERT INTO USUARIOS (CODIGO, NOME, EMAIL, SENHA, CELULAR, DATA_CADASTRO) VALUES (SEQ_USUARIOS.NEXTVAL, :nome, :email, :senha, :celular, CURRENT_DATE)";
         
-                const dados = [usuario.nome, usuario.email, usuario.senha];
+                const dados = [usuario.nome, usuario.email, usuario.senha, usuario.celular];
         
                 await conexao.execute(insert, dados);
         
                 const commit = "COMMIT";
                 await conexao.execute(commit);
         
-                const select = "SELECT CODIGO, NOME, EMAIL, SENHA, TO_CHAR(DATA_CADASTRO, 'YYYY-MM-DD HH24:MI:SS') FROM USUARIOS WHERE NOME = :0";
+                const select = "SELECT CODIGO, NOME, EMAIL, SENHA, CELULAR, TO_CHAR(DATA_CADASTRO, 'YYYY-MM-DD HH24:MI:SS') FROM USUARIOS WHERE CELULAR = :celular";
         
-                const dadosSelect = [usuario.nome];
+                const dadosSelect = [usuario.celular];
                 ret = await conexao.execute(select, dadosSelect);
                 console.log(ret.rows);
         
@@ -147,11 +162,12 @@ function Usuarios(bd)
     }
 }
 
-function Usuario(nome, email, senha)
+function Usuario(nome, email, senha, celular)
 {
     this.nome = nome;
     this.email = email;
     this.senha = senha;
+    this.celular = celular;
 }
 
 /*function middleWareGlobal(req, res, next) {
@@ -168,7 +184,7 @@ function Usuario(nome, email, senha)
 async function inclusao(req, res)
 {
     const codigo = new Date().getTime();
-    const bilhete = new Bilhete(codigo, req.body.tipo, req.body.data_geracao);
+    const bilhete = new Bilhete(codigo, req.body.tipo, req.body.data_geracao, req.session.idUser);
 
     try
     {
@@ -192,15 +208,13 @@ async function inclusao(req, res)
 
 async function inclusaoUsuario(req, res)
 {
-
-    const bcrypt = require('bcrypt');
     const senhaCriptografada = await bcrypt.hash(req.body.senhaCadastro, 10); //10 quer dizer que mesmo que a senha seja igual para usuários diferentes a criptografia vai ser a mesma
 
     const email = req.body.emailCadastro.toLowerCase();
-
     const nome = req.body.nomeUsuario;
+    const celular = req.body.celularCadastro;
 
-    const usuario = new Usuario(nome, email, senhaCriptografada);
+    const usuario = new Usuario(nome, email, senhaCriptografada, celular);
       
     try
     {
@@ -218,6 +232,51 @@ async function inclusaoUsuario(req, res)
     
 }
 
+async function realizaLogin(req, res)
+{
+
+    this.bd = new BD();
+
+    try
+    {
+        await this.bd.getConexao();
+
+        const email = req.body.emailLogin;
+        const senha = req.body.senhaLogin;
+
+        const selectLogin = "SELECT * FROM USUARIOS WHERE EMAIL = :email";
+
+        const dadoLogin = [email];
+
+        resultado = await conexao.execute(selectLogin, dadoLogin);
+
+        if(email == resultado.rows[0].EMAIL && await bcrypt.compare(senha, resultado.rows[0].SENHA))
+        {
+
+            //app.use(session({ secret: 'keyboard cat' }));
+            
+            req.session.nome = resultado.rows[0].NOME;
+            req.session.email = resultado.rows[0].EMAIL;
+            req.session.idUser = resultado.rows[0].CODIGO;
+
+
+            res.redirect("/mostraBilhete");
+
+        }
+        else
+        {
+            res.status(401).json("Erro ao logar");
+        }
+
+    }
+    catch(erro)
+    {
+        console.error;
+    }
+
+
+}
+
 async function ativacaoServidor()
 {
     const bd = new BD();
@@ -225,16 +284,6 @@ async function ativacaoServidor()
     global.bilhetes = new Bilhetes(bd);
 
     global.usuarios = new Usuarios(bd);
-
-    const express = require("express");
-    const app = express();
-    const cors = require("cors");
-    const path = require('path');
-    const bodyParser = require('body-parser');
-
-    app.engine('html', require('ejs').renderFile);
-    app.set('view engine', 'html');
-    app.use('/public', express.static(path.join(__dirname, 'public')));
 
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
@@ -250,9 +299,34 @@ async function ativacaoServidor()
     app.get('/login', function(req, res){
         res.render("login");
     });
+
+    app.post('/login', realizaLogin);
     
     app.get('/mostraBilhete', function(req, res){
-        res.render("mostraBilhete");
+
+        if(req.session.nome) {
+
+            res.render("mostraBilhete", {nome : req.session.nome});
+
+            async function AAA(){
+                
+                const bd = new BD();
+        
+                bd.getConexao();
+        
+                const selectBilhete = "SELECT * FROM BILHETES WHERE CODIGO = :numBilhete";
+
+                const dadosBilhete = [1667337752450];
+        
+                let resultado = await conexao.execute(selectBilhete, dadosBilhete);
+        
+                console.log(resultado.rows);
+            }
+
+            AAA();
+        }
+
+
     });
     
     

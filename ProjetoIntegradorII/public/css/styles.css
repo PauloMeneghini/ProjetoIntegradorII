@@ -150,7 +150,8 @@ h1 {
 
 .email,
 .senha,
-.nomeUsuario {
+.nomeUsuario,
+.celular {
     display: flex;
     flex-direction: column;
     color: #363636;
@@ -159,14 +160,16 @@ h1 {
 
 .email label,
 .senha label,
-.nomeUsuario label {
-    margin-top: 30px;
+.nomeUsuario label,
+.celular label {
+    margin-top: 15px;
     font-family: 'Poppins-Bold';
 }
 
 .email input,
 .senha input,
-.nomeUsuario input {
+.nomeUsuario input,
+.celular input {
     border: none;
     height: 40px;
     outline: 0;
@@ -175,6 +178,13 @@ h1 {
     border-radius: 5px;
     background-color: #F5F5F5;
 }
+
+.email input:focus,
+.senha input:focus,
+.nomeUsuario input:focus,
+.celular input:focus {
+    border: 1px solid #363636;
+} 
 
 .btnCadastrar {
     border: 3px solid #226CE0;
@@ -727,6 +737,27 @@ h3 {
 }
 .btnRecarregarBilhete:hover{
     background-color: white;
+    color: #F45D01;
+    transition: .2s;
+}
+
+.comprarBilhete {
+    background-color: #F45D01;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 25px;
+    color: white;
+    font-family: 'Poppins-Bold';
+    font-size: 18px;
+    margin-top: 15px;
+    border: 2px solid #F45D01;
+    transition: .2s;
+}
+
+.comprarBilhete:hover{
+    cursor: pointer;
+    background-color: white;
+    border: 2px solid #F45D01;
     color: #F45D01;
     transition: .2s;
 }

@@ -18,19 +18,37 @@
           <div class="formLogin">
             <h1>LOGIN</h1>
             <p>Bem-vindo(a) de volta!</p>
-            <div class="email">
-              <label for="emailCadastro">E-mail:</label>
-              <input type="email" id="emailCadastro" />
-            </div>
-            <div class="senha">
-              <label for="senhaCadastro">Senha:</label>
-              <input type="password" id="senhaCadastro" />
-            </div>
-            <a href="#">Esqueci minha senha</a>
-            <a href="/mostraBilhete"><button type="submit" class="btnEntrar">ENTRAR</button></a>
+            <form action="/login" method="post">
+              <div class="email">
+                <label for="emailLogin">E-mail:</label>
+                <input type="email" id="emailLogin" name="emailLogin" onkeypress="verificaEmailCelular(this.value)"/>
+              </div>
+              <div class="senha">
+                <label for="senhaLogin">Senha:</label>
+                <input type="password" id="senhaLogin" name="senhaLogin"/>
+              </div>
+              <a href="#">Esqueci minha senha</a>
+              <button type="submit" class="btnEntrar">ENTRAR</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </main>
+
+    <script>
+
+      const inputEmail = document.getElementById('emailLogin');
+
+      function verificaEmailCelular(input) {
+
+        var regra = /^[0-9]+$/;
+
+        if(input.match(regra)) {
+          console.log(input.split(""));
+        }
+      }
+    </script>
+
   </body>
 </html>

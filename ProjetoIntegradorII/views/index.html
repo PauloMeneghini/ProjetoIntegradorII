@@ -17,7 +17,6 @@
                     <h1>BEM-VINDO DE VOLTA!</h1>
                     <p>Acesse sua conta agora mesmo!</p>
                     <a href="/login" ><button type="submit" class="btnEntrar">ENTRAR</button></a>
-                    <a href="#">Esqueci minha senha</a>
                 </div>
             </div>
 
@@ -37,8 +36,12 @@
                                 <input type="email" id="emailCadastro" name="emailCadastro">
                             </div>
                             <div class="senha">
-                                <label for="email">Senha:</label>
+                                <label for="senhaCadastro">Senha:</label>
                                 <input type="password" id="senhaCadastro" name="senhaCadastro">
+                            </div>
+                            <div class="celular">
+                                <label for="celularCadastro">Celular:</label>
+                                <input type="text" id="celularCadastro" name="celularCadastro" onkeypress="mascaraCelular(this)" maxlength="14">
                             </div>
                             <button type="submit" class="btnCadastrar" id="btnCadastrar" onclick="cadastrarUsuario()">CADASTRAR</button>
                         <!-- </form> -->
