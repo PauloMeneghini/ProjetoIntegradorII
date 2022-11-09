@@ -56,9 +56,9 @@ function Bilhetes(bd)
 
             const conexao = await this.bd.getConexao();
     
-            const insert = "INSERT INTO BILHETES (CODIGO, TIPO, DATA_GERACAO) VALUES (:0, :1, CURRENT_DATE)";
+            const insert = "INSERT INTO BILHETES (CODIGO, TIPO, DATA_GERACAO, USUARIO) VALUES (:codigo, :tipo, CURRENT_DATE, :usuario)";
     
-            const dados = [bilhete.codigo, bilhete.tipo];
+            const dados = [bilhete.codigo, bilhete.tipo, bilhete.idUser];
     
             await conexao.execute(insert, dados);
     
@@ -83,11 +83,12 @@ function Bilhetes(bd)
     }
 }
 
-function Bilhete(codigo, tipo, data_geracao)
+function Bilhete(codigo, tipo, data_geracao, idUser)
 {
     this.codigo = codigo;
     this.tipo = tipo;
     this.data_geracao = data_geracao;
+    this.idUser = idUser;
 }
 
 function Comunicado(codigo, tipo, mensagem, resposta)
@@ -183,7 +184,7 @@ function Usuario(nome, email, senha, celular)
 async function inclusao(req, res)
 {
     const codigo = new Date().getTime();
-    const bilhete = new Bilhete(codigo, req.body.tipo, req.body.data_geracao);
+    const bilhete = new Bilhete(codigo, req.body.tipo, req.body.data_geracao, req.session.idUser);
 
     try
     {
@@ -243,29 +244,22 @@ async function realizaLogin(req, res)
         const email = req.body.emailLogin;
         const senha = req.body.senhaLogin;
 
-        const selectLogin = "SELECT EMAIL, SENHA, NOME FROM USUARIOS WHERE EMAIL = :email";
+        const selectLogin = "SELECT * FROM USUARIOS WHERE EMAIL = :email";
 
         const dadoLogin = [email];
 
         resultado = await conexao.execute(selectLogin, dadoLogin);
 
-        const nomeUsuario = resultado.rows[0].NOME;
-
         if(email == resultado.rows[0].EMAIL && await bcrypt.compare(senha, resultado.rows[0].SENHA))
         {
 
-            //res.status(201).json("Logado com sucesso!")
-
             //app.use(session({ secret: 'keyboard cat' }));
             
-
-            console.log(`O nome do usuário é: ${resultado.rows[0].NOME}`);
-            
             req.session.nome = resultado.rows[0].NOME;
+            req.session.email = resultado.rows[0].EMAIL;
+            req.session.idUser = resultado.rows[0].CODIGO;
 
-            console.log(`Nome: ${req.session.nome}`);
 
-            //res.redirect("http://localhost:4000/mostraBilhete");
             res.redirect("/mostraBilhete");
 
         }
@@ -274,8 +268,6 @@ async function realizaLogin(req, res)
             res.status(401).json("Erro ao logar");
         }
 
-        // return 
-        // return res.status(201).json("sucesso");
     }
     catch(erro)
     {
@@ -315,7 +307,26 @@ async function ativacaoServidor()
         if(req.session.nome) {
 
             res.render("mostraBilhete", {nome : req.session.nome});
+
+            async function AAA(){
+                
+                const bd = new BD();
+        
+                bd.getConexao();
+        
+                const selectBilhete = "SELECT * FROM BILHETES WHERE CODIGO = :numBilhete";
+
+                const dadosBilhete = [1667337752450];
+        
+                let resultado = await conexao.execute(selectBilhete, dadosBilhete);
+        
+                console.log(resultado.rows);
+            }
+
+            AAA();
         }
+
+
     });
     
     
