@@ -68,6 +68,34 @@ function Bilhetes(bd) {
       console.error(erro)
     }
   }
+
+  this.altera = async function (codigoBilhete) {
+
+    try {
+        const conexao = await this.bd.getConexao()
+  
+        const update = "UPDATE BILHETES SET TIPO = ' ' WHERE CODIGO = :codigo";
+  
+        const dados = [codigoBilhete.codigo];
+  
+        await conexao.execute(update, dados)
+  
+        const commit = 'COMMIT'
+        await conexao.execute(commit)
+  
+        const select =
+          "SELECT * FROM BILHETES WHERE CODIGO = :codigo"
+  
+        const dadosSelect = [codigoBilhete.codigo]
+        ret = await conexao.execute(select, dadosSelect)
+        console.log(ret.rows)
+  
+        return ret.rows
+      } catch (erro) {
+        console.error(erro)
+      }
+
+  }
 }
 
 function Bilhete(codigo, tipo, data_geracao, idUser) {
@@ -182,7 +210,6 @@ async function inclusao(req, res) {
     return res.status(201).json(sucesso)
   } catch (erro) {
     console.error(erro)
-    console.log('TESTE AQUI')
   }
 }
 
@@ -238,6 +265,21 @@ async function realizaLogin(req, res) {
   } catch (erro) {
     console.error
   }
+}
+
+async function utilizaBilhete(req, res) {
+
+    const codigoBilhete = new Bilhete( req.body.codigo );
+    
+    try {
+      const resposta = await global.bilhetes.altera(codigoBilhete);
+  
+      return res.status(201).json(resposta);
+
+    } catch (erro) {
+      console.error(erro);
+    }
+
 }
 
 async function ativacaoServidor() {
@@ -296,7 +338,6 @@ async function ativacaoServidor() {
           tamanhoOBJ: tamanhoOBJ
         })
 
-        console.log(`Bilhete: ${bilhete}; Tipo: ${tipoBilhete}`)
       }
 
       consultaBilhete()
@@ -355,6 +396,8 @@ async function ativacaoServidor() {
       res.render('utilizaBilhete')
     }
   })
+
+  app.post('/utilizaBilhete', utilizaBilhete);
 
   console.log('Servidor ativo na porta 4000...')
   app.listen(4000)

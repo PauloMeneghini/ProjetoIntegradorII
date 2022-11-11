@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bilhete</title>
     <link rel="stylesheet" href="/public/css/styles.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <main>
@@ -25,7 +26,7 @@
               </div>
 
               <div class="btnsBilhete">
-                  <a href="#" id="<%= bilhete[i].CODIGO %>"><button type="submit" class="btnUserBilhete">USAR BILHETE</button></a>
+                  <button type="submit" class="btnUserBilhete" onclick="usarBilhete(this.value)" value="<%= bilhete[i].CODIGO %>">USAR BILHETE</button></a>
                   <a href="/recarga"><button type="submit" class="btnRecarregarBilhete">RECARREGAR BILHETE</button></a>
               </div>
           </div>

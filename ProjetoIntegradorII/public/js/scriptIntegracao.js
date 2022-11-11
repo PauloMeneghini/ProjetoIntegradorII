@@ -135,3 +135,35 @@ function mascaraCelular(celular) {
         celular.value = celular.value + '-';
     }
 }
+
+function usarBilhete(codigoBilhete) {
+
+    /*const btnUsarBilhete = document.querySelector(".btnUserBilhete");
+
+    btnUsarBilhete.addEventListener('click', (evento) => {
+        alert(evento.target.value)
+    })*/
+
+    console.log(`BBB: ${codigoBilhete}`);
+    
+    let objBilhete = {codigo:codigoBilhete};
+
+    console.log(`OBJ: ${objBilhete.codigo}`);
+
+    let codBilhete = objBilhete.codigo;
+
+    console.log(`Codigo: ${codigoBilhete}`);
+
+    let url = "http://localhost:4000/utilizaBilhete";
+
+    axios.post(url, objBilhete)
+    .then(response => {
+        if(response.data) {
+            alert(response.data);
+        }
+    })
+    .catch(erro => {
+        alert(erro);
+    })
+
+}
