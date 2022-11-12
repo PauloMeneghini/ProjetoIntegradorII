@@ -167,3 +167,49 @@ function usarBilhete(codigoBilhete) {
       alert(erro)
     })
 }
+
+function mascaraCelular(celular) {
+    if(celular.value.length == 0) {
+        celular.value = '(' + celular.value;
+    }
+ 
+    if(celular.value.length == 3) {
+        celular.value = celular.value + ')';
+    }
+ 
+    if(celular.value.length == 9) {
+        celular.value = celular.value + '-';
+    }
+}
+
+function usarBilhete(codigoBilhete) {
+
+    /*const btnUsarBilhete = document.querySelector(".btnUserBilhete");
+
+    btnUsarBilhete.addEventListener('click', (evento) => {
+        alert(evento.target.value)
+    })*/
+
+    console.log(`BBB: ${codigoBilhete}`);
+    
+    let objBilhete = {codigo:codigoBilhete};
+
+    console.log(`OBJ: ${objBilhete.codigo}`);
+
+    let codBilhete = objBilhete.codigo;
+
+    console.log(`Codigo: ${codigoBilhete}`);
+
+    let url = "http://localhost:4000/utilizaBilhete";
+
+    axios.post(url, objBilhete)
+    .then(response => {
+        if(response.data) {
+            alert(response.data);
+        }
+    })
+    .catch(erro => {
+        alert(erro);
+    })
+
+}
