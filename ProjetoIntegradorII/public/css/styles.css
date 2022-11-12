@@ -1,786 +1,870 @@
 @font-face {
-    font-family: Poppins-Regular;
-    src: url(../fonts/Poppins/Poppins-Regular.ttf);
+  font-family: Poppins-Regular;
+  src: url(../fonts/Poppins/Poppins-Regular.ttf);
 }
 
 @font-face {
-    font-family: Poppins-Bold;
-    src: url(../fonts/Poppins/Poppins-Bold.ttf);
+  font-family: Poppins-Bold;
+  src: url(../fonts/Poppins/Poppins-Bold.ttf);
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins-Regular', Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins-Regular', Arial, Helvetica, sans-serif;
 }
 
 body {
-    background-color: #FCFCFC;
-    background-image: url("../img/blob-scene-haikei.svg");
-    background-size: 100%;
+  background-color: #fcfcfc;
+  background-image: url('../img/blob-scene-haikei.svg');
+  background-size: 100%;
 }
 
 main {
-    width: 100%;
-    height: 100vh;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 h1 {
-    text-align: center;
+  text-align: center;
 }
 
 .container {
-    height: 80vh;
-    width: 60%;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    border-radius: 16px;
-    background-color: #fefefe;
-    display: grid;
-    grid-template-columns: 40% 60%;
+  height: 90vh;
+  width: 100%;
+  max-width: 900px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 16px;
+  background-color: #fefefe;
+  display: grid;
+  grid-template-columns: 40% 60%;
 }
 
-.containerLogin{
-    height: 80vh;
-    width: 60%;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    border-radius: 16px;
-    background-color: #fefefe;
-    display: grid;
-    grid-template-columns: 40% 60%;
+.containerLogin {
+  height: 80vh;
+  width: 60%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 16px;
+  background-color: #fefefe;
+  display: grid;
+  grid-template-columns: 40% 60%;
 }
 
 /* Index -> Login */
 
 .conteudoLogin {
-    background: #226CE0;
-    border-radius: 16px 0px 0px 16px;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background: #226ce0;
+  border-radius: 16px 0px 0px 16px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .login {
-    width: 246px;
-    height: 382px;
+  width: 16rem;
+  /*246px -> 250px*/
+  height: 24rem;
+  /*382px* -> 390px */
 }
 
 .login h1 {
-    text-align: left;
-    width: 200px;
-    font-family: 'Poppins-Bold';
+  text-align: left;
+  width: 200px;
+  font-family: 'Poppins-Bold';
 }
 
 .login p {
-    margin-top: 30px;
+  margin-top: 30px;
 }
 
 .btnEntrar {
-    border: 3px solid white;
-    text-decoration: none;
-    background-color: #226CE0;
-    width: 204px;
-    height: 48px;
-    border-radius: 50px;
-    margin: 50px 0px 20px 0px;
-    font-size: 16px;
-    color: white;
-    font-family: 'Poppins-Bold';
-    cursor: pointer;
-    transition: .2s;
+  border: 3px solid white;
+  text-decoration: none;
+  background-color: #226ce0;
+  width: 204px;
+  height: 48px;
+  border-radius: 50px;
+  margin: 50px 0px 20px 0px;
+  font-size: 1rem;
+  color: white;
+  font-family: 'Poppins-Bold';
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 .btnEntrar:hover {
-    background-color: white;
-    border: 3px solid white;
-    color: #226CE0;
-    transition: .2s;
+  background-color: white;
+  border: 3px solid white;
+  color: #226ce0;
+  transition: 0.2s;
 }
 
 .login a {
-    font-weight: 500;
-    font-size: 14px;
-    text-decoration: none;
-    color: white;
+  font-weight: 500;
+  font-size: 14px;
+  text-decoration: none;
+  color: white;
 }
-
 
 /* Index -> Cadastro */
 
 .conteudoCadastro {
-    border-radius: 0px 16px 16px 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  border-radius: 0px 16px 16px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .cadastro {
-    width: 428px;
-    height: 661.33px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+  width: 428px;
+  height: 661.33px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .cadastro img {
-    width: 428px;
-    height: 236px;
+  width: 75%;
 }
 
 .cadastro h1 {
-    color: #226CE0;
-    font-family: 'Poppins-Bold';
+  color: #226ce0;
+  font-family: 'Poppins-Bold';
 }
 
 .formCadastro {
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 70%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-overflow: ellipsis;
 }
 
 .formCadastro form {
-    width: 100%;
+  width: 100%;
 }
 
 .email,
 .senha,
 .nomeUsuario,
 .celular {
-    display: flex;
-    flex-direction: column;
-    color: #363636;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  color: #363636;
+  width: 100%;
 }
 
 .email label,
 .senha label,
 .nomeUsuario label,
 .celular label {
-    margin-top: 15px;
-    font-family: 'Poppins-Bold';
+  margin-top: 15px;
+  font-family: 'Poppins-Bold';
 }
 
 .email input,
 .senha input,
 .nomeUsuario input,
 .celular input {
-    border: none;
-    height: 40px;
-    outline: 0;
-    font-size: 18px;
-    padding: 0px 7px;
-    border-radius: 5px;
-    background-color: #F5F5F5;
+  border: none;
+  height: 40px;
+  outline: 0;
+  font-size: 18px;
+  padding: 0px 7px;
+  border-radius: 5px;
+  background-color: #f5f5f5;
 }
 
 .email input:focus,
 .senha input:focus,
 .nomeUsuario input:focus,
 .celular input:focus {
-    border: 1px solid #363636;
-} 
+  border: 1px solid #363636;
+}
 
 .btnCadastrar {
-    border: 3px solid #226CE0;
-    text-decoration: none;
-    background-color: #226CE0;
-    width: 204px;
-    height: 48px;
-    border-radius: 50px;
-    margin-top: 20px;
-    font-size: 16px;
-    color: white;
-    font-family: 'Poppins-Bold';
-    cursor: pointer;
-    transition: .2s;
+  border: 3px solid #226ce0;
+  text-decoration: none;
+  background-color: #226ce0;
+  width: 204px;
+  height: 48px;
+  border-radius: 50px;
+  margin-top: 20px;
+  font-size: 16px;
+  color: white;
+  font-family: 'Poppins-Bold';
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 .btnCadastrar:hover {
-    background-color: white;
-    border: 3px solid #226CE0;
-    color: #226CE0;
-    transition: .2s;
+  background-color: white;
+  border: 3px solid #226ce0;
+  color: #226ce0;
+  transition: 0.2s;
 }
 
 /* Index.html -> Modal */
 
-.containerModalMensagem, .containerModalTermo {
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, .5);
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 999;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    
+.containerModalMensagem,
+.containerModalTermo {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  display: none;
+  justify-content: center;
+  align-items: center;
 }
-.containerModalMensagem.mostrar, .containerModalTermo.mostrar {
-    display: flex;
+
+.containerModalMensagem.mostrar,
+.containerModalTermo.mostrar {
+  display: flex;
 }
 
 .modalMensagem {
-    background: white;
-    width: 500px;
-    padding: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    border-radius: 15px;
-    box-shadow: 0 15px 15px 0 rgba(0, 0, 0, .3);
+  background: white;
+  width: 500px;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 15px;
+  box-shadow: 0 15px 15px 0 rgba(0, 0, 0, 0.3);
 }
 
-.fechaModal{
-    position: absolute;
-    top: -20px;
-    right: -20px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: 4px solid white;
-    background-color: #226CE0;
-    color: white;
-    font-family: 'Poppins-Bold';
-    font-size: 16px;
-    cursor: pointer;
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, .3);
+.fechaModal {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 4px solid white;
+  background-color: #226ce0;
+  color: white;
+  font-family: 'Poppins-Bold';
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.3);
 }
+
 .modalMensagem h3 {
-    color: #363636;
-    font-family: 'Poppins-Bold';
-    margin: 0;
+  color: #363636;
+  font-family: 'Poppins-Bold';
+  margin: 0;
 }
-
 
 /* Login.html */
 
 .imgLogin {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .contentLogin {
-    background-color: #226CE0;
-    border-radius: 0px 16px 16px 0px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background-color: #226ce0;
+  border-radius: 0px 16px 16px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .formLogin {
-    width: 90%;
-    color: white;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+  width: 90%;
+  color: white;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .formLogin h1 {
-    font-family: 'Poppins-Bold';
+  font-family: 'Poppins-Bold';
 }
 
 .formLogin label {
-    color: white;
-    font-family: 'Poppins-Bold';
+  color: white;
+  font-family: 'Poppins-Bold';
 }
 
 .formLogin a {
-    margin-top: 20px;
-    text-decoration: none;
-    color: white;
+  margin-top: 20px;
+  text-decoration: none;
+  color: white;
 }
-
-.btnEntrar {
-    margin-top: 10px;
-}
-
 /* termo.html */
 
-.modalTermo{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 500px;
-    height: 400px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+.modalTermo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 500px;
+  height: 400px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .modalTermo h3 {
-    color: #363636;
-    font-family: 'Poppins-bold';
-    margin: 15px 0px;
+  color: #363636;
+  font-family: 'Poppins-bold';
+  margin: 15px 0px;
 }
 
 .modalTermo p {
-    padding: 10px 0px; 
+  padding: 10px 0px;
 }
 
 #cbTermo {
-    width: 20px;
-    height: 20px;
+  width: 20px;
+  height: 20px;
 }
 
 .divTermo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
 }
 
 .divTermo label {
-    cursor: pointer;
-    font-family: 'Poppins-Bold';
-    color: #363636;
-    margin-left: 5px;
+  cursor: pointer;
+  font-family: 'Poppins-Bold';
+  color: #363636;
+  margin-left: 5px;
 }
 
 .linkTermo {
-    pointer-events: none;
-    cursor: default;
+  pointer-events: none;
+  cursor: default;
 }
 
 .linkTermoActive {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .btnTermo {
-    background-color: #ccc;
-    border: 3px solid #ccc;
-    width: 204px;
-    height: 48px;
-    border-radius: 50px;
-    margin-top: 20px;
-    font-size: 16px;
-    color: white;
-    font-family: 'Poppins-Bold';
+  background-color: #ccc;
+  border: 3px solid #ccc;
+  width: 204px;
+  height: 48px;
+  border-radius: 50px;
+  margin-top: 20px;
+  font-size: 16px;
+  color: white;
+  font-family: 'Poppins-Bold';
 }
 
 .active {
-    border: 3px solid white;
-    text-decoration: none;
-    background-color: #226CE0;
-    width: 204px;
-    height: 48px;
-    border-radius: 50px;
-    margin-top: 20px;
-    font-size: 16px;
-    color: white;
-    font-family: 'Poppins-Bold';
-    cursor: pointer;
-    transition: .2s;
+  border: 3px solid white;
+  text-decoration: none;
+  background-color: #226ce0;
+  width: 204px;
+  height: 48px;
+  border-radius: 50px;
+  margin-top: 20px;
+  font-size: 16px;
+  color: white;
+  font-family: 'Poppins-Bold';
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 .active:hover {
-    background-color: white;
-    border: 3px solid #226CE0;
-    color: #226CE0;
-    transition: .2s;
+  background-color: white;
+  border: 3px solid #226ce0;
+  color: #226ce0;
+  transition: 0.2s;
 }
 
 /* pagamento.html */
-  
+
 .contentPreco {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    border-radius: 16px 0px 0px 16px;
-    background-color: #226CE0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 16px 0px 0px 16px;
+  background-color: #226ce0;
 }
-  
+
 .imgPagamento {
-    width: 320px;
-    height: 100%;
+  width: 320px;
+  height: 100%;
 }
-  
+
 h3 {
-    font-size: 24px;
-    color: #fff;
-    margin-top: 50px;
-    font-weight: 400;
+  font-size: 24px;
+  color: #fff;
+  margin-top: 50px;
+  font-weight: 400;
 }
-  
+
 .contentPreco h1 {
-    color: #fff;
-    text-align: center;
-    margin-top: 50px;
-    font-family: 'Poppins-Bold';
-    font-size: 40px;
+  color: #fff;
+  text-align: center;
+  margin-top: 50px;
+  font-family: 'Poppins-Bold';
+  font-size: 40px;
 }
-  
-.contentPreco p, .contentPreco a {
-    color: #fff;
-    text-align: center;
-    font-size: 16px;
-    margin-bottom: 50px;
+
+.contentPreco p,
+.contentPreco a {
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 50px;
 }
-  
+
 .contentCartao {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
-  
+
 .contentCartao h1 {
-    color: #226CE0;
-    text-align: center;
-    font-family: 'Poppins-Bold';
+  color: #226ce0;
+  text-align: center;
+  font-family: 'Poppins-Bold';
 }
-  
+
 .cartao {
-    width: 430px;
-    height: 200px;
-    background-color: #E4E4E4;
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-direction: column;
-    margin: 0 auto;
-}
-  
-.numeroCartão, .nomeCartão {
-    border: none;
-    height: 40px;
-    width: 90%;
-    outline: 0;
-    font-size: 18px;
-    padding: 0px 7px;
-    border-radius: 5px;
+  width: 430px;
+  height: 200px;
+  background-color: #e4e4e4;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  margin: 0 auto;
 }
 
-.dadosCartao{
-    display: flex;
-    justify-content: space-between;
+.numeroCartão,
+.nomeCartão {
+  border: none;
+  height: 40px;
+  width: 90%;
+  outline: 0;
+  font-size: 18px;
+  padding: 0px 7px;
+  border-radius: 5px;
 }
 
-.diaVencCartão, .anoVencCartão, .cvvCartão {
-    border: none;
-    height: 40px;
-    width: 100px;
-    outline: 0;
-    font-size: 18px;
-    padding: 0px 7px;
-    border-radius: 5px;
-    margin: 0px 15px;
+.dadosCartao {
+  display: flex;
+  justify-content: space-between;
 }
-  
-.usar-cartao, .adicionar-cartao {
-    border: 3px solid #226CE0;
-    text-decoration: none;
-    background-color: #226CE0;
-    width: 204px;
-    height: 48px;
-    border-radius: 50px;
-    margin-top: 20px;
-    font-size: 16px;
-    color: white;
-    font-family: 'Poppins-Bold';
-    cursor: pointer;
-    transition: .2s;
+
+.diaVencCartão,
+.anoVencCartão,
+.cvvCartão {
+  border: none;
+  height: 40px;
+  width: 100px;
+  outline: 0;
+  font-size: 18px;
+  padding: 0px 7px;
+  border-radius: 5px;
+  margin: 0px 15px;
 }
-.usar-cartao:hover, .adicionar-cartao:hover{
-    background-color: white;
-    border: 3px solid #226CE0;
-    color: #226CE0;
-    transition: .2s;
+
+.usar-cartao,
+.adicionar-cartao {
+  border: 3px solid #226ce0;
+  text-decoration: none;
+  background-color: #226ce0;
+  width: 204px;
+  height: 48px;
+  border-radius: 50px;
+  margin-top: 20px;
+  font-size: 16px;
+  color: white;
+  font-family: 'Poppins-Bold';
+  cursor: pointer;
+  transition: 0.2s;
 }
-  
+
+.usar-cartao:hover,
+.adicionar-cartao:hover {
+  background-color: white;
+  border: 3px solid #226ce0;
+  color: #226ce0;
+  transition: 0.2s;
+}
+
 .linha {
-    background-color: #000000;
-    padding: 1px;
-    width: 8    0%;
+  background-color: #000000;
+  padding: 1px;
+  width: 8 0%;
 }
 
 /* cadCartao.html */
 
-.content-addCartao{
-    background-color: #226CE0;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    border-radius: 16px;
+.content-addCartao {
+  background-color: #226ce0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 16px;
 }
 
-.content-addCartao h1{
-    font-family: 'Poppins-Bold';
-    color: white;
-    margin-bottom: 20px;
+.content-addCartao h1 {
+  font-family: 'Poppins-Bold';
+  color: white;
+  margin-bottom: 20px;
 }
 
-.addCartao{
-    height: 200px;
-    border: 2px solid white;
-    padding: 15px;
-    border-radius: 16px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-direction: column;
-}
-.addCartao .numero, .addCartao .nome, .addCartao .dados-cartao{
-    margin: 16px 0px;
+.addCartao {
+  height: 200px;
+  border: 2px solid white;
+  padding: 15px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
 }
 
-.content-addCartao a{
-    margin-bottom: 0;
+.addCartao .numero,
+.addCartao .nome,
+.addCartao .dados-cartao {
+  margin: 16px 0px;
 }
 
-.btnsCadCartao{
-    margin-top: 20px;
-    flex-direction: row;
+.content-addCartao a {
+  margin-bottom: 0;
 }
 
-.btnCadCartao, .btnCancelar{
-    border: 3px solid white;
-    text-decoration: none;
-    background-color: #226CE0;
-    width: 204px;
-    height: 48px;
-    border-radius: 50px;    
-    font-size: 16px;
-    color: white;
-    font-family: 'Poppins-Bold';
-    cursor: pointer;
-    transition: .2s;
+.btnsCadCartao {
+  margin-top: 20px;
+  flex-direction: row;
 }
 
-.btnCancelar{
-    background-color: white;
-    color: #226CE0;
+.btnCadCartao,
+.btnCancelar {
+  border: 3px solid white;
+  text-decoration: none;
+  background-color: #226ce0;
+  width: 204px;
+  height: 48px;
+  border-radius: 50px;
+  font-size: 16px;
+  color: white;
+  font-family: 'Poppins-Bold';
+  cursor: pointer;
+  transition: 0.2s;
 }
 
-.btnCadCartao:hover{
-    background-color: white;
-    color: #226CE0;
+.btnCancelar {
+  background-color: white;
+  color: #226ce0;
 }
 
-.btnCancelar:hover{
-    background-color: #226CE0;
-    color: white;
+.btnCadCartao:hover {
+  background-color: white;
+  color: #226ce0;
+}
+
+.btnCancelar:hover {
+  background-color: #226ce0;
+  color: white;
 }
 
 /* recarga.html */
 
-.containerRecarga{
-    height: 80vh;
-    width: 60%;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    border-radius: 16px;
-    background-color: #fefefe;
-    display: grid;
-    grid-template-columns: 60% 40%;
+.containerRecarga {
+  height: 80vh;
+  width: 60%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 16px;
+  background-color: #fefefe;
+  display: grid;
+  grid-template-columns: 60% 40%;
 }
 
-.contentBilheteRecarga{
-    border-radius: 16px 0px 0px 16px;
-    background-color: #226CE0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    float: left;
+.contentBilheteRecarga {
+  border-radius: 16px 0px 0px 16px;
+  background-color: #226ce0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  float: left;
 }
 
-.contentBilheteRecarga .bilhete{
-    background-color: white;
-    width: 60%;
-    margin-top: 30px;
-    padding: 25px;
-    border-radius: 16px;
+.contentBilheteRecarga .bilhete {
+  background-color: white;
+  width: 60%;
+  margin-top: 30px;
+  padding: 25px;
+  border-radius: 16px;
 }
 
-.contentValorRecarga{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.contentValorRecarga {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.contentValorRecarga h1{
-    color: #226CE0;
-    font-family: 'Poppins-Bold';
-    width: 60%;
-    text-align: left;
-    margin-bottom: 50px;
+.contentValorRecarga h1 {
+  color: #226ce0;
+  font-family: 'Poppins-Bold';
+  width: 60%;
+  text-align: left;
+  margin-bottom: 50px;
 }
 
 .contentValorRecarga p {
-    text-align: center;
-    width: 80%;
-    font-size: 14px;
-    color: #F45D01;
-    font-weight: 600;
+  text-align: center;
+  width: 80%;
+  font-size: 14px;
+  color: #f45d01;
+  font-weight: 600;
 }
 
-.btnRecarga{
-    border: 3px solid #226CE0;
-    text-decoration: none;
-    background-color: #226CE0;
-    width: 204px;
-    height: 48px;
-    border-radius: 50px;    
-    font-size: 16px;
-    color: white;
-    font-family: 'Poppins-Bold';
-    cursor: pointer;
-    transition: .2s;
-    margin-top: 15px;
+.btnRecarga {
+  border: 3px solid #226ce0;
+  text-decoration: none;
+  background-color: #226ce0;
+  width: 204px;
+  height: 48px;
+  border-radius: 50px;
+  font-size: 16px;
+  color: white;
+  font-family: 'Poppins-Bold';
+  cursor: pointer;
+  transition: 0.2s;
+  margin-top: 15px;
 }
-.btnRecarga:hover{
-    background-color: white;
-    color: #226CE0;
-    transition: .2s;
+
+.btnRecarga:hover {
+  background-color: white;
+  color: #226ce0;
+  transition: 0.2s;
 }
 
 /* mostraBilhete.html */
 
-.containerBilhete{
-    height: 80vh;
-    width: 60%;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    border-radius: 16px;
-    background-color: #fefefe;
+.containerBilhete {
+  height: 80vh;
+  width: 60%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 16px;
+  background-color: #fefefe;
 }
 
-.contentBilhete{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-.contentBilhete h1{
-    font-family: 'Poppins-Bold';
-    color: #226CE0;
+.contentBilhete {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
-
-.bilhete{
-    background-color: #226CE0;
-    width: 40%;
-    height: 100px;
-    border-radius: 16px;
-    padding: 15px;
-    margin-top: 15px;
+.contentBilhete h1 {
+  font-family: 'Poppins-Bold';
+  color: #226ce0;
 }
 
-.info{
-    width: 50%;
-    height: 100%;
-    float: left;
-    display: flex;
-    justify-content: space-around;
-    flex-direction: column;
-}
-.info h4{
-    font-family: 'Poppins-Bold';
-    color: white;
+.bilhete {
+  background-color: #226ce0;
+  width: 40%;
+  height: 100px;
+  border-radius: 16px;
+  padding: 15px;
+  margin-top: 15px;
 }
 
-.btnsBilhete{
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 15px;
+.info {
+  width: 50%;
+  height: 100%;
+  float: left;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
 }
 
-.btnsBilhete a{
-    width: 100%;
+.info h4 {
+  font-family: 'Poppins-Bold';
+  color: white;
 }
 
-.btnUserBilhete, .btnRecarregarBilhete{
-    width: 80%;
-    height: 40px;
-    border-radius: 5px;
-    border: none;
-    font-family: 'Poppins-Bold';
+.btnsBilhete {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.btnUserBilhete{
-    background-color: white;
-    color: #226CE0;
-    cursor: pointer;
-    border: 2px solid white;
-    transition: .2s;
-}
-.btnUserBilhete:hover{
-    background-color: #226CE0;
-    color: white;
-    transition: .2s;
+.btnsBilhete a {
+  width: 100%;
 }
 
-
-.btnRecarregarBilhete{
-    background-color: #F45D01;
-    color: white;
-    transition: .2s;
-    cursor: pointer;
+.btnUserBilhete,
+.btnRecarregarBilhete {
+  width: 80%;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+  font-family: 'Poppins-Bold';
 }
-.btnRecarregarBilhete:hover{
-    background-color: white;
-    color: #F45D01;
-    transition: .2s;
+
+.btnUserBilhete {
+  background-color: white;
+  color: #226ce0;
+  cursor: pointer;
+  border: 2px solid white;
+  transition: 0.2s;
+}
+
+.btnUserBilhete:hover {
+  background-color: #226ce0;
+  color: white;
+  transition: 0.2s;
+}
+
+.btnRecarregarBilhete {
+  background-color: #f45d01;
+  color: white;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.btnRecarregarBilhete:hover {
+  background-color: white;
+  color: #f45d01;
+  transition: 0.2s;
 }
 
 .comprarBilhete {
-    background-color: #F45D01;
-    border: none;
-    border-radius: 10px;
-    padding: 10px 25px;
-    color: white;
-    font-family: 'Poppins-Bold';
-    font-size: 18px;
-    margin-top: 15px;
-    border: 2px solid #F45D01;
-    transition: .2s;
+  background-color: #f45d01;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 25px;
+  color: white;
+  font-family: 'Poppins-Bold';
+  font-size: 18px;
+  margin-top: 15px;
+  border: 2px solid #f45d01;
+  transition: 0.2s;
 }
 
-.comprarBilhete:hover{
-    cursor: pointer;
-    background-color: white;
-    border: 2px solid #F45D01;
-    color: #F45D01;
-    transition: .2s;
+.comprarBilhete:hover {
+  cursor: pointer;
+  background-color: white;
+  border: 2px solid #f45d01;
+  color: #f45d01;
+  transition: 0.2s;
 }
 
 /* utilizaBilhete.html */
 
 .utilizaBilhete {
-    background-color: #226CE0;
-    width: 50%;
-    height: 200px;
-    border-radius: 16px;
-    padding: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: #226ce0;
+  width: 50%;
+  height: 200px;
+  border-radius: 16px;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .infoUtilizaBilhete {
-    color: white;
-    letter-spacing: 2px;
-    width: 80%;
+  color: white;
+  letter-spacing: 2px;
+  width: 80%;
 }
 
 .infoUtilizaBilhete h4 {
-    margin-left: 15px;
+  margin-left: 15px;
+}
+
+/* .voltar i {
+  display: flex;
+  justify-content: flex-start;
+  color: #f45d01;
+  font-size: 24px;
+} */
+
+/*RESPONSIVIDADE**/
+
+@media screen and (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    width: auto;
+    height: 100%;
+  }
+
+  .containerBilhete {
+    width: 100%;
+  }
+
+  .containerRecarga {
+    grid-template-columns: 1fr;
+    width: 100%;
+    height: 100%;
+  }
+
+  .contentValorRecarga h1 {
+    width: auto;
+    font-size: 18px;
+    margin: 40px 0px 30px 0px;
+  }
+
+  .contentBilheteRecarga {
+    border-radius: 0;
+    height: 100%;
+  }
+
+  .bilhete {
+    width: 80%;
+  }
+
+  .contentBilhete {
+    height: auto;
+  }
+
+  .login {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+
+  .login h1 {
+    width: 100%;
+    text-align: center;
+  }
+
+  .login p {
+    text-align: center;
+  }
+
+  .conteudoLogin {
+    border-radius: 0;
+  }
 }

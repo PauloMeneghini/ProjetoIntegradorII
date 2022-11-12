@@ -68,6 +68,31 @@ function Bilhetes(bd) {
       console.error(erro)
     }
   }
+
+  this.altera = async function (codigoBilhete) {
+    try {
+      const conexao = await this.bd.getConexao()
+
+      const update = "UPDATE BILHETES SET TIPO = ' ' WHERE CODIGO = :codigo"
+
+      const dados = [codigoBilhete.codigo]
+
+      await conexao.execute(update, dados)
+
+      const commit = 'COMMIT'
+      await conexao.execute(commit)
+
+      const select = 'SELECT * FROM BILHETES WHERE CODIGO = :codigo'
+
+      const dadosSelect = [codigoBilhete.codigo]
+      ret = await conexao.execute(select, dadosSelect)
+      console.log(ret.rows)
+
+      return ret.rows
+    } catch (erro) {
+      console.error(erro)
+    }
+  }
 }
 
 function Bilhete(codigo, tipo, data_geracao, idUser) {
@@ -182,7 +207,6 @@ async function inclusao(req, res) {
     return res.status(201).json(sucesso)
   } catch (erro) {
     console.error(erro)
-    console.log('TESTE AQUI')
   }
 }
 
@@ -237,6 +261,18 @@ async function realizaLogin(req, res) {
     }
   } catch (erro) {
     console.error
+  }
+}
+
+async function utilizaBilhete(req, res) {
+  const codigoBilhete = new Bilhete(req.body.codigo)
+
+  try {
+    const resposta = await global.bilhetes.altera(codigoBilhete)
+
+    return res.status(201).json(resposta)
+  } catch (erro) {
+    console.error(erro)
   }
 }
 
@@ -295,8 +331,6 @@ async function ativacaoServidor() {
           tipoBilhete: tipoBilhete,
           tamanhoOBJ: tamanhoOBJ
         })
-
-        console.log(`Bilhete: ${bilhete}; Tipo: ${tipoBilhete}`)
       }
 
       consultaBilhete()
@@ -304,34 +338,7 @@ async function ativacaoServidor() {
   })
 
   app.get('/recarga', function (req, res) {
-    if (req.session.nome) {
-      let resultado
-      let bilheteAAA
-
-      async function consultaBilhete() {
-        const bd = new BD()
-
-        bd.getConexao()
-
-        const selectBilhete =
-          'SELECT * FROM BILHETES WHERE USUARIO = :codUsuario'
-
-        const dadosBilhete = [req.session.idUser]
-
-        resultado = await conexao.execute(selectBilhete, dadosBilhete)
-
-        bilhete = resultado.rows
-
-        res.render('recarga', {
-          nome: req.session.nome,
-          bilhete: bilhete
-        })
-
-        console.log(`Bilhete: ${bilhete}; Nome: ${nome}`)
-      }
-
-      consultaBilhete()
-    }
+    res.render('recarga')
   })
 
   app.get('/termo', function (req, res) {
@@ -355,6 +362,8 @@ async function ativacaoServidor() {
       res.render('utilizaBilhete')
     }
   })
+
+  app.post('/utilizaBilhete', utilizaBilhete)
 
   console.log('Servidor ativo na porta 4000...')
   app.listen(4000)
