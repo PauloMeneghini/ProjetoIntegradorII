@@ -94,7 +94,6 @@ function Bilhetes(bd) {
       } catch (erro) {
         console.error(erro)
       }
-
   }
 }
 
@@ -267,7 +266,7 @@ async function realizaLogin(req, res) {
   }
 }
 
-async function utilizaBilhete(req, res) {
+async function utilizaBilhete(req, res) 
 
     const codigoBilhete = new Bilhete( req.body.codigo );
     
@@ -345,34 +344,7 @@ async function ativacaoServidor() {
   })
 
   app.get('/recarga', function (req, res) {
-    if (req.session.nome) {
-      let resultado
-      let bilheteAAA
-
-      async function consultaBilhete() {
-        const bd = new BD()
-
-        bd.getConexao()
-
-        const selectBilhete =
-          'SELECT * FROM BILHETES WHERE USUARIO = :codUsuario'
-
-        const dadosBilhete = [req.session.idUser]
-
-        resultado = await conexao.execute(selectBilhete, dadosBilhete)
-
-        bilhete = resultado.rows
-
-        res.render('recarga', {
-          nome: req.session.nome,
-          bilhete: bilhete
-        })
-
-        console.log(`Bilhete: ${bilhete}; Nome: ${nome}`)
-      }
-
-      consultaBilhete()
-    }
+    res.render('recarga')
   })
 
   app.get('/termo', function (req, res) {
@@ -396,6 +368,7 @@ async function ativacaoServidor() {
       res.render('utilizaBilhete')
     }
   })
+
 
   app.post('/utilizaBilhete', utilizaBilhete);
 

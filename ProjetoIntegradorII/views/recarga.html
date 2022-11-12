@@ -4,19 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Recarga</title>
-    <link rel="stylesheet" href="public/css/styles.css" />
+    <link rel="stylesheet" href="/public/css/styles.css" />
   </head>
   <body>
     <main>
       <div class="containerRecarga">
         <div class="contentBilheteRecarga">
-            <div class="bilhete">
-              
-                <p>Nome titular <%= nome %></p>
-                <p>Número do bilhete <%= bilhete %></p>
-            </div>
-
-            <img src="public/img/imgRecarga.png" alt="" width="80%" height="80%">
+            <img src="public/img/imgRecarga.png" alt="" width="75%" height="auto">
         </div>
 
         <div class="contentValorRecarga">
@@ -24,7 +18,7 @@
             <p>Mantenha o mouse em cima do botão para ter uma breve descrição de cada tipo</p>
             <button onclick="chamaTermo('unico')" class="btnRecarga" title="Esse bilhete é válido apenas uma vez">BILHETE ÚNICO</button>
             <button onclick="chamaTermo('duplo')" class="btnRecarga" title="Esse bilhete pode ser utilizado até 2 vezes">BILHETE DUPLO</button>
-            <button onclick="chamaTermo('7 dias')" class="btnRecarga" title="Esse bilhete é válido por um período de 7 dias">BILHETE 7 DIAS</button>/>
+            <button onclick="chamaTermo('7 dias')" class="btnRecarga" title="Esse bilhete é válido por um período de 7 dias">BILHETE 7 DIAS</button>
             <button onclick="chamaTermo('30 dias')" class="btnRecarga" title="Esse bilhete é válido por um período de 30 dias">BILHETE 30 DIAS</button></a>
         </div>
 
@@ -40,7 +34,7 @@
               <input type="checkbox" name="cbTermo" id="cbTermo" onclick="verifyCheckBox()">
               <label for="cbTermo">Aceito os termos</label>
           </div>
-          <!--comentario pro commit-->
+          
           <a href="#" class="linkTermo" id="linkTermo"><button type="submit" class="btnTermo" id="btnTermo">CONFIRMAR</button></a>
       </div>
     </div>
