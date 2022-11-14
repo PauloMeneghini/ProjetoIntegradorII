@@ -4,9 +4,16 @@ const linkTermo = document.getElementById("linkTermo");
 const btnRecarga = document.querySelector(".btnRecarga");
 const modalTermo = document.getElementById("containerModalTermo");
 
-function chamaTermo(tipoBilhete) {
+function chamaTermo(tipoBilhete, codigoBilhete) {
+
+    const recargarBilhete = document.getElementById('recargarBilhete');
+  
+    recargarBilhete.innerHTML = `Valor da recarga = ${tipoBilhete} Código: ${codigoBilhete}`;
+    btnTermo.setAttribute('onclick', `recargarBilhete('${tipoBilhete}', ${codigoBilhete})`);
+  
     modalTermo.classList.add('mostrar');
     linkTermo.setAttribute("href", `/pagamento?tipo=${tipoBilhete}`);
+  
 };
 
 modalTermo.addEventListener('click', (evento) => {

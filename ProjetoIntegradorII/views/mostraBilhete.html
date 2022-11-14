@@ -17,24 +17,58 @@
           <a href="/recarga"><button class="comprarBilhete">COMPRAR BILHETE</button></a>
 
 
-        <% for (i = 0; i < tamanhoOBJ; i++) { %>
+          <% for (i = 0; i < tamanhoOBJ; i++) { %>
 
-          <div class="bilhete">
-              <div class="info">
-                  <h4 id="codigoBilhete">Bilhete Nº <%= bilhete[i].CODIGO %></h4>
-                  <h4 id="tipoBilhete">Tipo: <%= tipoBilhete[i].TIPO %> </h4>
-              </div>
+            <div class="bilhete">
+                <div class="info">
+                    <h4 id="codigoBilhete">Bilhete Nº <%= bilhete[i].CODIGO %></h4>
+                    <h4 id="tipoBilhete">Tipo: <%= tipoBilhete[i].TIPO %> </h4>
+                </div>
 
-              <div class="btnsBilhete">
-                  <button type="submit" class="btnUserBilhete" onclick="usarBilhete(this.value)" value="<%= bilhete[i].CODIGO %>">USAR BILHETE</button></a>
-                  <a href="/recarga"><button type="submit" class="btnRecarregarBilhete">RECARREGAR BILHETE</button></a>
-              </div>
-          </div>
-        <% } %>
+                <div class="btnsBilhete">
+                    <button type="submit" class="btnUserBilhete" onclick="usarBilhete(this.value)" value="<%= bilhete[i].CODIGO %>">USAR BILHETE</button></a>
+                    <button type="submit" class="btnRecarregarBilhete" onclick="chamaRecargaBilhete(this.value)" value="<%= bilhete[i].CODIGO %>">RECARREGAR BILHETE</button>
+                </div>
+            </div>
+          <% } %>
+        </div>
       </div>
     </main>
 
+    <div class="containerModalRecarga" id="containerModalRecarga">
+      <div class="modalRecarga">
+        <button class="fechaModal">X</button>
+
+        <div class="contentValorRecarga">
+          <h1 id="numBilhete"></h1>
+          <p>Mantenha o mouse em cima do botão para ter uma breve descrição de cada tipo</p>
+          <button class="btnRecarga" title="Esse bilhete é válido apenas uma vez" value="unico">BILHETE ÚNICO <br> VALOR: R$ 5,00</button>
+          <button class="btnRecarga" title="Esse bilhete pode ser utilizado até 2 vezes" value="duplo">BILHETE DUPLO <br> VALOR: R$ 7,00</button>
+          <button class="btnRecarga" title="Esse bilhete é válido por um período de 7 dias" value="7 dias">BILHETE 7 DIAS <br> VALOR: R$ 40,00</button>
+          <button class="btnRecarga" title="Esse bilhete é válido por um período de 30 dias" value="30 dias">BILHETE 30 DIAS <br> VALOR: R$ 70,00</button>
+          <button>CANCELAR</button>
+        </div>
+
+        <div class="containerModalTermo" id="containerModalTermo">
+          <div class="modalTermo">
+              <h3>TERMO DE USO</h3>
+              <p>- Esse termo será incluso na próxima fase de entrega.</p>
+              <p id="recargarBilhete"></p>
+      
+              <div class="divTermo">
+                  <input type="checkbox" name="cbTermo" id="cbTermo" onclick="verifyCheckBox()">
+                  <label for="cbTermo">Aceito os termos</label>
+              </div>
+              
+              <button type="submit" class="btnTermo" id="btnTermo">CONFIRMAR E PAGAR</button>
+              <a href="#" class="linkTermo" id="linkTermo"><button type="submit" class="btnTermo" id="btnTermo">CANCELAR</button></a>
+        </div>
+
+      </div>
+    </div>
+
     <script src="../public/js/scriptIntegracao.js"></script>
+    <script src="public/js/script.js"></script>
 
     <script>
       
