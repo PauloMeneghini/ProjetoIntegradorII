@@ -138,21 +138,8 @@ function mascaraCelular(celular) {
 }
 
 function usarBilhete(codigoBilhete) {
-  /*const btnUsarBilhete = document.querySelector(".btnUserBilhete");
-
-    btnUsarBilhete.addEventListener('click', (evento) => {
-        alert(evento.target.value)
-    })*/
-
-  console.log(`BBB: ${codigoBilhete}`)
 
   let objBilhete = { codigo: codigoBilhete }
-
-  console.log(`OBJ: ${objBilhete.codigo}`)
-
-  let codBilhete = objBilhete.codigo
-
-  console.log(`Codigo: ${codigoBilhete}`)
 
   let url = 'http://localhost:4000/utilizaBilhete'
 
@@ -182,34 +169,43 @@ function mascaraCelular(celular) {
     }
 }
 
-function usarBilhete(codigoBilhete) {
+function chamaRecargaBilhete(bilhete) {
+  const modalRecarga = document.getElementById("containerModalRecarga");
+  const exibeNumBilhete = document.getElementById("numBilhete");
+  const btnsRecarga = document.querySelectorAll(".btnRecarga");
 
-    /*const btnUsarBilhete = document.querySelector(".btnUserBilhete");
+  btnsRecarga.forEach((btnRecarga) => {
+    btnRecarga.setAttribute('onclick', `chamaTermo('${btnRecarga.value}', ${bilhete})`);
+  })
 
-    btnUsarBilhete.addEventListener('click', (evento) => {
-        alert(evento.target.value)
-    })*/
+  exibeNumBilhete.innerHTML = `ESCOLHA A RECARGA DO SEU BILHETE Nº: ${bilhete}`;
 
-    console.log(`BBB: ${codigoBilhete}`);
-    
-    let objBilhete = {codigo:codigoBilhete};
+  modalRecarga.addEventListener('click', evento => {
+    if (evento.target.id == 'containerModalRecarga' || evento.target.className == 'fechaModal') {
+      modalRecarga.classList.remove('mostrar');
+    }
+  })
+  
 
-    console.log(`OBJ: ${objBilhete.codigo}`);
+  modalRecarga.classList.add('mostrar');
 
-    let codBilhete = objBilhete.codigo;
+}
 
-    console.log(`Codigo: ${codigoBilhete}`);
+function recargarBilhete(recarga, codigoBilhete) {
 
-    let url = "http://localhost:4000/utilizaBilhete";
+  let objBilhete = { recarga: recarga, codigoBilhete : codigoBilhete };
 
-    axios.post(url, objBilhete)
+  let url = 'http://localhost:4000/recarga'
+
+  axios
+    .post(url, objBilhete)
     .then(response => {
-        if(response.data) {
-            alert(response.data);
-        }
+      if (response.data) {
+        window.location.href = '/mostraBilhete';
+      }
     })
     .catch(erro => {
-        alert(erro);
+      alert(erro)
     })
-
+    
 }
