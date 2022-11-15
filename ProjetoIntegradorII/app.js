@@ -75,6 +75,8 @@ function Bilhetes(bd) {
   
         const commit = 'COMMIT'
         await conexao.execute(commit)
+
+        return mensagem = "Bilhete utilizado com sucesso <br> A página será recarregada";
   
       } catch (erro) {
         console.error(erro)
@@ -99,9 +101,12 @@ function Bilhetes(bd) {
         const commit = 'COMMIT'
         await conexao.execute(commit)
   
-        return mensagem = "Bilhete recarregado";
+        return mensagem = `Bilhete ${bilhete.codigo} recarregado <br> A página será recarregada`;
+
       } catch (erro) {
-        console.error(erro)
+        console.error(erro);
+
+        return mensagem = "Erro ao recarregar bilhete";
       }
   }
 }

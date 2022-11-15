@@ -32,3 +32,66 @@ function verifyCheckBox(){
         linkTermo.className = "linkTermo";
     }
 }
+
+const bilhetes = document.querySelectorAll('.bilhete');
+
+/*for(i = 0; i < bilhetes.length; i++) {
+
+    // const textoBilhete = bilhetes[i].textContent.split(" ");
+    const textoBilhete = bilhetes[i].textContent;
+
+    const index = textoBilhete.indexOf("Tipo:");
+
+    const tipoBilhete = textoBilhete.slice(index, index + 7);
+
+    console.log(tipoBilhete);
+
+    if( tipoBilhete == "Tipo:  ") {
+        console.log("Bilhete invalido");
+
+        bilhetes[i].classList.add('desativado');
+
+    } else {
+        console.log("Bilhete valido");
+    }
+
+}*/
+
+bilhetes.forEach((bilhete) => {
+
+    const textoBilhete = bilhete.textContent;
+
+    const index = textoBilhete.indexOf("Tipo:");
+
+    const tipoBilhete = textoBilhete.slice(index, index + 7);
+
+    console.log(tipoBilhete);
+
+    if( tipoBilhete == "Tipo:  ") {
+        console.log("Bilhete invalido");
+
+        bilhete.classList.remove('ativado');
+        bilhete.classList.add('desativado');
+
+    } else {
+        console.log("Bilhete valido");
+    }
+    
+})
+
+const bilhetesDesativados = document.querySelectorAll('.bilhete.desativado .btnsBilhete .btnUsarBilhete');
+
+bilhetesDesativados.forEach((bilheteDesativado) => {
+    console.log(bilheteDesativado);
+
+    bilheteDesativado.classList.add('desativado');
+})
+
+const bilhetesAtivados = document.querySelectorAll('.bilhete.ativado .btnsBilhete .btnRecarregarBilhete');
+
+bilhetesAtivados.forEach((bilheteAtivo) => {
+    bilheteAtivo.classList.add('desativado');
+})
+
+console.log(bilhetesAtivados);
+console.log(bilhetesAtivados.length);

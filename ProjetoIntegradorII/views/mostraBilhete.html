@@ -19,14 +19,14 @@
 
           <% for (i = 0; i < tamanhoOBJ; i++) { %>
 
-            <div class="bilhete">
+            <div class="bilhete ativado" value="<%= tipoBilhete[i].TIPO %>">
                 <div class="info">
                     <h4 id="codigoBilhete">Bilhete Nº <%= bilhete[i].CODIGO %></h4>
-                    <h4 id="tipoBilhete">Tipo: <%= tipoBilhete[i].TIPO %> </h4>
+                    <h4 id="tipoBilhete">Tipo: <%= tipoBilhete[i].TIPO %></h4>
                 </div>
 
                 <div class="btnsBilhete">
-                    <button type="submit" class="btnUserBilhete" onclick="usarBilhete(this.value)" value="<%= bilhete[i].CODIGO %>">USAR BILHETE</button></a>
+                    <button type="submit" class="btnUsarBilhete" id="btnUsarBilhete" onclick="usarBilhete(this.value)" value="<%= bilhete[i].CODIGO %>">USAR BILHETE</button></a>
                     <button type="submit" class="btnRecarregarBilhete" onclick="chamaRecargaBilhete(this.value)" value="<%= bilhete[i].CODIGO %>">RECARREGAR BILHETE</button>
                 </div>
             </div>
@@ -46,7 +46,7 @@
           <button class="btnRecarga" title="Esse bilhete pode ser utilizado até 2 vezes" value="duplo">BILHETE DUPLO <br> VALOR: R$ 7,00</button>
           <button class="btnRecarga" title="Esse bilhete é válido por um período de 7 dias" value="7 dias">BILHETE 7 DIAS <br> VALOR: R$ 40,00</button>
           <button class="btnRecarga" title="Esse bilhete é válido por um período de 30 dias" value="30 dias">BILHETE 30 DIAS <br> VALOR: R$ 70,00</button>
-          <button>CANCELAR</button>
+          <button class="btnCancelar">CANCELAR</button>
         </div>
 
         <div class="containerModalTermo" id="containerModalTermo">
@@ -61,9 +61,17 @@
               </div>
               
               <button type="submit" class="btnTermo" id="btnTermo">CONFIRMAR E PAGAR</button>
-              <a href="#" class="linkTermo" id="linkTermo"><button type="submit" class="btnTermo" id="btnTermo">CANCELAR</button></a>
+              <button type="submit" class="btnCancelar">CANCELAR</button>
+          </div>
         </div>
 
+      </div>
+    </div>
+
+    <div class="containerModalMensagem" id="containerModalMensagem">
+      <div class="modalMensagem">
+        <button class="fechaModal">X</button>
+        <h3 id="mensangem"></h3>
       </div>
     </div>
 
