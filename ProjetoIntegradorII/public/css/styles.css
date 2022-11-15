@@ -696,6 +696,10 @@ h3 {
   margin-top: 15px;
 }
 
+.bilhete.desativado {
+  background-color: #ccc;
+}
+
 .info {
   width: 50%;
   height: 100%;
@@ -723,7 +727,7 @@ h3 {
   width: 100%;
 }
 
-.btnUserBilhete,
+.btnUsarBilhete,
 .btnRecarregarBilhete {
   width: 80%;
   height: 40px;
@@ -732,7 +736,7 @@ h3 {
   font-family: 'Poppins-Bold';
 }
 
-.btnUserBilhete {
+.btnUsarBilhete {
   background-color: white;
   color: #226ce0;
   cursor: pointer;
@@ -740,10 +744,19 @@ h3 {
   transition: 0.2s;
 }
 
-.btnUserBilhete:hover {
+.btnUsarBilhete:hover {
   background-color: #226ce0;
   color: white;
   transition: 0.2s;
+}
+
+.btnUsarBilhete.desativado,
+.btnRecarregarBilhete.desativado {
+  background-color: #aaa;
+  pointer-events: none;
+  cursor: default;
+  border: #aaa;
+  color: white;
 }
 
 .btnRecarregarBilhete {
@@ -840,7 +853,7 @@ h3 {
     height: 100%;
   }
 
-  .bilhete {
+  .bilhete.ativado {
     width: 80%;
   }
 
