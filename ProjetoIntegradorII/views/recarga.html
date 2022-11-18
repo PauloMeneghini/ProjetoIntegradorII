@@ -16,10 +16,10 @@
         <div class="contentValorRecarga">
             <h1>ESCOLHA A RECARGA DO SEU BILHETE</h1>
             <p>Mantenha o mouse em cima do botão para ter uma breve descrição de cada tipo</p>
-            <button onclick="chamaRecargaBilhete(this.value)" class="btnRecarga" title="Esse bilhete é válido apenas uma vez" value=" <%= bilhete[0].CODIGO %>">BILHETE ÚNICO</button>
-            <button onclick="chamaRecargaBilhete(this.value)" class="btnRecarga" title="Esse bilhete pode ser utilizado até 2 vezes" value=" <%= bilhete[0].CODIGO %>">BILHETE DUPLO</button>
-            <button onclick="chamaRecargaBilhete(this.value)" class="btnRecarga" title="Esse bilhete é válido por um período de 7 dias" value=" <%= bilhete[0].CODIGO %>">BILHETE 7 DIAS</button>
-            <button onclick="chamaRecargaBilhete(this.value)" class="btnRecarga" title="Esse bilhete é válido por um período de 30 dias" value=" <%= bilhete[0].CODIGO %>">BILHETE 30 DIAS</button></a>
+            <button id="btnRecarga" onclick="chamaGeraBilhete(this.value)" class="btnRecarga" title="Esse bilhete é válido apenas uma vez" value="unico">BILHETE ÚNICO</button>
+            <button onclick="chamaGeraBilhete(this.value)" class="btnRecarga" title="Esse bilhete pode ser utilizado até 2 vezes" value="duplo">BILHETE DUPLO</button>
+            <button onclick="chamaGeraBilhete(this.value)" class="btnRecarga" title="Esse bilhete é válido por um período de 7 dias" value="7 dias">BILHETE 7 DIAS</button>
+            <button onclick="chamaGeraBilhete(this.value)" class="btnRecarga" title="Esse bilhete é válido por um período de 30 dias" value="30 dias">BILHETE 30 DIAS</button></a>
         </div>
 
       </div>
@@ -45,14 +45,14 @@
           <div class="modalTermo">
               <h3>TERMO DE USO</h3>
               <p>- Esse termo será incluso na próxima fase de entrega.</p>
-              <p id="recargarBilhete"></p>
+              <p id="incluirBilhete"></p>
       
               <div class="divTermo">
                   <input type="checkbox" name="cbTermo" id="cbTermo" onclick="verifyCheckBox()">
                   <label for="cbTermo">Aceito os termos</label>
               </div>
               
-              <button type="submit" class="btnTermo" id="btnTermo">CONFIRMAR E PAGAR</button>
+              <button type="submit" class="btnTermo" id="btnTermo" >CONFIRMAR E PAGAR</button>
               <button type="submit" class="btnCancelar">CANCELAR</button>
           </div>
         </div>

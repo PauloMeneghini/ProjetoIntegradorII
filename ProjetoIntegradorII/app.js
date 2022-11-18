@@ -63,51 +63,49 @@ function Bilhetes(bd) {
   }
 
   this.altera = async function (codigoBilhete) {
-
     try {
-        const conexao = await this.bd.getConexao()
-  
-        const update = "UPDATE BILHETES SET TIPO = ' ' WHERE CODIGO = :codigo";
-  
-        const dados = [codigoBilhete.codigo];
-  
-        await conexao.execute(update, dados)
-  
-        const commit = 'COMMIT'
-        await conexao.execute(commit)
+      const conexao = await this.bd.getConexao()
 
-        return mensagem = "Bilhete utilizado com sucesso <br> A página será recarregada";
-  
-      } catch (erro) {
-        console.error(erro)
-      }
+      const update = "UPDATE BILHETES SET TIPO = ' ' WHERE CODIGO = :codigo"
+
+      const dados = [codigoBilhete.codigo]
+
+      await conexao.execute(update, dados)
+
+      const commit = 'COMMIT'
+      await conexao.execute(commit)
+
+      return (mensagem =
+        'Bilhete utilizado com sucesso <br> A página será recarregada')
+    } catch (erro) {
+      console.error(erro)
+    }
   }
 
   this.recarrega = async function (bilhete) {
-
     try {
-        const conexao = await this.bd.getConexao();
+      const conexao = await this.bd.getConexao()
 
-        const dados = [bilhete.tipo, bilhete.codigo];
+      const dados = [bilhete.tipo, bilhete.codigo]
 
-        const insert = "INSERT INTO RECARGAS (CODIGO, TIPO, DATA_COMPRA, BILHETE) VALUES (SEQ_RECARGAS.NEXTVAL, :tipo, CURRENT_DATE, :codigo)"
-        
-        await conexao.execute(insert, dados);
-  
-        const update = "UPDATE BILHETES SET TIPO = :tipo WHERE CODIGO = :codigo";
-  
-        await conexao.execute(update, dados)
-  
-        const commit = 'COMMIT'
-        await conexao.execute(commit)
-  
-        return mensagem = `Bilhete ${bilhete.codigo} recarregado <br> A página será recarregada`;
+      const insert =
+        'INSERT INTO RECARGAS (CODIGO, TIPO, DATA_COMPRA, BILHETE) VALUES (SEQ_RECARGAS.NEXTVAL, :tipo, CURRENT_DATE, :codigo)'
 
-      } catch (erro) {
-        console.error(erro);
+      await conexao.execute(insert, dados)
 
-        return mensagem = "Erro ao recarregar bilhete";
-      }
+      const update = 'UPDATE BILHETES SET TIPO = :tipo WHERE CODIGO = :codigo'
+
+      await conexao.execute(update, dados)
+
+      const commit = 'COMMIT'
+      await conexao.execute(commit)
+
+      return (mensagem = `Bilhete ${bilhete.codigo} recarregado <br> A página será recarregada`)
+    } catch (erro) {
+      console.error(erro)
+
+      return (mensagem = 'Erro ao recarregar bilhete')
+    }
   }
 }
 
@@ -213,14 +211,15 @@ async function inclusao(req, res) {
 
   try {
     const resposta = await global.bilhetes.inclua(bilhete)
+    console.log('AQUI BILHETE = ', resposta)
     const sucesso = new Comunicado(
       'Número bilhete: ' + bilhete.codigo,
       'Tipo: ' + bilhete.tipo,
       'O bilhete foi gerado com sucesso',
       resposta
     )
-
-    return res.status(201).json(sucesso)
+    res.redirect('/mostraBilhete')
+    //return res.status(201).json(sucesso)
   } catch (erro) {
     console.error(erro)
   }
@@ -281,35 +280,29 @@ async function realizaLogin(req, res) {
 }
 
 async function utilizaBilhete(req, res) {
+  const codigoBilhete = new Bilhete(req.body.codigo)
 
-  const codigoBilhete = new Bilhete( req.body.codigo );
-  
   try {
-    const resposta = await global.bilhetes.altera(codigoBilhete);
+    const resposta = await global.bilhetes.altera(codigoBilhete)
 
-    return res.status(201).json(resposta);
-
+    return res.status(201).json(resposta)
   } catch (erro) {
-    console.error(erro);
+    console.error(erro)
   }
-
 }
 
 async function recarregarBilhete(req, res) {
+  const bilhete = new Bilhete(req.body.codigoBilhete, req.body.recarga)
 
-  const bilhete = new Bilhete( req.body.codigoBilhete, req.body.recarga );
+  console.log(bilhete)
 
-  console.log(bilhete);
-  
   try {
-    const resposta = await global.bilhetes.recarrega(bilhete);
+    const resposta = await global.bilhetes.recarrega(bilhete)
 
-    return res.status(201).json(resposta);
-
+    return res.status(201).json(resposta)
   } catch (erro) {
-    console.error(erro);
+    console.error(erro)
   }
-
 }
 
 async function ativacaoServidor() {
@@ -367,7 +360,6 @@ async function ativacaoServidor() {
           tipoBilhete: tipoBilhete,
           tamanhoOBJ: tamanhoOBJ
         })
-
       }
 
       consultaBilhete()
@@ -378,7 +370,7 @@ async function ativacaoServidor() {
     res.render('recarga')
   })
 
-  app.post('/recarga', recarregarBilhete);
+  app.post('/recarga', recarregarBilhete)
 
   app.get('/termo', function (req, res) {
     res.render('termo')
@@ -402,8 +394,7 @@ async function ativacaoServidor() {
     }
   })
 
-
-  app.post('/utilizaBilhete', utilizaBilhete);
+  app.post('/utilizaBilhete', utilizaBilhete)
 
   console.log('Servidor ativo na porta 4000...')
   app.listen(4000)
