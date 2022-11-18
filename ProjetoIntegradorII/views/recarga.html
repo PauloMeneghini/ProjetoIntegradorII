@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Recarga</title>
     <link rel="stylesheet" href="/public/css/styles.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <main>
@@ -25,40 +26,22 @@
       </div>
     </main>
 
-    
-    
-    <div class="containerModalRecarga" id="containerModalRecarga">
-      <div class="modalRecarga">
-        <button class="fechaModal">X</button>
-
-        <div class="contentValorRecarga">
-          <h1 id="numBilhete"></h1>
-          <p>Mantenha o mouse em cima do botão para ter uma breve descrição de cada tipo</p>
-          <button class="btnRecarga" title="Esse bilhete é válido apenas uma vez" value="unico">BILHETE ÚNICO <br> VALOR: R$ 5,00</button>
-          <button class="btnRecarga" title="Esse bilhete pode ser utilizado até 2 vezes" value="duplo">BILHETE DUPLO <br> VALOR: R$ 7,00</button>
-          <button class="btnRecarga" title="Esse bilhete é válido por um período de 7 dias" value="7 dias">BILHETE 7 DIAS <br> VALOR: R$ 40,00</button>
-          <button class="btnRecarga" title="Esse bilhete é válido por um período de 30 dias" value="30 dias">BILHETE 30 DIAS <br> VALOR: R$ 70,00</button>
-          <button class="btnCancelar">CANCELAR</button>
-        </div>
-
-        <div class="containerModalTermo" id="containerModalTermo">
-          <div class="modalTermo">
-              <h3>TERMO DE USO</h3>
-              <p>- Esse termo será incluso na próxima fase de entrega.</p>
-              <p id="incluirBilhete"></p>
-      
-              <div class="divTermo">
-                  <input type="checkbox" name="cbTermo" id="cbTermo" onclick="verifyCheckBox()">
-                  <label for="cbTermo">Aceito os termos</label>
-              </div>
-              
-              <button type="submit" class="btnTermo" id="btnTermo" >CONFIRMAR E PAGAR</button>
-              <button type="submit" class="btnCancelar">CANCELAR</button>
+    <div class="containerModalTermo" id="containerModalTermo">
+      <div class="modalTermo">
+          <h3>TERMO DE USO</h3>
+          <p>- Esse termo será incluso na próxima fase de entrega.</p>
+          <p id="incluirBilhete"></p>
+  
+          <div class="divTermo">
+              <input type="checkbox" name="cbTermo" id="cbTermo" onclick="verifyCheckBox()">
+              <label for="cbTermo">Aceito os termos</label>
           </div>
-        </div>
-
+          
+          <button type="submit" class="btnTermo" id="btnTermo" onclick="gerarBilhete(this.value)">CONFIRMAR E PAGAR</button>
+          <button type="submit" class="btnCancelar">CANCELAR</button>
       </div>
     </div>
+    
 
     <div class="containerModalMensagem" id="containerModalMensagem">
       <div class="modalMensagem">

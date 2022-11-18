@@ -17,16 +17,6 @@ function chamaTermo(tipoBilhete, codigoBilhete) {
   linkTermo.setAttribute('href', `/pagamento?tipo=${tipoBilhete}`)
 }
 
-function chamaTermoIncluir(tipoBilhete) {
-  // const recargarBilhete = document.getElementById('recargarBilhete')
-
-  //recargarBilhete.innerHTML = `Valor da recarga = ${tipoBilhete} Código: ${codigoBilhete}`
-  btnTermo.setAttribute('onclick', `incluirBilhete('${tipoBilhete}')`)
-
-  modalTermo.classList.add('mostrar')
-  // linkTermo.setAttribute('href', `/pagamento?tipo=${tipoBilhete}`)
-}
-
 modalTermo.addEventListener('click', evento => {
   if (
     evento.target.id == 'containerModalTermo' ||

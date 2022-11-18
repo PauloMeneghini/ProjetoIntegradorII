@@ -45,18 +45,24 @@ function Bilhetes(bd) {
   this.inclua = async function (bilhete) {
     try {
       const conexao = await this.bd.getConexao()
+      const dados = [bilhete.codigo, bilhete.tipo, bilhete.idUser]
+      const dadosRecarga = [bilhete.tipo, bilhete.codigo]
 
       const insert =
         'INSERT INTO BILHETES (CODIGO, TIPO, DATA_GERACAO, USUARIO) VALUES (:codigo, :tipo, CURRENT_DATE, :usuario)'
 
-      const dados = [bilhete.codigo, bilhete.tipo, bilhete.idUser]
-
       await conexao.execute(insert, dados)
+
+      const insertRecarga =
+        'INSERT INTO RECARGAS (CODIGO, TIPO, DATA_COMPRA, BILHETE) VALUES (SEQ_RECARGAS.NEXTVAL, :tipo, CURRENT_DATE, :codigo)'
+
+      await conexao.execute(insertRecarga, dadosRecarga)
 
       const commit = 'COMMIT'
       await conexao.execute(commit)
 
-      return ret.rows
+      return (mensagem =
+        'Bilhete gerado com sucesso<br> Você será redirecionado para tela de bilhetes')
     } catch (erro) {
       console.error(erro)
     }
@@ -211,15 +217,8 @@ async function inclusao(req, res) {
 
   try {
     const resposta = await global.bilhetes.inclua(bilhete)
-    console.log('AQUI BILHETE = ', resposta)
-    const sucesso = new Comunicado(
-      'Número bilhete: ' + bilhete.codigo,
-      'Tipo: ' + bilhete.tipo,
-      'O bilhete foi gerado com sucesso',
-      resposta
-    )
-    res.redirect('/mostraBilhete')
-    //return res.status(201).json(sucesso)
+
+    return res.status(201).json(resposta)
   } catch (erro) {
     console.error(erro)
   }
@@ -332,7 +331,6 @@ async function ativacaoServidor() {
   app.get('/mostraBilhete', function (req, res) {
     if (req.session.nome) {
       let resultado
-      let bilheteAAA
 
       async function consultaBilhete() {
         const bd = new BD()
@@ -340,7 +338,7 @@ async function ativacaoServidor() {
         bd.getConexao()
 
         const selectBilhete =
-          'SELECT * FROM BILHETES WHERE USUARIO = :codUsuario'
+          'SELECT * FROM BILHETES WHERE USUARIO = :codUsuario ORDER BY CODIGO ASC'
 
         const dadosBilhete = [req.session.idUser]
 
