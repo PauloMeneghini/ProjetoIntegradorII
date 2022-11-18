@@ -1,36 +1,46 @@
-function gerarBilhete() {
-  const btnTermo = document.getElementById('btnTermo')
-  let tipo = btnTermo.getAttribute('value')
-  console.log(tipo)
-
-  let objBilhete = { codigo: undefined, tipo: tipo, data_geracao: '' }
+function gerarBilhete(bilhete) {
+  let objBilhete = { codigo: undefined, tipo: bilhete, data_geracao: '' }
   let url = `http://localhost:4000/bilhete`
 
   let res = axios
     .post(url, objBilhete)
     .then(response => {
       if (response.data) {
-        const msg = new Comunicado(
-          response.data.codigo,
-          response.data.tipo,
-          response.data.mensagem
-        )
+        const modalMensagem = document.getElementById('containerModalMensagem')
+        const H3ModalMensagem = document.getElementById('mensangem')
 
-        alert(msg.get())
+        console.log(modalMensagem)
+        console.log(H3ModalMensagem)
 
-        // window.location.href = "/mostraBilhete?codigo=" + response.data.codigo;
-        mostraDadosBilhete(response.data.codigo, response.data.tipo)
+        modalMensagem.addEventListener('click', evento => {
+          if (
+            evento.target.id == 'containerModalMensagem' ||
+            evento.target.className == 'fechaModal'
+          ) {
+            modalMensagem.classList.remove('mostrar')
+          }
+        })
+
+        H3ModalMensagem.innerHTML = response.data
+
+        modalMensagem.classList.add('mostrar')
+
+        console.log(response.data)
+
+        setTimeout(() => {
+          window.location.href = '/mostraBilhete'
+        }, 3000)
       }
     })
     .catch(error => {
       if (error.response) {
-        const msg = new Comunicado(
-          error.response.data.codigo,
-          error.response.data.mensagem,
-          error.response.data.descricao
-        )
-        alert(msg.get())
-        console.log(error)
+        // const msg = new Comunicado(
+        //   error.response.data.codigo,
+        //   error.response.data.mensagem,
+        //   error.response.data.descricao
+        // )
+        // alert(msg.get())
+        // console.log(error)
       }
     })
 }
@@ -256,65 +266,22 @@ function recargarBilhete(recarga, codigoBilhete) {
 }
 
 function chamaGeraBilhete(bilhete) {
-  const modalRecarga = document.getElementById('containerModalRecarga')
-  const btnsRecarga = document.querySelectorAll('.btnRecarga')
+  const modalTermo = document.getElementById('containerModalTermo')
+  const btnTermo = document.getElementById('btnTermo')
 
-  btnsRecarga.forEach(btnRecarga => {
-    btnRecarga.setAttribute(
-      'onclick',
-      `chamaTermoIncluir('${btnRecarga.value}')`
-    )
-  })
+  console.log(bilhete)
 
-  modalRecarga.addEventListener('click', evento => {
+  modalTermo.addEventListener('click', evento => {
     if (
       evento.target.id == 'containerModalRecarga' ||
       evento.target.className == 'fechaModal' ||
       evento.target.className == 'btnCancelar'
     ) {
-      modalRecarga.classList.remove('mostrar')
+      modalTermo.classList.remove('mostrar')
     }
   })
 
-  modalRecarga.classList.add('mostrar')
-}
+  btnTermo.setAttribute('value', bilhete)
 
-function incluirBilhete(bilhete) {
-  const btnRecarga = document.getElementById('btnRecarga')
-  let tipo = bilhete
-  console.log(tipo)
-
-  let objBilhete = { codigo: undefined, tipo: tipo, data_geracao: '' }
-  let url = `http://localhost:4000/bilhete`
-
-  axios
-    .post(url, objBilhete)
-    .then(response => {
-      if (response.data) {
-        console.log('console aq = ', response.data)
-        const modalMensagem = document.getElementById('containerModalMensagem')
-        const H3ModalMensagem = document.getElementById('mensangem')
-
-        modalMensagem.addEventListener('click', evento => {
-          if (
-            evento.target.id == 'containerModalMensagem' ||
-            evento.target.className == 'fechaModal' ||
-            evento.target.className == 'btnCancelar'
-          ) {
-            modalMensagem.classList.remove('mostrar')
-          }
-        })
-
-        H3ModalMensagem.innerHTML = response.data
-
-        modalMensagem.classList.add('mostrar')
-
-        setTimeout(() => {
-          window.location.href = '/mostraBilhete'
-        }, 3000)
-      }
-    })
-    .catch(erro => {
-      alert(erro)
-    })
+  modalTermo.classList.add('mostrar')
 }
