@@ -16,21 +16,23 @@
 
           <a href="/recarga"><button class="comprarBilhete">COMPRAR BILHETE</button></a>
 
+          <div class="mostrarBilhetes">
+            <% for (i = 0; i < tamanhoOBJ; i++) { %>
 
-          <% for (i = 0; i < tamanhoOBJ; i++) { %>
-
-            <div class="bilhete ativado" value="<%= tipoBilhete[i].TIPO %>">
-                <div class="info">
-                    <h4 id="codigoBilhete">Bilhete Nº <%= bilhete[i].CODIGO %></h4>
-                    <h4 id="tipoBilhete">Tipo: <%= tipoBilhete[i].TIPO %></h4>
-                </div>
-
-                <div class="btnsBilhete">
-                    <button type="submit" class="btnUsarBilhete" id="btnUsarBilhete" onclick="usarBilhete(this.value)" value="<%= bilhete[i].CODIGO %>">USAR BILHETE</button></a>
-                    <button type="submit" class="btnRecarregarBilhete" onclick="chamaRecargaBilhete(this.value)" value="<%= bilhete[i].CODIGO %>">RECARREGAR BILHETE</button>
-                </div>
-            </div>
-          <% } %>
+              <div class="bilhete ativado" value="<%= tipoBilhete[i].TIPO %>">
+                  <div class="info">
+                      <h4 id="codigoBilhete">Bilhete Nº <%= bilhete[i].CODIGO %></h4>
+                      <h4 id="tipoBilhete">Tipo: <%= tipoBilhete[i].TIPO %></h4>
+                  </div>
+  
+                  <div class="btnsBilhete">
+                      <button type="submit" class="btnUsarBilhete" id="btnUsarBilhete" onclick="usarBilhete(this.value)" value="<%= bilhete[i].CODIGO %>">USAR BILHETE</button></a>
+                      <button type="submit" class="btnRecarregarBilhete" onclick="chamaRecargaBilhete(this.value)" value="<%= bilhete[i].CODIGO %>">RECARREGAR BILHETE</button>
+                  </div>
+              </div>
+            <% } %>
+          </div>
+          
         </div>
       </div>
     </main>

@@ -307,6 +307,7 @@ h1 {
   text-decoration: none;
   color: white;
 }
+
 /* termo.html */
 
 .modalTermo {
@@ -663,7 +664,14 @@ h3 {
   transition: 0.2s;
 }
 
-/* mostraBilhete.html */
+.mostrarBilhetes {
+  max-height: 350px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
 
 .containerBilhete {
   height: 80vh;
@@ -689,7 +697,7 @@ h3 {
 
 .bilhete {
   background-color: #226ce0;
-  width: 40%;
+  width: 300px;
   height: 100px;
   border-radius: 16px;
   padding: 15px;
