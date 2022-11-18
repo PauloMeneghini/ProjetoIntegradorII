@@ -1,6 +1,6 @@
 function gerarBilhete() {
-  const tipoBilhete = document.getElementById('usar-cartao')
-  let tipo = tipoBilhete.getAttribute('value')
+  const btnTermo = document.getElementById('btnTermo')
+  let tipo = btnTermo.getAttribute('value')
   console.log(tipo)
 
   let objBilhete = { codigo: undefined, tipo: tipo, data_geracao: '' }
@@ -138,79 +138,89 @@ function mascaraCelular(celular) {
 }
 
 function usarBilhete(codigoBilhete) {
-
-  let objBilhete = { codigo: codigoBilhete };
+  let objBilhete = { codigo: codigoBilhete }
 
   let url = 'http://localhost:4000/utilizaBilhete'
 
-  axios.post(url, objBilhete)
-  .then(response => {
-    if (response.data) {
-      const modalMensagem = document.getElementById('containerModalMensagem');
-      const H3ModalMensagem = document.getElementById('mensangem');
-    
-      console.log(modalMensagem);
-      console.log(H3ModalMensagem);
+  axios
+    .post(url, objBilhete)
+    .then(response => {
+      if (response.data) {
+        const modalMensagem = document.getElementById('containerModalMensagem')
+        const H3ModalMensagem = document.getElementById('mensangem')
 
-      modalMensagem.addEventListener('click', evento => {
-        if ( evento.target.id == 'containerModalMensagem' || evento.target.className == 'fechaModal' || evento.target.className == 'btnCancelar' ) {
-          modalMensagem.classList.remove('mostrar');
-        }
-      })
+        console.log(modalMensagem)
+        console.log(H3ModalMensagem)
 
-      H3ModalMensagem.innerHTML = response.data;
+        modalMensagem.addEventListener('click', evento => {
+          if (
+            evento.target.id == 'containerModalMensagem' ||
+            evento.target.className == 'fechaModal' ||
+            evento.target.className == 'btnCancelar'
+          ) {
+            modalMensagem.classList.remove('mostrar')
+          }
+        })
 
-      modalMensagem.classList.add('mostrar');
+        H3ModalMensagem.innerHTML = response.data
 
-      console.log(response.data);
+        modalMensagem.classList.add('mostrar')
 
-       setTimeout(() => { window.location.href = '/mostraBilhete'}, 3000)
-    }
-  })
-  .catch(erro => {
-    alert(erro)
-  })
+        console.log(response.data)
+
+        setTimeout(() => {
+          window.location.href = '/mostraBilhete'
+        }, 3000)
+      }
+    })
+    .catch(erro => {
+      alert(erro)
+    })
 }
 
 function mascaraCelular(celular) {
-    if(celular.value.length == 0) {
-        celular.value = '(' + celular.value;
-    }
- 
-    if(celular.value.length == 3) {
-        celular.value = celular.value + ')';
-    }
- 
-    if(celular.value.length == 9) {
-        celular.value = celular.value + '-';
-    }
+  if (celular.value.length == 0) {
+    celular.value = '(' + celular.value
+  }
+
+  if (celular.value.length == 3) {
+    celular.value = celular.value + ')'
+  }
+
+  if (celular.value.length == 9) {
+    celular.value = celular.value + '-'
+  }
 }
 
 function chamaRecargaBilhete(bilhete) {
-  const modalRecarga = document.getElementById("containerModalRecarga");
-  const exibeNumBilhete = document.getElementById("numBilhete");
-  const btnsRecarga = document.querySelectorAll(".btnRecarga");
+  const modalRecarga = document.getElementById('containerModalRecarga')
+  const exibeNumBilhete = document.getElementById('numBilhete')
+  const btnsRecarga = document.querySelectorAll('.btnRecarga')
 
-  btnsRecarga.forEach((btnRecarga) => {
-    btnRecarga.setAttribute('onclick', `chamaTermo('${btnRecarga.value}', ${bilhete})`);
+  btnsRecarga.forEach(btnRecarga => {
+    btnRecarga.setAttribute(
+      'onclick',
+      `chamaTermo('${btnRecarga.value}', ${bilhete})`
+    )
   })
 
-  exibeNumBilhete.innerHTML = `ESCOLHA A RECARGA DO SEU BILHETE Nº: ${bilhete}`;
+  exibeNumBilhete.innerHTML = `ESCOLHA A RECARGA DO SEU BILHETE Nº: ${bilhete}`
 
   modalRecarga.addEventListener('click', evento => {
-    if (evento.target.id == 'containerModalRecarga' || evento.target.className == 'fechaModal' || evento.target.className == 'btnCancelar' ) {
-      modalRecarga.classList.remove('mostrar');
+    if (
+      evento.target.id == 'containerModalRecarga' ||
+      evento.target.className == 'fechaModal' ||
+      evento.target.className == 'btnCancelar'
+    ) {
+      modalRecarga.classList.remove('mostrar')
     }
   })
-  
 
-  modalRecarga.classList.add('mostrar');
-
+  modalRecarga.classList.add('mostrar')
 }
 
 function recargarBilhete(recarga, codigoBilhete) {
-
-  let objBilhete = { recarga: recarga, codigoBilhete : codigoBilhete };
+  let objBilhete = { recarga: recarga, codigoBilhete: codigoBilhete }
 
   let url = 'http://localhost:4000/recarga'
 
@@ -218,25 +228,93 @@ function recargarBilhete(recarga, codigoBilhete) {
     .post(url, objBilhete)
     .then(response => {
       if (response.data) {
+        const modalMensagem = document.getElementById('containerModalMensagem')
+        const H3ModalMensagem = document.getElementById('mensangem')
 
-        const modalMensagem = document.getElementById('containerModalMensagem');
-        const H3ModalMensagem = document.getElementById('mensangem');
-      
         modalMensagem.addEventListener('click', evento => {
-          if ( evento.target.id == 'containerModalMensagem' || evento.target.className == 'fechaModal' || evento.target.className == 'btnCancelar' ) {
-            modalMensagem.classList.remove('mostrar');
+          if (
+            evento.target.id == 'containerModalMensagem' ||
+            evento.target.className == 'fechaModal' ||
+            evento.target.className == 'btnCancelar'
+          ) {
+            modalMensagem.classList.remove('mostrar')
           }
         })
 
-        H3ModalMensagem.innerHTML = response.data;
+        H3ModalMensagem.innerHTML = response.data
 
-        modalMensagem.classList.add('mostrar');
+        modalMensagem.classList.add('mostrar')
 
-        setTimeout(() => { window.location.href = '/mostraBilhete'}, 3000) 
+        setTimeout(() => {
+          window.location.href = '/mostraBilhete'
+        }, 3000)
       }
     })
     .catch(erro => {
       alert(erro)
     })
-    
+}
+
+function chamaGeraBilhete(bilhete) {
+  const modalRecarga = document.getElementById('containerModalRecarga')
+  const btnsRecarga = document.querySelectorAll('.btnRecarga')
+
+  btnsRecarga.forEach(btnRecarga => {
+    btnRecarga.setAttribute(
+      'onclick',
+      `chamaTermoIncluir('${btnRecarga.value}')`
+    )
+  })
+
+  modalRecarga.addEventListener('click', evento => {
+    if (
+      evento.target.id == 'containerModalRecarga' ||
+      evento.target.className == 'fechaModal' ||
+      evento.target.className == 'btnCancelar'
+    ) {
+      modalRecarga.classList.remove('mostrar')
+    }
+  })
+
+  modalRecarga.classList.add('mostrar')
+}
+
+function incluirBilhete(bilhete) {
+  const btnRecarga = document.getElementById('btnRecarga')
+  let tipo = bilhete
+  console.log(tipo)
+
+  let objBilhete = { codigo: undefined, tipo: tipo, data_geracao: '' }
+  let url = `http://localhost:4000/bilhete`
+
+  axios
+    .post(url, objBilhete)
+    .then(response => {
+      if (response.data) {
+        console.log('console aq = ', response.data)
+        const modalMensagem = document.getElementById('containerModalMensagem')
+        const H3ModalMensagem = document.getElementById('mensangem')
+
+        modalMensagem.addEventListener('click', evento => {
+          if (
+            evento.target.id == 'containerModalMensagem' ||
+            evento.target.className == 'fechaModal' ||
+            evento.target.className == 'btnCancelar'
+          ) {
+            modalMensagem.classList.remove('mostrar')
+          }
+        })
+
+        H3ModalMensagem.innerHTML = response.data
+
+        modalMensagem.classList.add('mostrar')
+
+        setTimeout(() => {
+          window.location.href = '/mostraBilhete'
+        }, 3000)
+      }
+    })
+    .catch(erro => {
+      alert(erro)
+    })
 }
