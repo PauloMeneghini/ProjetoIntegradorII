@@ -54,7 +54,7 @@ function Bilhetes(bd) {
       await conexao.execute(insert, dados)
 
       const insertRecarga =
-        'INSERT INTO RECARGAS (CODIGO, TIPO, DATA_COMPRA, BILHETE) VALUES (SEQ_RECARGAS.NEXTVAL, :tipo, CURRENT_DATE, :codigo)'
+        "INSERT INTO RECARGAS (CODIGO, TIPO, DATA_COMPRA, ATIVO, BILHETE) VALUES (SEQ_RECARGAS.NEXTVAL, :tipo, CURRENT_DATE, 'T', :codigo)"
 
       await conexao.execute(insertRecarga, dadosRecarga)
 
@@ -68,7 +68,7 @@ function Bilhetes(bd) {
     }
   }
 
-  this.altera = async function (codigoBilhete) {
+  this.utiliza = async function (codigoBilhete) {
     try {
       const conexao = await this.bd.getConexao()
 
@@ -95,7 +95,7 @@ function Bilhetes(bd) {
       const dados = [bilhete.tipo, bilhete.codigo]
 
       const insert =
-        'INSERT INTO RECARGAS (CODIGO, TIPO, DATA_COMPRA, BILHETE) VALUES (SEQ_RECARGAS.NEXTVAL, :tipo, CURRENT_DATE, :codigo)'
+        "INSERT INTO RECARGAS (CODIGO, TIPO, DATA_COMPRA, ATIVO, BILHETE) VALUES (SEQ_RECARGAS.NEXTVAL, :tipo, CURRENT_DATE, 'T', :codigo)"
 
       await conexao.execute(insert, dados)
 
@@ -282,7 +282,7 @@ async function utilizaBilhete(req, res) {
   const codigoBilhete = new Bilhete(req.body.codigo)
 
   try {
-    const resposta = await global.bilhetes.altera(codigoBilhete)
+    const resposta = await global.bilhetes.utiliza(codigoBilhete)
 
     return res.status(201).json(resposta)
   } catch (erro) {
