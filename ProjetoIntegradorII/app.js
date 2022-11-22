@@ -70,13 +70,34 @@ function Bilhetes(bd) {
 
   this.utiliza = async function (codigoBilhete) {
     try {
-      const conexao = await this.bd.getConexao()
+      const conexao = await this.bd.getConexao();
 
-      const update = "UPDATE BILHETES SET TIPO = ' ' WHERE CODIGO = :codigo"
+      const selectRecarga = "SELECT * FROM RECARGAS WHERE BILHETE = :codigoBilhete AND ATIVO = 'T'";
+      const dadosSelect = [codigoBilhete.codigo];
 
-      const dados = [codigoBilhete.codigo]
+      const resultadoSelect = await conexao.execute(selectRecarga, dadosSelect);
 
-      await conexao.execute(update, dados)
+      // console.log(resultadoSelect.rows); 
+
+      const insertUtilizacao = "INSERT INTO UTILIZACAO (CODIGO, DATA_UTILIZACAO, RECARGA) VALUES (SEQ_UTILIZACAO.NEXTVAL, CURRENT_DATE, :recarga)";
+
+      const dadosUtilizacao = [resultadoSelect.rows[0].CODIGO];
+
+      console.log(dadosUtilizacao);
+
+      const resultadoInsertUtilizacao = await conexao.execute(insertUtilizacao, dadosUtilizacao);
+
+      console.log(resultadoInsertUtilizacao);
+
+              const updateRercarga = "UPDATE RECARGAS SET ATIVO = 'F' WHERE CODIGO = :recarga";
+
+              await conexao.execute(updateRercarga, dadosUtilizacao);
+
+              const updateBilhetes = "UPDATE BILHETES SET TIPO = ' ' WHERE CODIGO = :codigo";
+
+              const dadosBilhete = [codigoBilhete.codigo];
+
+              await conexao.execute(updateBilhetes, dadosBilhete);
 
       const commit = 'COMMIT'
       await conexao.execute(commit)
@@ -147,10 +168,7 @@ function Usuarios(bd) {
         dadoEmailCount
       )
 
-      console.log(resultadoEmailCount.rows.length)
-
       if (resultadoEmailCount.rows.length > 0) {
-        console.log(`O email ${usuario.email} já está cadastrado`)
 
         mensagem = 'EMAIL JÁ CADASTRADO!'
 
@@ -176,7 +194,6 @@ function Usuarios(bd) {
 
         const dadosSelect = [usuario.celular]
         ret = await conexao.execute(select, dadosSelect)
-        console.log(ret.rows)
 
         mensagem = 'Usuário cadastrado com sucesso'
 
@@ -293,8 +310,6 @@ async function utilizaBilhete(req, res) {
 async function recarregarBilhete(req, res) {
   const bilhete = new Bilhete(req.body.codigoBilhete, req.body.recarga)
 
-  console.log(bilhete)
-
   try {
     const resposta = await global.bilhetes.recarrega(bilhete)
 
@@ -343,8 +358,6 @@ async function ativacaoServidor() {
         const dadosBilhete = [req.session.idUser]
 
         resultado = await conexao.execute(selectBilhete, dadosBilhete)
-
-        console.log(resultado.rows)
 
         tamanhoOBJ = resultado.rows.length
 
