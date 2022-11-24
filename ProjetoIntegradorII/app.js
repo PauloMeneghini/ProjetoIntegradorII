@@ -77,15 +77,45 @@ function Bilhetes(bd) {
 
       const resultadoSelect = await conexao.execute(selectRecarga, dadosSelect);
 
-      // console.log(resultadoSelect.rows); 
+      console.log(resultadoSelect.rows); 
 
-      const insertUtilizacao = "INSERT INTO UTILIZACAO (CODIGO, DATA_UTILIZACAO, RECARGA) VALUES (SEQ_UTILIZACAO.NEXTVAL, CURRENT_DATE, :recarga)";
+      const insertUtilizacao = "INSERT INTO UTILIZACOES (CODIGO, DATA_UTILIZACAO, RECARGA) VALUES (SEQ_UTILIZACAO.NEXTVAL, CURRENT_DATE, :recarga)";
 
       const dadosUtilizacao = [resultadoSelect.rows[0].CODIGO];
 
       console.log(dadosUtilizacao);
 
+      const tipoRecarga = resultadoSelect.rows[0].TIPO;
+
+      console.log(tipoRecarga);
+
+      if(tipoRecarga == 'unico') {
+
+        const updateDatasRecarga = "UPDATE RECARGAS SET DATA_UTILIZACAO = CURRENT_DATE, DATA_EXPIRACAO = CURRENT_DATE + INTERVAL '40' MINUTE WHERE CODIGO = :codigoRecarga";
+        await conexao.execute(updateDatasRecarga, dadosUtilizacao);
+
+      } else if(tipoRecarga == 'duplo') {
+
+        const updateDatasRecarga = "UPDATE RECARGAS SET DATA_UTILIZACAO = CURRENT_DATE, DATA_EXPIRACAO = CURRENT_DATE + INTERVAL '40' MINUTE WHERE CODIGO = :codigoRecarga";
+        await conexao.execute(updateDatasRecarga, dadosUtilizacao);
+
+      } else if(tipoRecarga == '7 dias') {
+
+        const updateDatasRecarga = "UPDATE RECARGAS SET DATA_UTILIZACAO = CURRENT_DATE, DATA_EXPIRACAO = CURRENT_DATE + INTERVAL '7' DAY WHERE CODIGO = :codigoRecarga";
+        await conexao.execute(updateDatasRecarga, dadosUtilizacao);
+
+      } else if(tipoRecarga == '30 dias') {
+
+        const updateDatasRecarga = "UPDATE RECARGAS SET DATA_UTILIZACAO = CURRENT_DATE, DATA_EXPIRACAO = CURRENT_DATE + INTERVAL '30' DAY WHERE CODIGO = :codigoRecarga";
+        await conexao.execute(updateDatasRecarga, dadosUtilizacao);
+
+      }
+
       const resultadoInsertUtilizacao = await conexao.execute(insertUtilizacao, dadosUtilizacao);
+
+      //const updateDatasRecarga = "UPDATE RECARGAS SET DATA_UTILIZACAO = CURRENT_DATE, DATA_EXPIRACAO = CURRENT_DATE + INTERVAL '40' MINUTE WHERE CODIGO = :codigoRecarga";
+
+      //await conexao.execute(updateDatasRecarga, dadosUtilizacao);
 
       console.log(resultadoInsertUtilizacao);
 
