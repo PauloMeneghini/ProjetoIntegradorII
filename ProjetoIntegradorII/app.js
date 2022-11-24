@@ -5,6 +5,7 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const bcrypt = require('bcrypt')
 const session = require('express-session')
+const { addAbortSignal } = require('stream')
 
 app.engine('html', require('ejs').renderFile)
 app.set('view engine', 'html')
@@ -79,61 +80,82 @@ function Bilhetes(bd) {
 
       console.log(resultadoSelect.rows); 
 
-      const insertUtilizacao = "INSERT INTO UTILIZACOES (CODIGO, DATA_UTILIZACAO, RECARGA) VALUES (SEQ_UTILIZACAO.NEXTVAL, CURRENT_DATE, :recarga)";
+      const tipoRecarga = resultadoSelect.rows[0].TIPO;
 
       const dadosUtilizacao = [resultadoSelect.rows[0].CODIGO];
 
-      console.log(dadosUtilizacao);
+      console.log(resultadoSelect.rows[0].DATA_EXPIRACAO)
 
-      const tipoRecarga = resultadoSelect.rows[0].TIPO;
-
-      console.log(tipoRecarga);
-
-      if(tipoRecarga == 'unico') {
+      if(tipoRecarga == 'unico' && resultadoSelect.rows[0].DATA_EXPIRACAO == null) {
 
         const updateDatasRecarga = "UPDATE RECARGAS SET DATA_UTILIZACAO = CURRENT_DATE, DATA_EXPIRACAO = CURRENT_DATE + INTERVAL '40' MINUTE WHERE CODIGO = :codigoRecarga";
         await conexao.execute(updateDatasRecarga, dadosUtilizacao);
 
-      } else if(tipoRecarga == 'duplo') {
+      } else if(tipoRecarga == 'duplo' && resultadoSelect.rows[0].DATA_EXPIRACAO == null) {
 
         const updateDatasRecarga = "UPDATE RECARGAS SET DATA_UTILIZACAO = CURRENT_DATE, DATA_EXPIRACAO = CURRENT_DATE + INTERVAL '40' MINUTE WHERE CODIGO = :codigoRecarga";
         await conexao.execute(updateDatasRecarga, dadosUtilizacao);
 
-      } else if(tipoRecarga == '7 dias') {
+      } else if(tipoRecarga == '7 dias' && resultadoSelect.rows[0].DATA_EXPIRACAO == null) {
 
         const updateDatasRecarga = "UPDATE RECARGAS SET DATA_UTILIZACAO = CURRENT_DATE, DATA_EXPIRACAO = CURRENT_DATE + INTERVAL '7' DAY WHERE CODIGO = :codigoRecarga";
         await conexao.execute(updateDatasRecarga, dadosUtilizacao);
 
-      } else if(tipoRecarga == '30 dias') {
+      } else if(tipoRecarga == '30 dias' && resultadoSelect.rows[0].DATA_EXPIRACAO == null) {
 
         const updateDatasRecarga = "UPDATE RECARGAS SET DATA_UTILIZACAO = CURRENT_DATE, DATA_EXPIRACAO = CURRENT_DATE + INTERVAL '30' DAY WHERE CODIGO = :codigoRecarga";
         await conexao.execute(updateDatasRecarga, dadosUtilizacao);
 
       }
 
-      const resultadoInsertUtilizacao = await conexao.execute(insertUtilizacao, dadosUtilizacao);
+      const selectDataExpiracao = "SELECT TO_CHAR(DATA_EXPIRACAO, 'DD/MM/YYYY HH24:MI:SS') DATA_EXPIRACAO FROM RECARGAS WHERE BILHETE = :codigoBilhete AND ATIVO = 'T'";
+      const dadosSelectDataExpiracao = [codigoBilhete.codigo];
 
-      //const updateDatasRecarga = "UPDATE RECARGAS SET DATA_UTILIZACAO = CURRENT_DATE, DATA_EXPIRACAO = CURRENT_DATE + INTERVAL '40' MINUTE WHERE CODIGO = :codigoRecarga";
+      const resultadoSelectDataExpiracao = await conexao.execute(selectDataExpiracao, dadosSelectDataExpiracao);
 
-      //await conexao.execute(updateDatasRecarga, dadosUtilizacao);
+      const dataAtual = new Date().toLocaleString();
+      const dataExpiracao = resultadoSelectDataExpiracao.rows[0].DATA_EXPIRACAO;
 
-      console.log(resultadoInsertUtilizacao);
+      const horarioAtual = dataAtual.split(' ')
+      const horarioExpiracao = dataExpiracao.split(' ')
 
-              const updateRercarga = "UPDATE RECARGAS SET ATIVO = 'F' WHERE CODIGO = :recarga";
+      if (horarioAtual[0] >= horarioExpiracao[0] && horarioAtual[1] > horarioExpiracao[1]) {
+        const updateRercarga = "UPDATE RECARGAS SET ATIVO = 'F' WHERE CODIGO = :recarga";
 
-              await conexao.execute(updateRercarga, dadosUtilizacao);
+        await conexao.execute(updateRercarga, dadosUtilizacao);
 
-              const updateBilhetes = "UPDATE BILHETES SET TIPO = ' ' WHERE CODIGO = :codigo";
+        const updateBilhetes = "UPDATE BILHETES SET TIPO = ' ' WHERE CODIGO = :codigo";
 
-              const dadosBilhete = [codigoBilhete.codigo];
+        const dadosBilhete = [codigoBilhete.codigo];
 
-              await conexao.execute(updateBilhetes, dadosBilhete);
+        await conexao.execute(updateBilhetes, dadosBilhete);
+        
+        const commit = 'COMMIT';
+        await conexao.execute(commit);
 
-      const commit = 'COMMIT'
-      await conexao.execute(commit)
+        console.log('Bilhete expirado!');
 
-      return (mensagem =
-        'Bilhete utilizado com sucesso <br> A página será recarregada')
+        return mensagem = 'Bilhete expirado. Para utilizar novamente faça uma nova recarga <br> A página será recarregada';
+      } else {
+
+        const insertUtilizacao = "INSERT INTO UTILIZACOES (CODIGO, DATA_UTILIZACAO, RECARGA) VALUES (SEQ_UTILIZACAO.NEXTVAL, CURRENT_DATE, :recarga)";
+  
+        console.log(dadosUtilizacao);
+  
+        await conexao.execute(insertUtilizacao, dadosUtilizacao);
+
+        const commit = 'COMMIT';
+        await conexao.execute(commit);
+        
+        console.log('Bilhete valido');
+
+        return mensagem = 'Bilhete utilizado com sucesso <br> A página será recarregada';
+
+      }
+
+      const commit = 'COMMIT';
+      await conexao.execute(commit);
+
     } catch (erro) {
       console.error(erro)
     }
@@ -349,6 +371,21 @@ async function recarregarBilhete(req, res) {
   }
 }
 
+async function obtemData(req, res) {
+  console.log(req.body.codigo, req.body.tipo)
+
+  this.bd = new BD()
+
+  await this.bd.getConexao()
+
+  const selectDataExpiracao = "SELECT * FROM RECARGAS WHERE BILHETE = :codigo AND ATIVO = 'T'";
+  const dadosSelectDataExpiracao = [req.body.codigo];
+
+  const resultadoSelectDataExpiracao = await conexao.execute(selectDataExpiracao, dadosSelectDataExpiracao);
+
+  console.log(resultadoSelectDataExpiracao.rows);
+}
+
 async function ativacaoServidor() {
   const bd = new BD()
 
@@ -436,6 +473,8 @@ async function ativacaoServidor() {
   })
 
   app.post('/utilizaBilhete', utilizaBilhete)
+
+  app.post('/obtemData', obtemData);
 
   console.log('Servidor ativo na porta 4000...')
   app.listen(4000)

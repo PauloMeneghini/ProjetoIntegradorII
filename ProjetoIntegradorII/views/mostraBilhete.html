@@ -26,7 +26,7 @@
                   </div>
   
                   <div class="btnsBilhete">
-                      <button type="submit" class="btnUsarBilhete" id="btnUsarBilhete" onclick="usarBilhete(this.value)" value="<%= bilhete[i].CODIGO %>">USAR BILHETE</button></a>
+                      <button type="submit" class="btnUsarBilhete" id="btnUsarBilhete" onclick="usarBilhete(this.value)" value="<%= bilhete[i].CODIGO %>&<%= bilhete[i].TIPO %>">USAR BILHETE</button></a>
                       <button type="submit" class="btnRecarregarBilhete" onclick="chamaRecargaBilhete(this.value)" value="<%= bilhete[i].CODIGO %>">RECARREGAR BILHETE</button>
                   </div>
               </div>

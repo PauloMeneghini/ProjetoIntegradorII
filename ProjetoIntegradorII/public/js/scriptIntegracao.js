@@ -151,85 +151,83 @@ function usarBilhete(bilhete) {
   const arrayBilhete = bilhete.split('&')
   let objBilhete = { codigo: arrayBilhete[0], tipo: arrayBilhete[1] }
 
-  setTimeout(validaTempo(), 3000)
+  //setTimeout(validaTempo(), 3000)
 
-  function validaTempo() {
-    console.log('entrei')
-    const dataAtual = new Date().toLocaleString()
+  // function validaTempo() {
+  //   console.log('entrei')
+  //   const dataAtual = new Date().toLocaleString()
 
-    if (objBilhete.tipo != '') {
-      let url = 'http://localhost:4000/obtemData'
-      axios
-        .post(url, objBilhete)
-        .then(response => {
-          if (response.data) {
-            const dataExpiracao = response.data
+  //   if (objBilhete.tipo != '') {
+  // //     let url = 'http://localhost:4000/obtemData'
+  //     axios
+  //       .post(url, objBilhete)
+  //       .then(response => {
+  //         if (response.data) {
+  //           const dataExpiracao = response.data
 
-            console.log('Data expiração: ', dataExpiracao)
-            console.log('Data atual: ', dataAtual)
+  //           console.log('Data expiração: ', dataExpiracao)
+  //           console.log('Data atual: ', dataAtual)
 
-            Date.parse(dataAtual)
-            Date.parse(dataExpiracao)
+  //           Date.parse(dataAtual)
+  //           Date.parse(dataExpiracao)
 
-            const horarioAtual = dataAtual.split(' ')
-            const horarioExpiracao = dataExpiracao.split(' ')
+  //           const horarioAtual = dataAtual.split(' ')
+  //           const horarioExpiracao = dataExpiracao.split(' ')
 
-            console.log('completo = ', horarioAtual, horarioExpiracao)
+  //           console.log('completo = ', horarioAtual, horarioExpiracao)
 
-            if (
-              horarioAtual[0] >= horarioExpiracao[0] &&
-              horarioAtual[1] > horarioExpiracao[1]
-            )
-              console.log('Bilhete expirado!')
-            else console.log('Cai no else')
-          }
-        })
-        .catch(erro => {
-          alert(erro)
-        })
-
-      console.log(dataAtual)
-    } else {
-      console.log('ERRO = ', objBilhete.tipo)
-    }
-  }
-
-  // let url = 'http://localhost:4000/utilizaBilhete'
-
-  // axios
-  //   .post(url, objBilhete)
-  //   .then(response => {
-  //     if (response.data) {
-  //       const modalMensagem = document.getElementById('containerModalMensagem')
-  //       const H3ModalMensagem = document.getElementById('mensangem')
-
-  //       console.log(modalMensagem)
-  //       console.log(H3ModalMensagem)
-
-  //       modalMensagem.addEventListener('click', evento => {
-  //         if (
-  //           evento.target.id == 'containerModalMensagem' ||
-  //           evento.target.className == 'fechaModal' ||
-  //           evento.target.className == 'btnCancelar'
-  //         ) {
-  //           modalMensagem.classList.remove('mostrar')
+  //           if (horarioAtual[0] >= horarioExpiracao[0] && horarioAtual[1] > horarioExpiracao[1])
+  //             console.log('Bilhete expirado!')
+  //           else 
+  //             console.log('Cai no else')
   //         }
   //       })
+  //       .catch(erro => {
+  //         alert(erro)
+  //       })
 
-  //       H3ModalMensagem.innerHTML = response.data
+  //     console.log(dataAtual)
+  //   } else {
+  //     console.log('ERRO = ', objBilhete.tipo)
+  //   }
+  // }
 
-  //       modalMensagem.classList.add('mostrar')
+  let url = 'http://localhost:4000/utilizaBilhete'
 
-  //       console.log(response.data)
+  axios
+    .post(url, objBilhete)
+    .then(response => {
+      if (response.data) {
+        const modalMensagem = document.getElementById('containerModalMensagem')
+        const H3ModalMensagem = document.getElementById('mensangem')
 
-  //       // setTimeout(() => {
-  //       //   window.location.href = '/mostraBilhete'
-  //       // }, 3000)
-  //     }
-  //   })
-  //   .catch(erro => {
-  //     alert(erro)
-  //   })
+        console.log(modalMensagem)
+        console.log(H3ModalMensagem)
+
+        modalMensagem.addEventListener('click', evento => {
+          if (
+            evento.target.id == 'containerModalMensagem' ||
+            evento.target.className == 'fechaModal' ||
+            evento.target.className == 'btnCancelar'
+          ) {
+            modalMensagem.classList.remove('mostrar')
+          }
+        })
+
+        H3ModalMensagem.innerHTML = response.data
+
+        modalMensagem.classList.add('mostrar')
+
+        console.log(response.data)
+
+        setTimeout(() => {
+          window.location.href = '/mostraBilhete'
+        }, 3000)
+      }
+    })
+    .catch(erro => {
+      alert(erro)
+    })
 }
 
 function mascaraCelular(celular) {
