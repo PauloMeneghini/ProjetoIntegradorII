@@ -70,70 +70,103 @@ function Bilhetes(bd) {
 
   this.utiliza = async function (codigoBilhete) {
     try {
-      const conexao = await this.bd.getConexao();
+      const conexao = await this.bd.getConexao()
 
-      const selectRecarga = "SELECT * FROM RECARGAS WHERE BILHETE = :codigoBilhete AND ATIVO = 'T'";
-      const dadosSelect = [codigoBilhete.codigo];
+      const selectRecarga =
+        "SELECT * FROM RECARGAS WHERE BILHETE = :codigoBilhete AND ATIVO = 'T'"
+      const dadosSelect = [codigoBilhete.codigo]
 
-      const resultadoSelect = await conexao.execute(selectRecarga, dadosSelect);
+      const resultadoSelect = await conexao.execute(selectRecarga, dadosSelect)
 
-      console.log(resultadoSelect.rows); 
+      console.log(resultadoSelect.rows)
 
-      const insertUtilizacao = "INSERT INTO UTILIZACOES (CODIGO, DATA_UTILIZACAO, RECARGA) VALUES (SEQ_UTILIZACAO.NEXTVAL, CURRENT_DATE, :recarga)";
+      const insertUtilizacao =
+        'INSERT INTO UTILIZACOES (CODIGO, DATA_UTILIZACAO, RECARGA) VALUES (SEQ_UTILIZACAO.NEXTVAL, CURRENT_DATE, :recarga)'
 
-      const dadosUtilizacao = [resultadoSelect.rows[0].CODIGO];
+      const dadosUtilizacao = [resultadoSelect.rows[0].CODIGO]
 
-      console.log(dadosUtilizacao);
+      console.log(dadosUtilizacao)
 
-      const tipoRecarga = resultadoSelect.rows[0].TIPO;
+      const tipoRecarga = resultadoSelect.rows[0].TIPO
 
-      console.log(tipoRecarga);
+      console.log(tipoRecarga)
 
-      if(tipoRecarga == 'unico') {
-
-        const updateDatasRecarga = "UPDATE RECARGAS SET DATA_UTILIZACAO = CURRENT_DATE, DATA_EXPIRACAO = CURRENT_DATE + INTERVAL '40' MINUTE WHERE CODIGO = :codigoRecarga";
-        await conexao.execute(updateDatasRecarga, dadosUtilizacao);
-
-      } else if(tipoRecarga == 'duplo') {
-
-        const updateDatasRecarga = "UPDATE RECARGAS SET DATA_UTILIZACAO = CURRENT_DATE, DATA_EXPIRACAO = CURRENT_DATE + INTERVAL '40' MINUTE WHERE CODIGO = :codigoRecarga";
-        await conexao.execute(updateDatasRecarga, dadosUtilizacao);
-
-      } else if(tipoRecarga == '7 dias') {
-
-        const updateDatasRecarga = "UPDATE RECARGAS SET DATA_UTILIZACAO = CURRENT_DATE, DATA_EXPIRACAO = CURRENT_DATE + INTERVAL '7' DAY WHERE CODIGO = :codigoRecarga";
-        await conexao.execute(updateDatasRecarga, dadosUtilizacao);
-
-      } else if(tipoRecarga == '30 dias') {
-
-        const updateDatasRecarga = "UPDATE RECARGAS SET DATA_UTILIZACAO = CURRENT_DATE, DATA_EXPIRACAO = CURRENT_DATE + INTERVAL '30' DAY WHERE CODIGO = :codigoRecarga";
-        await conexao.execute(updateDatasRecarga, dadosUtilizacao);
-
+      if (tipoRecarga == 'unico') {
+        const updateDatasRecarga =
+          "UPDATE RECARGAS SET DATA_UTILIZACAO = CURRENT_DATE, DATA_EXPIRACAO = CURRENT_DATE + INTERVAL '40' MINUTE WHERE CODIGO = :codigoRecarga"
+        await conexao.execute(updateDatasRecarga, dadosUtilizacao)
+      } else if (tipoRecarga == 'duplo') {
+        const updateDatasRecarga =
+          "UPDATE RECARGAS SET DATA_UTILIZACAO = CURRENT_DATE, DATA_EXPIRACAO = CURRENT_DATE + INTERVAL '40' MINUTE WHERE CODIGO = :codigoRecarga"
+        await conexao.execute(updateDatasRecarga, dadosUtilizacao)
+      } else if (tipoRecarga == '7 dias') {
+        const updateDatasRecarga =
+          "UPDATE RECARGAS SET DATA_UTILIZACAO = CURRENT_DATE, DATA_EXPIRACAO = CURRENT_DATE + INTERVAL '7' DAY WHERE CODIGO = :codigoRecarga"
+        await conexao.execute(updateDatasRecarga, dadosUtilizacao)
+      } else if (tipoRecarga == '30 dias') {
+        const updateDatasRecarga =
+          "UPDATE RECARGAS SET DATA_UTILIZACAO = CURRENT_DATE, DATA_EXPIRACAO = CURRENT_DATE + INTERVAL '30' DAY WHERE CODIGO = :codigoRecarga"
+        await conexao.execute(updateDatasRecarga, dadosUtilizacao)
       }
 
-      const resultadoInsertUtilizacao = await conexao.execute(insertUtilizacao, dadosUtilizacao);
+      const resultadoInsertUtilizacao = await conexao.execute(
+        insertUtilizacao,
+        dadosUtilizacao
+      )
 
       //const updateDatasRecarga = "UPDATE RECARGAS SET DATA_UTILIZACAO = CURRENT_DATE, DATA_EXPIRACAO = CURRENT_DATE + INTERVAL '40' MINUTE WHERE CODIGO = :codigoRecarga";
 
       //await conexao.execute(updateDatasRecarga, dadosUtilizacao);
 
-      console.log(resultadoInsertUtilizacao);
+      console.log(resultadoInsertUtilizacao)
 
-              const updateRercarga = "UPDATE RECARGAS SET ATIVO = 'F' WHERE CODIGO = :recarga";
+      const updateRercarga =
+        "UPDATE RECARGAS SET ATIVO = 'F' WHERE CODIGO = :recarga"
 
-              await conexao.execute(updateRercarga, dadosUtilizacao);
+      await conexao.execute(updateRercarga, dadosUtilizacao)
 
-              const updateBilhetes = "UPDATE BILHETES SET TIPO = ' ' WHERE CODIGO = :codigo";
+      const updateBilhetes =
+        "UPDATE BILHETES SET TIPO = ' ' WHERE CODIGO = :codigo"
 
-              const dadosBilhete = [codigoBilhete.codigo];
+      const dadosBilhete = [codigoBilhete.codigo]
 
-              await conexao.execute(updateBilhetes, dadosBilhete);
+      await conexao.execute(updateBilhetes, dadosBilhete)
 
       const commit = 'COMMIT'
       await conexao.execute(commit)
 
       return (mensagem =
         'Bilhete utilizado com sucesso <br> A página será recarregada')
+    } catch (erro) {
+      console.error(erro)
+    }
+  }
+
+  this.obtemData = async function (bilhete) {
+    try {
+      const conexao = await this.bd.getConexao()
+
+      const selectRecarga =
+        "SELECT * FROM RECARGAS WHERE BILHETE = :codigoBilhete AND ATIVO = 'T'"
+
+      const dadosSelect = [bilhete.codigo]
+
+      const resultadoSelect = await conexao.execute(selectRecarga, dadosSelect)
+
+      const dadosUtilizacao = [resultadoSelect.rows[0].CODIGO]
+
+      console.log(dadosUtilizacao)
+
+      const selectData =
+        'SELECT DATA_EXPIRACAO FROM RECARGAS WHERE RECARGA = 142'
+
+      // const retornaData = await conexao.execute(selectData)
+      // console.log('retorna data = ', retornaData.rows)
+      // const commit = 'COMMIT'
+      // await conexao.execute(commit)
+      const retornaData = '23/11/2022 10:00:00'
+      console.log(retornaData)
+      return retornaData
     } catch (erro) {
       console.error(erro)
     }
@@ -199,7 +232,6 @@ function Usuarios(bd) {
       )
 
       if (resultadoEmailCount.rows.length > 0) {
-
         mensagem = 'EMAIL JÁ CADASTRADO!'
 
         return mensagem
@@ -337,6 +369,18 @@ async function utilizaBilhete(req, res) {
   }
 }
 
+async function obtemData(req, res) {
+  const codigoBilhete = new Bilhete(req.body.codigo)
+
+  try {
+    const resposta = await global.bilhetes.obtemData(codigoBilhete)
+
+    return res.status(201).json(resposta)
+  } catch (erro) {
+    console.error(erro)
+  }
+}
+
 async function recarregarBilhete(req, res) {
   const bilhete = new Bilhete(req.body.codigoBilhete, req.body.recarga)
 
@@ -436,6 +480,7 @@ async function ativacaoServidor() {
   })
 
   app.post('/utilizaBilhete', utilizaBilhete)
+  app.post('/obtemData', obtemData)
 
   console.log('Servidor ativo na porta 4000...')
   app.listen(4000)
