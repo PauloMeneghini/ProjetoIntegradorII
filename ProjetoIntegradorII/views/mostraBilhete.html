@@ -28,6 +28,7 @@
                   <div class="btnsBilhete">
                       <button type="submit" class="btnUsarBilhete" id="btnUsarBilhete" onclick="usarBilhete(this.value)" value="<%= bilhete[i].CODIGO %>&<%= bilhete[i].TIPO %>">USAR BILHETE</button></a>
                       <button type="submit" class="btnRecarregarBilhete" onclick="chamaRecargaBilhete(this.value)" value="<%= bilhete[i].CODIGO %>">RECARREGAR BILHETE</button>
+                      <button type="submit" class="btnRelatorio" value="<%= bilhete[i].CODIGO %>">RELATÓRIO DE USO</button>
                   </div>
               </div>
             <% } %>
@@ -73,29 +74,15 @@
     <div class="containerModalMensagem" id="containerModalMensagem">
       <div class="modalMensagem">
         <button class="fechaModal">X</button>
-        <h3 id="mensangem"></h3>
+        <img id="QRCode" width="40%">
+        <p>Utilize o QR code acima para validar o bilhete</p>
+        <h3 id="codigoBilheteU" style="margin: 15px 0px"></h3>
+        <h4 id="mensangem"></h4>
       </div>
     </div>
 
     <script src="../public/js/scriptIntegracao.js"></script>
     <script src="public/js/script.js"></script>
 
-    <script>
-      
-      /*const urlParams = new URLSearchParams(window.location.search);
-
-      const codigoBilheteURL = urlParams.get("codigo");
-      const tipoBilheteURL = urlParams.get("tipo");
-      
-      const inputCodigoBilhete = document.getElementById("codigoBilhete");
-      const inputTipoBilhete = document.getElementById("tipoBilhete");
-      const linkUtilizaBilhete = document.getElementById("utilizaBilhete");
-      
-      inputCodigoBilhete.innerHTML = codigoBilheteURL;
-      inputTipoBilhete.innerHTML = tipoBilheteURL;
-
-      linkUtilizaBilhete.setAttribute("href", `/utilizaBilhete?codigo=${codigoBilheteURL}&tipo=${tipoBilheteURL}`);*/
-
-    </script>
   </body>
 </html>
