@@ -144,12 +144,41 @@ function Bilhetes(bd) {
   
         await conexao.execute(insertUtilizacao, dadosUtilizacao);
 
+        const selectDiferencaHora = "SELECT ROUND(86400*(DATA_EXPIRACAO - CURRENT_DATE)) DIFERENCA_HORA FROM RECARGAS WHERE CODIGO = :recarga";
+
+        const resultadoDifHora = await conexao.execute(selectDiferencaHora, dadosUtilizacao);
+
+        console.log(`A diferença de horario é de: `);
+        console.log(resultadoDifHora.rows);
+
+        const segundosRestantes = resultadoDifHora.rows[0].DIFERENCA_HORA;
+        const days = Math.floor(segundosRestantes / 86400);
+        console.log(`Dias: ${days}`);
+        const hours = Math.floor((segundosRestantes - (days * 86400)) / 3600);
+        console.log(`Horas: ${hours}`);
+        // const minutes = Math.floor((segundosRestantes - (hours * 3600)) / 60);
+        const minutes = Math.floor((segundosRestantes/60) % 60);
+        console.log(`Minutos: ${minutes}`);
+        const seconds = segundosRestantes % 60;
+        console.log(`Segundos: ${seconds}`);
+
+        /*a = seg//60//60//24
+        b = (seg//60//60)%24
+        c = (seg//60)%60
+        d = seg%60*/
+
+        const aaa = 
+        days.toString().padStart(2, '0') + ' dias - ' +
+        hours.toString().padStart(2, '0') + ':' + 
+        minutes.toString().padStart(2, '0') + ':' + 
+        seconds.toString().padStart(2, '0');
+
         const commit = 'COMMIT';
         await conexao.execute(commit);
         
         console.log('Bilhete valido');
 
-        return mensagem = 'Bilhete utilizado com sucesso <br> A página será recarregada';
+        return mensagem = 'Bilhete utilizado com sucesso <br> A página será recarregada', aaa;
 
       }
 
