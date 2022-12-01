@@ -49,6 +49,25 @@ function mostraDadosBilhete(codigo, tipo) {
   window.location.href = `/mostraBilhete?codigo=${codigo}&tipo=${tipo}`
 }
 
+function modalRelatorio() {
+  const modalMensagem = document.getElementById('containerModalRelatorio')
+  const conteudoRelatorio = document.getElementById('conteudoRelatorio')
+
+  console.log(modalMensagem)
+  console.log(conteudoRelatorio)
+
+  modalMensagem.addEventListener('click', evento => {
+    if (
+      evento.target.id == 'containerModalRelatorio' ||
+      evento.target.className == 'fechaModalRelatorio'
+    ) {
+      modalMensagem.classList.remove('mostrar')
+    }
+  })
+  //conteudoRelatorio.innerHTML = 'teste'
+  modalMensagem.classList.add('mostrar')
+}
+
 function Comunicado(codigo, tipo, mensagem, resposta) {
   this.codigo = codigo
   this.tipo = tipo
@@ -178,7 +197,7 @@ function usarBilhete(bilhete) {
 
   //           if (horarioAtual[0] >= horarioExpiracao[0] && horarioAtual[1] > horarioExpiracao[1])
   //             console.log('Bilhete expirado!')
-  //           else 
+  //           else
   //             console.log('Cai no else')
   //         }
   //       })
@@ -200,8 +219,8 @@ function usarBilhete(bilhete) {
       if (response.data) {
         const modalMensagem = document.getElementById('containerModalMensagem')
         const H3ModalMensagem = document.getElementById('mensangem')
-        const QRcode = document.getElementById("QRCode")
-        const codigoBilhete = document.getElementById("codigoBilheteU")
+        const QRcode = document.getElementById('QRCode')
+        const codigoBilhete = document.getElementById('codigoBilheteU')
 
         console.log(modalMensagem)
         console.log(H3ModalMensagem)
@@ -216,14 +235,13 @@ function usarBilhete(bilhete) {
           }
         })
 
-        QRcode.src = `https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=${response.data[1]}`;
-        codigoBilhete.innerHTML = `Bilhete Nº: ${response.data[1]}`;
+        QRcode.src = `https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=${response.data[1]}`
+        codigoBilhete.innerHTML = `Bilhete Nº: ${response.data[1]}`
         H3ModalMensagem.innerHTML = `Tempo restante: ${response.data[0]}`
 
         modalMensagem.classList.add('mostrar')
 
         console.log(response.data)
-
       }
     })
     .catch(erro => {
