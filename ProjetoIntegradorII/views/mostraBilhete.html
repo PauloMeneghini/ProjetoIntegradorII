@@ -28,7 +28,7 @@
                   <div class="btnsBilhete">
                       <button type="submit" class="btnUsarBilhete" id="btnUsarBilhete" onclick="usarBilhete(this.value)" value="<%= bilhete[i].CODIGO %>&<%= bilhete[i].TIPO %>">USAR BILHETE</button></a>
                       <button type="submit" class="btnRecarregarBilhete" onclick="chamaRecargaBilhete(this.value)" value="<%= bilhete[i].CODIGO %>">RECARREGAR BILHETE</button>
-                      <button type="submit" class="btnRelatorio" value="<%= bilhete[i].CODIGO %>">RELATÓRIO DE USO</button>
+                      <button type="submit" class="btnRelatorio" onclick="modalRelatorio()" value="<%= bilhete[i].CODIGO %>">RELATÓRIO DE USO</button>
                   </div>
               </div>
             <% } %>
@@ -78,6 +78,22 @@
         <p>Utilize o QR code acima para validar o bilhete</p>
         <h3 id="codigoBilheteU" style="margin: 15px 0px"></h3>
         <h4 id="mensangem"></h4>
+      </div>
+    </div>
+
+    <div class="containerModalRelatorio" id="containerModalRelatorio">
+      <div class="conteudoRelatorio">
+        <button class="fechaModalRelatorio"></button>
+        <h3 class="">RELATÓRIO DE USO</h3>
+        <div class="cabecalho">
+          <ul>
+            <li>BILHETE</li>
+            <li>DATA DE GERAÇÃO</li>
+            <li>RECARGA</li>
+            <li>DATA DE COMPRA DA RECARGA</li>
+            <li>DATA DE UTILIZAÇÃO DA RECARGAs</li>
+          </ul>
+        </div>
       </div>
     </div>
 

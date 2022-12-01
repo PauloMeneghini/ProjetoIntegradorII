@@ -214,6 +214,7 @@ h1 {
 /* Index.html -> Modal */
 
 .containerModalMensagem,
+.containerModalRelatorio,
 .containerModalTermo,
 .containerModalRecarga {
   width: 100vw;
@@ -230,6 +231,7 @@ h1 {
 
 .containerModalMensagem.mostrar,
 .containerModalTermo.mostrar,
+.containerModalRelatorio.mostrar,
 .containerModalRecarga.mostrar {
   display: flex;
 }
@@ -239,6 +241,20 @@ h1 {
   background: white;
   width: 600px;
   padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  border-radius: 15px;
+  box-shadow: 0 15px 15px 0 rgba(0, 0, 0, 0.3);
+}
+
+.conteudoRelatorio {
+  background: white;
+  width: 600px;
+  padding: 40px;
+  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -264,10 +280,32 @@ h1 {
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.3);
 }
 
-.modalMensagem h3 {
+.modalMensagem h3,
+.conteudoRelatorio h3 {
   color: #363636;
   font-family: 'Poppins-Bold';
   margin: 0;
+
+}
+
+.cabecalho {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.cabecalho ul {
+
+  display: flex;
+  flex-direction: row;
+}
+
+.cabecalho li {
+  display: flex;
+  flex-direction: row;
+  margin: 0 20px;
 }
 
 /* Login.html */
