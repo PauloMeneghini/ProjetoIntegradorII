@@ -3,6 +3,7 @@ const btnTermo = document.getElementById('btnTermo')
 const linkTermo = document.getElementById('linkTermo')
 const btnRecarga = document.querySelector('.btnRecarga')
 const modalTermo = document.getElementById('containerModalTermo')
+const descricaoTermo = document.getElementById('descricaoTermo')
 
 function chamaTermo(tipoBilhete, codigoBilhete) {
   const recargarBilhete = document.getElementById('recargarBilhete')
@@ -13,8 +14,29 @@ function chamaTermo(tipoBilhete, codigoBilhete) {
     `recargarBilhete('${tipoBilhete}', ${codigoBilhete})`
   )
 
+  switch (tipoBilhete) {
+    case 'unico':
+      descricaoTermo.innerHTML =
+        'Bilhete único, que dará direito ao usuário utilizar o bilhete apenas uma vez. Deverá aparecer mensagem ao usuário explicando o modo de utilização, o valor a ser pago e a confirmação para o aceite da compra.'
+      break
+
+    case 'duplo':
+      descricaoTermo.innerHTML =
+        'Bilhete duplo, que dará direito ao usuário utilizar o bilhete duas vezes. Deverá aparecer mensagem ao usuário explicando o modo de utilização, o valor a ser pago e a confirmação para o aceite da compra.'
+      break
+
+    case '7 dias':
+      descricaoTermo.innerHTML =
+        'Bilhete de 7 dias, que dará ao usuário utilizar o transporte por um período de 7 dias. Deverá aparecer mensagem ao usuário explicando o modo de utilização, o valor a ser pago e a confirmação para o aceite da compra.'
+      break
+
+    case '30 dias':
+      descricaoTermo.innerHTML =
+        'Bilhete de 30 dias, que dará ao usuário utilizar o transporte por um período de Deverá aparecer mensagem ao usuário explicando o modo de utilização, o valor a ser pago e a confirmação para o aceite da compra.'
+      break
+  }
+
   modalTermo.classList.add('mostrar')
-  linkTermo.setAttribute('href', `/pagamento?tipo=${tipoBilhete}`)
 }
 
 modalTermo.addEventListener('click', evento => {
@@ -24,6 +46,7 @@ modalTermo.addEventListener('click', evento => {
   ) {
     modalTermo.classList.remove('mostrar')
     linkTermo.setAttribute('href', `#`)
+    descricaoTermo.innerHTML = ''
   }
 })
 

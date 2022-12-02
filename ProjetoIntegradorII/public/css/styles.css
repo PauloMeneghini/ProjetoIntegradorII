@@ -302,7 +302,9 @@ h1 {
   grid-template-columns: repeat(3, 1fr);
   width: 100%;
 }
-.cabecalho li, #dadosRelatorio li {
+
+.cabecalho li,
+#dadosRelatorio li {
   display: flex;
   flex-direction: row;
   margin: 0 20px;
@@ -731,6 +733,12 @@ h3 {
   width: 100%;
 }
 
+.descricaoTermo {
+  margin: 15px;
+  text-align: justify;
+}
+
+
 .containerBilhete {
   height: 80vh;
   width: 60%;
@@ -932,6 +940,9 @@ h3 {
   .contentBilhete {
     height: auto;
   }
+
+
+
 
   .login {
     width: 50%;
