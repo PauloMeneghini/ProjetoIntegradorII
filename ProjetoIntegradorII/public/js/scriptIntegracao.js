@@ -63,6 +63,8 @@ function modalRelatorio(codigoBilhete) {
         const modalMensagem = document.getElementById('containerModalRelatorio')
         const conteudoRelatorio = document.getElementById('conteudoRelatorio')
         const dadosRelatorios = document.getElementById('dadosRelatorio')
+        const exibeNumBilhete = document.getElementById('numeroBilhete')
+        const exibeDataCompraBilhte = document.getElementById('dataCompraBilhete')
       
         console.log(modalMensagem)
         console.log(conteudoRelatorio)
@@ -83,18 +85,18 @@ function modalRelatorio(codigoBilhete) {
 
         console.log(tamanho)
 
+        exibeNumBilhete.innerHTML = `Bilhete Nº: ${response.data[0].BILHETE}`
+
+        exibeDataCompraBilhte.innerHTML = `Data de compra: ${response.data[0].DATA_GERACAO}`
+
         for(i = 0; i < tamanho; i++)
         {
           dadosRelatorios.innerHTML +=
-          `<div class="cabecalho">
-            <ul>
-              <li>${response.data[i].BILHETE}</li>
-              <li>${response.data[i].DATA_GERACAO}</li>
+          `<ul>
               <li>${response.data[i].RECARGA}</li>
               <li>${response.data[i].DATA_COMPRA_RECARGA}</li>
               <li>${response.data[i].DATA_UTILIZACAO_RECARGA}</li>
-            </ul>
-          </div>`
+            </ul>`
         }
         
         console.log(dadosRelatorios)

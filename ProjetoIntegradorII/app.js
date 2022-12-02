@@ -417,29 +417,26 @@ async function relatorioDeUso(req, res) {
 
     //const dadosTeste = [codigoBilhete]
 
-      const innerJoin = "select " +
-      "recarga.bilhete, " +
-      "bilhete.data_geracao, " +
-      "recarga.codigo recarga, " +
-      "recarga.data_compra data_compra_recarga, " +
-      "utilizacao.data_utilizacao data_utilizacao_recarga " +
-  "from " +
-      "recargas recarga " +
-      "inner join " +
-      "utilizacoes utilizacao " +
-  "on recarga.codigo = utilizacao.recarga " +
-      "inner join " +
-      "bilhetes bilhete " +
-  "on recarga.bilhete = bilhete.codigo " +
-  "where bilhete.codigo = :codigoBilhete"
+      const innerJoin = "SELECT " +
+      "RECARGA.BILHETE, " +
+      "TO_CHAR(BILHETE.DATA_GERACAO, 'DD/MM/YYYY HH24:MI:SS') DATA_GERACAO, " +
+      "RECARGA.CODIGO RECARGA, " +
+      "TO_CHAR(RECARGA.DATA_COMPRA, 'DD/MM/YYYY HH24:MI:SS') DATA_COMPRA_RECARGA, " +
+      "TO_CHAR(UTILIZACAO.DATA_UTILIZACAO, 'DD/MM/YYYY HH24:MI:SS') DATA_UTILIZACAO_RECARGA " +
+  "FROM " +
+      "RECARGAS RECARGA " +
+      "INNER JOIN " +
+      "UTILIZACOES UTILIZACAO " +
+  "ON RECARGA.CODIGO = UTILIZACAO.RECARGA " +
+      "INNER JOIN " +
+      "BILHETES BILHETE " +
+  "ON RECARGA.BILHETE = BILHETE.CODIGO " +
+  "WHERE BILHETE.CODIGO = :codigoBilhete " +
+  "ORDER BY RECARGA.CODIGO ASC"
 
     const codigoBilhete = [req.body.codigoBilhete]
 
     const resultadoRelatorio = await conexao.execute(innerJoin, codigoBilhete)
-
-    console.log(resultadoRelatorio.rows)
-
-    console.log("Está no try")
 
     return res.status(201).json(resultadoRelatorio.rows)
 
