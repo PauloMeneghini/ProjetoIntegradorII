@@ -49,23 +49,64 @@ function mostraDadosBilhete(codigo, tipo) {
   window.location.href = `/mostraBilhete?codigo=${codigo}&tipo=${tipo}`
 }
 
-function modalRelatorio() {
-  const modalMensagem = document.getElementById('containerModalRelatorio')
-  const conteudoRelatorio = document.getElementById('conteudoRelatorio')
+function modalRelatorio(codigoBilhete) {
+  let objBilhete = { codigoBilhete: codigoBilhete }
 
-  console.log(modalMensagem)
-  console.log(conteudoRelatorio)
+  console.log(objBilhete)
+  let url = 'http://localhost:4000/relatorioDeUso'
 
-  modalMensagem.addEventListener('click', evento => {
-    if (
-      evento.target.id == 'containerModalRelatorio' ||
-      evento.target.className == 'fechaModalRelatorio'
-    ) {
-      modalMensagem.classList.remove('mostrar')
-    }
-  })
-  //conteudoRelatorio.innerHTML = 'teste'
-  modalMensagem.classList.add('mostrar')
+  axios
+    .post(url, objBilhete)
+    .then(response => {
+
+      if (response.data) {
+        const modalMensagem = document.getElementById('containerModalRelatorio')
+        const conteudoRelatorio = document.getElementById('conteudoRelatorio')
+        const dadosRelatorios = document.getElementById('dadosRelatorio')
+      
+        console.log(modalMensagem)
+        console.log(conteudoRelatorio)
+      
+        modalMensagem.addEventListener('click', evento => {
+          if (
+            evento.target.id == 'containerModalRelatorio' ||
+            evento.target.className == 'fechaModalRelatorio'
+          ) {
+            modalMensagem.classList.remove('mostrar')
+          }
+        })
+        //conteudoRelatorio.innerHTML = 'teste'
+        console.log(response.data[0])
+        console.log(response.data.length)
+
+        const tamanho = response.data.length
+
+        console.log(tamanho)
+
+        for(i = 0; i < tamanho; i++)
+        {
+          dadosRelatorios.innerHTML +=
+          `<div class="cabecalho">
+            <ul>
+              <li>${response.data[i].BILHETE}</li>
+              <li>${response.data[i].DATA_GERACAO}</li>
+              <li>${response.data[i].RECARGA}</li>
+              <li>${response.data[i].DATA_COMPRA_RECARGA}</li>
+              <li>${response.data[i].DATA_UTILIZACAO_RECARGA}</li>
+            </ul>
+          </div>`
+        }
+        
+        console.log(dadosRelatorios)
+
+        modalMensagem.classList.add('mostrar')
+      }
+    })
+    .catch(error => {
+      if (error.response) {
+        console.log(error)
+      }
+    })
 }
 
 function Comunicado(codigo, tipo, mensagem, resposta) {

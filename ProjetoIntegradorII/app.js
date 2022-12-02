@@ -400,19 +400,53 @@ async function recarregarBilhete(req, res) {
   }
 }
 
-async function obtemData(req, res) {
-  console.log(req.body.codigo, req.body.tipo)
+async function relatorioDeUso(req, res) {
 
+  const codigoBilhete = req.body.codigoBilhete;
+
+  console.log(`O código do bilhete é: ${codigoBilhete}`)
+  
   this.bd = new BD()
+  
+  console.log(codigoBilhete)
 
-  await this.bd.getConexao()
+  try {
+    await this.bd.getConexao()
 
-  const selectDataExpiracao = "SELECT * FROM RECARGAS WHERE BILHETE = :codigo AND ATIVO = 'T'";
-  const dadosSelectDataExpiracao = [req.body.codigo];
+    //const innerJoin = "SELECT * FROM BILHETES WHERE CODIGO = :codigo"
 
-  const resultadoSelectDataExpiracao = await conexao.execute(selectDataExpiracao, dadosSelectDataExpiracao);
+    //const dadosTeste = [codigoBilhete]
 
-  console.log(resultadoSelectDataExpiracao.rows);
+      const innerJoin = "select " +
+      "recarga.bilhete, " +
+      "bilhete.data_geracao, " +
+      "recarga.codigo recarga, " +
+      "recarga.data_compra data_compra_recarga, " +
+      "utilizacao.data_utilizacao data_utilizacao_recarga " +
+  "from " +
+      "recargas recarga " +
+      "inner join " +
+      "utilizacoes utilizacao " +
+  "on recarga.codigo = utilizacao.recarga " +
+      "inner join " +
+      "bilhetes bilhete " +
+  "on recarga.bilhete = bilhete.codigo " +
+  "where bilhete.codigo = :codigoBilhete"
+
+    const codigoBilhete = [req.body.codigoBilhete]
+
+    const resultadoRelatorio = await conexao.execute(innerJoin, codigoBilhete)
+
+    console.log(resultadoRelatorio.rows)
+
+    console.log("Está no try")
+
+    return res.status(201).json(resultadoRelatorio.rows)
+
+  } catch (erro) {
+    console.error
+  }
+  
 }
 
 async function ativacaoServidor() {
@@ -503,7 +537,7 @@ async function ativacaoServidor() {
 
   app.post('/utilizaBilhete', utilizaBilhete)
 
-  app.post('/obtemData', obtemData);
+  app.post('/relatorioDeUso', relatorioDeUso)
 
   console.log('Servidor ativo na porta 4000...')
   app.listen(4000)
