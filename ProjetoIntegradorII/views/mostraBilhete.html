@@ -28,7 +28,7 @@
                   <div class="btnsBilhete">
                       <button type="submit" class="btnUsarBilhete" id="btnUsarBilhete" onclick="usarBilhete(this.value)" value="<%= bilhete[i].CODIGO %>&<%= bilhete[i].TIPO %>">USAR BILHETE</button></a>
                       <button type="submit" class="btnRecarregarBilhete" onclick="chamaRecargaBilhete(this.value)" value="<%= bilhete[i].CODIGO %>">RECARREGAR BILHETE</button>
-                      <button type="submit" class="btnRelatorio" onclick="modalRelatorio()" value="<%= bilhete[i].CODIGO %>">RELATÓRIO DE USO</button>
+                      <button type="submit" class="btnRelatorio" onclick="modalRelatorio(this.value)" value="<%= bilhete[i].CODIGO %>">RELATÓRIO DE USO</button>
                   </div>
               </div>
             <% } %>
@@ -84,15 +84,17 @@
     <div class="containerModalRelatorio" id="containerModalRelatorio">
       <div class="conteudoRelatorio">
         <button class="fechaModalRelatorio"></button>
+        <h3 id="numeroBilhete"></h3>
+        <h4 id="dataCompraBilhete"></h4>
         <h3 class="">RELATÓRIO DE USO</h3>
         <div class="cabecalho">
           <ul>
-            <li>BILHETE</li>
-            <li>DATA DE GERAÇÃO</li>
             <li>RECARGA</li>
             <li>DATA DE COMPRA DA RECARGA</li>
-            <li>DATA DE UTILIZAÇÃO DA RECARGAs</li>
+            <li>DATA DE UTILIZAÇÃO DA RECARGA</li>
           </ul>
+        </div>
+        <div id="dadosRelatorio">
         </div>
       </div>
     </div>

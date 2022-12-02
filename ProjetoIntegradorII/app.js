@@ -400,19 +400,50 @@ async function recarregarBilhete(req, res) {
   }
 }
 
-async function obtemData(req, res) {
-  console.log(req.body.codigo, req.body.tipo)
+async function relatorioDeUso(req, res) {
 
+  const codigoBilhete = req.body.codigoBilhete;
+
+  console.log(`O código do bilhete é: ${codigoBilhete}`)
+  
   this.bd = new BD()
+  
+  console.log(codigoBilhete)
 
-  await this.bd.getConexao()
+  try {
+    await this.bd.getConexao()
 
-  const selectDataExpiracao = "SELECT * FROM RECARGAS WHERE BILHETE = :codigo AND ATIVO = 'T'";
-  const dadosSelectDataExpiracao = [req.body.codigo];
+    //const innerJoin = "SELECT * FROM BILHETES WHERE CODIGO = :codigo"
 
-  const resultadoSelectDataExpiracao = await conexao.execute(selectDataExpiracao, dadosSelectDataExpiracao);
+    //const dadosTeste = [codigoBilhete]
 
-  console.log(resultadoSelectDataExpiracao.rows);
+      const innerJoin = "SELECT " +
+      "RECARGA.BILHETE, " +
+      "TO_CHAR(BILHETE.DATA_GERACAO, 'DD/MM/YYYY HH24:MI:SS') DATA_GERACAO, " +
+      "RECARGA.CODIGO RECARGA, " +
+      "TO_CHAR(RECARGA.DATA_COMPRA, 'DD/MM/YYYY HH24:MI:SS') DATA_COMPRA_RECARGA, " +
+      "TO_CHAR(UTILIZACAO.DATA_UTILIZACAO, 'DD/MM/YYYY HH24:MI:SS') DATA_UTILIZACAO_RECARGA " +
+  "FROM " +
+      "RECARGAS RECARGA " +
+      "INNER JOIN " +
+      "UTILIZACOES UTILIZACAO " +
+  "ON RECARGA.CODIGO = UTILIZACAO.RECARGA " +
+      "INNER JOIN " +
+      "BILHETES BILHETE " +
+  "ON RECARGA.BILHETE = BILHETE.CODIGO " +
+  "WHERE BILHETE.CODIGO = :codigoBilhete " +
+  "ORDER BY RECARGA.CODIGO ASC"
+
+    const codigoBilhete = [req.body.codigoBilhete]
+
+    const resultadoRelatorio = await conexao.execute(innerJoin, codigoBilhete)
+
+    return res.status(201).json(resultadoRelatorio.rows)
+
+  } catch (erro) {
+    console.error
+  }
+  
 }
 
 async function ativacaoServidor() {
@@ -503,7 +534,7 @@ async function ativacaoServidor() {
 
   app.post('/utilizaBilhete', utilizaBilhete)
 
-  app.post('/obtemData', obtemData);
+  app.post('/relatorioDeUso', relatorioDeUso)
 
   console.log('Servidor ativo na porta 4000...')
   app.listen(4000)

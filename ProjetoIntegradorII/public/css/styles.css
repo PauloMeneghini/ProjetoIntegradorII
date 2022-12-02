@@ -252,7 +252,7 @@ h1 {
 
 .conteudoRelatorio {
   background: white;
-  width: 600px;
+  width: 1500px;
   padding: 40px;
   height: 80vh;
   display: flex;
@@ -262,6 +262,7 @@ h1 {
   position: relative;
   border-radius: 15px;
   box-shadow: 0 15px 15px 0 rgba(0, 0, 0, 0.3);
+  overflow: auto;
 }
 
 .fechaModal {
@@ -293,19 +294,37 @@ h1 {
   width: 100%;
   justify-content: center;
   align-items: center;
-  padding: 40px;
+  padding: 40px 0px 20px 0px;
 }
 
 .cabecalho ul {
-
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
 }
-
-.cabecalho li {
+.cabecalho li, #dadosRelatorio li {
   display: flex;
   flex-direction: row;
   margin: 0 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+#dadosRelatorio {
+  height: 100px;
+  overflow: auto;
+  flex-direction: column;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+#dadosRelatorio ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 10px 0px;
+  width: 100%;
 }
 
 /* Login.html */
